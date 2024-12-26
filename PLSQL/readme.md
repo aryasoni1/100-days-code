@@ -1,4 +1,4 @@
-*PL/SQL: Procedural Language/SQL
+# PL/SQL: Procedural Language/SQL
 <details>Purpose:
 Manage data in Oracle databases.
 Extend SQL with procedural capabilities (loops, conditional statements, etc.).
@@ -13,7 +13,7 @@ Superset of SQL: Includes all SQL commands and data types.
 Anonymous Block: A PL/SQL block without a name.
 Components: Includes functions, procedures, triggers, packages, and more.</details>
 
-*The following points should be remembered while writing a PL/SQL program –
+# The following points should be remembered while writing a PL/SQL program –
 <details>
 Semicolon Usage:
 Semicolon (;) after each SQL statement and PL/SQL control statement.
@@ -29,7 +29,7 @@ Adhere to the principle of least privilege (grant only necessary permissions).
 Transaction Management:
 Use COMMIT and ROLLBACK for proper transaction control.</details>
 
-*Features of PL/SQL :
+# Features of PL/SQL :
 <details>
 Platform Independence: Runs on various operating systems (Windows, Linux, etc.).
 Error Handling: Provides error checking and user-friendly error messages.
@@ -39,7 +39,7 @@ Triggers: Automatically executes stored procedures based on data events (INSERT,
 Cursor Support: Enables efficient handling of multi-row queries.
 Data Declaration: Supports declaration of variables and constants for data storage.</details>
 
-*What do you mean by PL/SQL Architecture?
+# What do you mean by PL/SQL Architecture?
 <details>
 PL/SQL Runtime System:
 
@@ -56,7 +56,7 @@ SQL statements are passed to the SQL executor within the Oracle Server.
 Single transfer to the server improves performance, especially in client-server networks.
 Stored Subprograms: PL/SQL code can be stored as subprograms (functions, procedures) in the database for reuse by multiple applications.</details>
 
-*Advantages of PL/SQL
+# Advantages of PL/SQL
 <details>
 Enhanced Performance:
 
@@ -79,7 +79,7 @@ Web Application Development:
 
 Supports various web development tools for building dynamic and data-driven web applications.
 </details>
-*Disadvantages of PL/SQL
+# Disadvantages of PL/SQL
 <details>
 Memory Consumption:
 
@@ -91,7 +91,7 @@ Oracle Dependency:
 
 Primarily designed for Oracle databases, limiting portability to other database systems.
 </details>
-*PL/SQL Blocks
+# PL/SQL Blocks
 <details>
 Structure: PL/SQL code is organized into blocks.
 Components:
@@ -105,9 +105,9 @@ Handles errors that occur during execution (syntax errors, logic errors, validat
 Termination:
 The END keyword marks the end of the PL/SQL block.
 
-*PL/SQL Blocks: Anonymous vs. Named
+# PL/SQL Blocks: Anonymous vs. Named
 
-**1. Anonymous Blocks
+## 1. Anonymous Blocks
 
 Definition: PL/SQL blocks without a header or name.
 Structure:
@@ -117,7 +117,7 @@ EXCEPTION section: Handles errors.
 END;
 Execution: Executed once and then discarded.
 Example: Your provided example demonstrates finding the maximum of two numbers using an anonymous block.
-**2. Named Blocks
+## 2. Named Blocks
 
 Definition: PL/SQL blocks with a header or name.
 Types: Functions, procedures, packages, triggers.
@@ -126,7 +126,7 @@ Can be stored in the database for reusability.
 Can be called from other PL/SQL blocks.
 Improve code organization and maintainability.
 Example: Your provided example demonstrates finding the maximum of two numbers using a named block (a function).
-**Key Differences
+## Key Differences
 
 Feature    Anonymous Block    Named Block
 Header    No header    Has a header (function, procedure, etc.)
