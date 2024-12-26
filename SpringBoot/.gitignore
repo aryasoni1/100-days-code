@@ -1,0 +1,32 @@
+# Logs
+*.log
+target/
+*.tmp
+
+# Compiled files
+*.class
+
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# Eclipse
+#.classpath
+#.project
+#.settings/
+
+# IntelliJ
+.idea/
+*.iml
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Spring Boot-specific
+application.properties
+application.yml
