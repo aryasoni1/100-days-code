@@ -1,17 +1,46 @@
-
+# ----------------------------------------
 # OS-specific
+# ----------------------------------------
 .DS_Store
 Thumbs.db
 
+# ----------------------------------------
+# Python / Flask project
+# ----------------------------------------
+# Byte‑compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# SQLite database files
+*.db
+*.sqlite3
+
+# Flask instance folder (if used for config)
+instance/
+
+# Environment variables file
+.env
+
+# VS Code settings
+.vscode/
+
 # Logs
 *.log
-target/
-*.tmp
 
-# Compiled files
+# ----------------------------------------
+# Java / Spring Boot / Maven
+# ----------------------------------------
+# Compiled class files
 *.class
 
-# Maven
+# Maven build folders and files
+target/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -19,6 +48,13 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 
+# Spring Boot-specific config (local overrides)
+application.properties
+application.yml
+
+# ----------------------------------------
+# IDEs & Editors
+# ----------------------------------------
 # Eclipse
 .classpath
 .project
@@ -28,10 +64,37 @@ dependency-reduced-pom.xml
 .idea/
 *.iml
 
-# OS-specific
+# ----------------------------------------
+# Packaging / Distribution
+# ----------------------------------------
+build/
+dist/
+downloads/
+eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# ----------------------------------------
+# Testing / Coverage
+# ----------------------------------------
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Temporary files
+*.tmp
+
+# MacOS / Windows (again for emphasis)
 .DS_Store
 Thumbs.db
-
-# Spring Boot-specific
-application.properties
-application.yml
