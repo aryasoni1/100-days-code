@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Auth System{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <nav>
+      <a href="{{url_for('dashboard')}}">Home</a>
+      {% if 'username' in session %}
+      <span>{{ session['username']}}</span>
+      <a href="{{url_for('logout')}}">Logout</a>
+      {% else %}
+      <a href="{{url_for('login')}}">Login</a>
+      <a href="{{url_for('register')}}">Register</a>
+      {% endif %}
+    </nav>
+    {% with msgs = get_flashed_messages(with_categories=true) %} {% if msgs %}
+    <ul class="flashes">
+      {% for category, message in msgs %}
+      <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %} {% block content %} {% endblock %}
+  </body>
+</html>

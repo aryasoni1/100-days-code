@@ -1,0 +1,68 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f2f2f2;
+  margin: 40px;
+}
+/* Navigation bar */
+nav {
+  background: #333;
+  padding: 10px;
+}
+nav a,
+nav span {
+  color: #fff;
+  margin-right: 15px;
+  text-decoration: none;
+}
+nav a:hover {
+  background: #ddd;
+  color: #000;
+}
+/* Flash messages */
+.flashes {
+  list-style: none;
+  padding: 0;
+}
+.flashes li {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+}
+.success {
+  background: #d4edda;
+  color: #155724;
+}
+.error {
+  background: #f8d7da;
+  color: #721c24;
+}
+.info {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+/* Forms */
+form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 15px;
+  box-sizing: border-box;
+}
+/*Consistent box-sizing across form inputs makes sizing predictable when adding padding or borders, which is essential for responsive layouts on mobile devices 
+*/
+input[type="submit"] {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  background: #333;
+  color: #fff;
+}
+input[type="submit"]:hover {
+  background: #ddd;
+  color: #000;
+}
