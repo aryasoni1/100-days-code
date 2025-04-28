@@ -1,0 +1,192 @@
+Here’s a **hands-on, step-by-step recipe** to build your Real-Time Collaborative Workspace from the ground up—touching every tech in your stack, with clear mini-goals so you can practice and measure as you go.
+
+---
+
+## 1. Scaffold the Monorepo & Dev Environment
+
+1. **Create Project Folders**  
+   ```bash
+   mkdir collab-workspace
+   cd collab-workspace
+   mkdir frontend backend infra
+   ```
+2. **Initialize Git & CI**  
+   - `git init` in the root.  
+   - Add a GitHub Actions workflow stub (`.github/workflows/ci.yml`) that you’ll fill in later.
+
+3. **Docker-Compose Starter**  
+   In `infra/docker-compose.yml`, define services for MongoDB, Redis, and a placeholder `api` + `web`.  
+   ```yaml
+   version: '3'
+   services:
+     mongo:
+       image: mongo:5
+       ports: ["27017:27017"]
+     redis:
+       image: redis:latest
+       ports: ["6379:6379"]
+     api:
+       build: ../backend
+       depends_on: [mongo, redis]
+     web:
+       build: ../frontend
+       depends_on: [api]
+   ```
+
+---
+
+## 2. Backend Basic API (Node.js + Express)
+
+### Day 1–2: CRUD & Health Check
+- **Scaffold**  
+  ```bash
+  cd backend
+  npm init -y
+  npm install express socket.io mongoose ioredis
+  npm install -D typescript ts-node-dev @types/express
+  tsc --init
+  ```
+- **Health Endpoint**  
+  ```ts
+  // src/index.ts
+  import express from 'express';
+  const app = express();
+  app.get('/health', (_, res) => res.send('OK'));
+  app.listen(4000, () => console.log('API up on 4000'));
+  ```
+- **Test** with `ts-node-dev src/index.ts` and `curl http://localhost:4000/health`.
+
+---
+
+## 3. Frontend Basic App (Next.js + React + Redux)
+
+### Day 3–4: Scaffold & Hello World
+- **Scaffold**  
+  ```bash
+  cd frontend
+  npx create-next-app@latest . --typescript
+  npm install @reduxjs/toolkit react-redux socket.io-client tailwindcss
+  npx tailwindcss init -p
+  ```
+- **Hello World**  
+  - Add a Redux slice for `messages: string[]`.  
+  - Render a simple form and list in `pages/index.tsx`.
+
+---
+
+## 4. Real-Time Messaging with Socket.io
+
+### Day 5–6: One-Room Chat
+- **Backend**  
+  ```ts
+  import http from 'http';
+  import { Server } from 'socket.io';
+
+  const server = http.createServer(app);
+  const io = new Server(server);
+  io.on('connection', socket => {
+    socket.on('chat:send', msg => {
+      io.emit('chat:message', msg); // broadcast
+    });
+  });
+  server.listen(4000);
+  ```
+- **Frontend**  
+  ```ts
+  import { io } from 'socket.io-client';
+  const socket = io('http://localhost:4000');
+  // on form submit: socket.emit('chat:send', text)
+  // on mount: socket.on('chat:message', msg => dispatch(addMessage(msg)))
+  ```
+
+**Measure:** Local p95 round-trip latency using browser console timestamps—aim for **<50 ms**.
+
+---
+
+## 5. Operational Transformation (OT) Editor
+
+### Day 7–8: Basic Shared Text
+- **Learn FT or OT basics** via a simple tutorial (e.g. ShareDB docs).  
+- **Integrate** a basic OT library (like [ot.js](https://github.com/Operational-Transformation/ot.js)) in your backend to manage document state and operations.  
+- **Frontend**: Embed a `<textarea>` and hook up OT client to send ops via Socket.io.  
+
+**Measure:** Simulate 100 concurrent clients in headless tabs; make sure diff-sync p95 **<50 ms**.
+
+---
+
+## 6. Horizontal Scaling with Redis Pub/Sub
+
+### Day 9: Cluster Prep
+- In `infra/docker-compose.yml`, ensure Redis is up and accessible.  
+- Update Socket.io server to use Redis adapter:
+  ```ts
+  import { createAdapter } from 'socket.io-redis';
+  io.adapter(createAdapter({ host: 'redis', port: 6379 }));
+  ```
+- **Test**: Bring up two API instances, connect a client to each, send messages—verify cross-instance broadcast.
+
+**Measure:** Fire 10K messages/sec using a script; confirm **<0.01%** message loss.
+
+---
+
+## 7. Persistence & History (MongoDB)
+
+### Day 10–11: Store & Replay
+- **Mongoose Schema**  
+  ```ts
+  const OpSchema = new mongoose.Schema({ roomId: String, op: Object, ts: Date });
+  const Op = mongoose.model('Operation', OpSchema);
+  ```
+- **On each op:** `await Op.create({ … })`.  
+- **History API:** `/history/:roomId?limit=1000` to fetch last N ops.
+- **Frontend**: On room join, fetch history and replay ops before live sync.
+
+**Measure:** Use Postman to query `/history`; aim for **<100 ms** for 1 000 ops.
+
+---
+
+## 8. Containerization & Local Kubernetes
+
+### Day 12: Dockerize & K8s Manifests
+- **Dockerfiles** in `frontend` and `backend`.  
+- **K8s YAML**:  
+  - Deployments for `api` (with 3 replicas) and `web`.  
+  - Service + Ingress for routing.  
+  - Redis and MongoDB as StatefulSets or use managed services in AWS later.  
+- **Minikube**: `kubectl apply -f infra/k8s` → verify `kubectl get pods`.
+
+---
+
+## 9. Observability with Prometheus & Grafana
+
+### Day 13: Metrics & Dashboards
+- **Backend**: expose `/metrics` via [prom-client](https://github.com/siimon/prom-client). Track:  
+  - Active connections  
+  - Message events/sec  
+  - Error count  
+- **Deploy** Prometheus + Grafana via Helm on your cluster.  
+- **Dashboards**: plot connections (10 K+), throughput (1 M msgs/hr), and error rate (**<0.1%**).
+
+---
+
+## 10. Production Infra (EKS) & Deployment
+
+### Day 14: AWS & GitHub Actions
+1. **Terraform** (in `infra/terraform`):  
+   - Provision VPC, EKS, RDS (if needed), ElastiCache (Redis), and Atlas(*optional*).  
+2. **GitHub Actions**:  
+   - **CI** on PR: run lint, build, basic tests.  
+   - **CD** on `main` merge: build Docker images → push to ECR → `kubectl apply` to EKS.  
+3. **Verify**:  
+   - Spike test with `artillery` or `k6` hitting your public endpoint—confirm autoscaling and no downtime.
+
+---
+
+### Final Tips
+
+- **Iterate in small chunks**—get each piece working end-to-end before moving on.
+- **Automate**: as soon as you have a Docker build, hook it into CI/CD.
+- **Measure & record** real numbers at each step so you can say, for example:  
+  > “Reduced history-query latency to 80 ms for 1 000 ops, and sustained 1 M messages/hour with <0.01% loss across 3 clusters.”
+
+By day 14 you’ll have a fully containerized, horizontally scalable, observable collaborative editor—practicing every tool and ready to shout out those p95 metrics in your interviews. Good luck!

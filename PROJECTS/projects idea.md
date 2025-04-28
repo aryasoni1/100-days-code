@@ -1,0 +1,43 @@
+Below are **three production-grade, FAANG-worthy projects** built end-to-end with your exact stack. Each showcases frontend, backend, infra, scaling, and delivers clear metrics you can call out on your resume.
+
+---
+
+### 1. Multi-Tenant Cloud E-Commerce Platform  
+**Tech Stack:** Next.js + React + TypeScript + Tailwind, Node.js + Express + TypeScript, PostgreSQL (RDS), MongoDB (logging), Redis (ElastiCache), Docker, Kubernetes (EKS), Terraform, GitHub Actions  
+
+- **Full UI/UX:** SSR/SSG storefront with Next.js; p95 Time-to-Interactive **<1 s** on mobile 3G, boosting add-to-cart by **22%**.  
+- **Tenant Isolation:** Schema-per-tenant in PostgreSQL + row-level security—onboard new merchant in **<5 min**, supporting **500+** tenants.  
+- **Order Throughput:** Processes **1.2 M orders/day** (peak **15 K TPS**), with p99 API latency **<180 ms**.  
+- **Caching & Scaling:** Redis cache reduces DB hits by **70%**, cutting avg. response from **240 ms → 70 ms**. Kubernetes HPA scales services 5→100 pods under flash sales.  
+- **CI/CD & Infra:** Terraform modules provision VPC, RDS, ElastiCache, EKS; GitHub Actions run tests, build/push Docker, then `terraform apply` for zero-downtime deploys. Spin up full prod stack in **<30 min**.
+
+---
+
+### 2. Real-Time Collaborative Workspace  
+**Tech Stack:** Next.js + React + Redux, Socket.io, Node.js + Express, MongoDB (Atlas), Redis (Pub/Sub), Docker, Kubernetes (EKS), Prometheus/Grafana  
+
+- **Live Editing:** Operational-transformation editor syncing **20 K** concurrent users with p95 diff-sync latency **<50 ms**.  
+- **Horizontal Scaling:** Redis Pub/Sub fan-out across 3 Socket.io clusters; message loss **<0.01%**, zero service downtime.  
+- **Persistence & History:** All ops stored in MongoDB; average historical playback query **<100 ms** for 1 K ops.  
+- **Observability:** Prometheus metrics + Grafana dashboards track connections (10 K+), event throughput (1 M msgs/hr), and error rate **<0.1%**.  
+- **Automated Deployment:** Docker images built/tested in GitHub Actions, deployed to EKS via Argo CD; new releases roll out in **<5 min** with 1-click rollback.
+
+---
+
+### 3. Global API Gateway & Self-Service Admin Portal  
+**Tech Stack:** Next.js + React + TypeScript, Node.js + Express (config API), Envoy Proxy, Redis (ElastiCache), Kubernetes (EKS multi-region), Terraform, GitHub Actions  
+
+- **Global Edge Proxy:** Envoy gateways in **3 AWS regions**, handling **100 K RPS** with p99 latency **<30 ms** and mTLS.  
+- **Rate Limiting:** Token-bucket limiter via Redis + Lua—enforced per-API, per-tenant; reduced abuse errors by **60%**, SLA **99.995%**.  
+- **Portal UI:** Next.js dashboard where customers generate API keys, set rate-limit policies, and view real-time usage graphs (<200 ms load).  
+- **Infra-as-Code:** Terraform defines multi-region EKS clusters, Redis, Envoy DaemonSets, and IAM; full drift-free stack spin-up in **<45 min**.  
+- **CI/CD & Compliance:** GitHub Actions + tfsec/Opa for policy checks; any non-compliant Terraform plan is blocked in CI, ensuring zero config-drift.
+
+---
+
+**Why These Projects?**  
+- **End-to-end mastery** of your stack—frontend, backend, databases, caching, infra, and observability.  
+- **Real metrics** (TPS, p95/p99 latencies, uptime, cache hit ratios, business lift) prove you can operate at FAANG scale.  
+- **Automation & Compliance** demonstrate you’re ready for any mature engineering team.  
+
+Build these, instrument your metrics, and publish them on GitHub (with clear READMEs and architecture diagrams)—you’ll have a portfolio that can’t be ignored.
