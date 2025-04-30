@@ -1,0 +1,213 @@
+Here's a **comprehensive list of algorithm topics** you should master to crack an **SDE role at FAANG or top tech companies**. These topics cover both **core DSA fundamentals** and **advanced problem-solving patterns**, curated from LeetCode, GFG, interview experiences, and competitive programming trends.
+
+---
+
+### ✅ **1. Arrays & Strings**
+- Basic operations (traversal, insertion, deletion)
+- Prefix Sum, Sliding Window
+- Two Pointers
+- Sorting techniques (Merge Sort, Quick Sort, Counting Sort)
+- Kadane’s Algorithm
+- Dutch National Flag problem
+- Subarrays & Substrings (fixed and variable length)
+- Binary Search on arrays
+
+---
+
+### ✅ **2. Hashing & Maps**
+- HashMap, HashSet usage
+- Frequency counting
+- Group Anagrams
+- Longest Consecutive Sequence
+- Subarray sum problems
+- Custom Hashing / Modulo techniques
+
+---
+
+### ✅ **3. Two Pointers & Sliding Window**
+- Fixed & variable window size
+- Minimum/Maximum window substring
+- Longest substring without repeating characters
+- Container With Most Water
+- Pair sum & Triplet sum problems
+
+---
+
+### ✅ **4. Binary Search**
+- Classic Binary Search
+- Lower Bound / Upper Bound
+- Binary Search on answer (search space problems)
+- Rotated Sorted Arrays
+- Peak Element, Median of two arrays
+- Min/max in rotated arrays
+
+---
+
+### ✅ **5. Recursion & Backtracking**
+- Subsets, Permutations, Combinations
+- N-Queens, Sudoku Solver
+- Word Search, Rat in a Maze
+- Backtracking with pruning
+- Letter Combinations of Phone Number
+
+---
+
+### ✅ **6. Divide & Conquer**
+- Merge Sort, Quick Sort
+- Count Inversions
+- Binary Search Variants
+- Maximum Subarray (Divide and conquer)
+
+---
+
+### ✅ **7. Dynamic Programming (DP)**
+- Memoization & Tabulation
+- 1D DP: Fibonacci, Climbing Stairs, House Robber
+- 2D DP: Grid path, Unique Paths, DP on matrix
+- DP on Subsequences: LCS, LIS, Subset Sum
+- DP on Strings: Edit Distance, Regex Matching
+- DP on Trees: Tree DP
+- DP on Bitmasking: TSP, Subset DP
+- Knapsack Variants (0/1, Unbounded, Bounded)
+
+---
+
+### ✅ **8. Greedy Algorithms**
+- Activity Selection
+- Job Scheduling
+- Fractional Knapsack
+- Huffman Encoding
+- Gas Station, Jump Game
+- Minimum Platforms
+
+---
+
+### ✅ **9. Stacks & Queues**
+- Monotonic Stack/Queue
+- Next Greater/Smaller Element
+- Stack with min/max
+- Valid Parentheses, Min Stack
+- Sliding Window Maximum
+- Design LRU Cache
+
+---
+
+### ✅ **10. Linked Lists**
+- Reverse, Detect cycle (Floyd’s), Merge two sorted lists
+- Intersection, Middle of linked list
+- Palindrome, Reorder list
+- Flatten linked list
+- Copy List with Random Pointer
+- Reverse K nodes
+
+---
+
+### ✅ **11. Trees & Binary Trees**
+- Traversals (Inorder, Preorder, Postorder, Level Order)
+- Height, Diameter, Mirror
+- Lowest Common Ancestor (LCA)
+- Balanced Binary Tree
+- Serialize/Deserialize
+- Views (Top, Bottom, Left, Right)
+
+---
+
+### ✅ **12. Binary Search Trees (BST)**
+- BST Insert/Delete/Search
+- Floor/Ceil in BST
+- Kth smallest/largest
+- Validate BST
+- Convert BST to DLL
+- Inorder successor/predecessor
+
+---
+
+### ✅ **13. Tries**
+- Insert, Search, Prefix Matching
+- Word Dictionary with Wildcards
+- Longest Prefix Matching
+- Count distinct substrings
+- Implement Auto-suggestion
+
+---
+
+### ✅ **14. Heaps & Priority Queues**
+- Max Heap / Min Heap
+- Kth largest/smallest element
+- Merge K sorted lists/arrays
+- Top K frequent elements
+- Median in a stream
+- Sliding Window Median
+
+---
+
+### ✅ **15. Graph Algorithms**
+- BFS, DFS (connected components, path finding)
+- Dijkstra’s Algorithm
+- Bellman-Ford
+- Floyd Warshall
+- Topological Sort (Kahn’s and DFS)
+- Cycle Detection (Directed & Undirected)
+- Union-Find / Disjoint Set (with path compression)
+- Graph coloring, Bipartite Check
+- Bridges & Articulation Points (Tarjan's)
+- Shortest Path in Binary Matrix
+
+---
+
+### ✅ **16. Number Theory & Math**
+- GCD, LCM, Euclidean Algorithm
+- Modular Arithmetic
+- Fast Exponentiation
+- Prime Numbers (Sieve of Eratosthenes)
+- Combinatorics (nCr, Catalan)
+- Modular Inverse
+- Bit Manipulation
+
+---
+
+### ✅ **17. Bit Manipulation**
+- Set/Clear/Toggle bits
+- Counting bits
+- XOR problems (Single Number)
+- Subsets using bitmasks
+- Power of Two, Hamming Distance
+
+---
+
+### ✅ **18. Strings & Pattern Matching**
+- String hashing (Rabin-Karp)
+- KMP algorithm
+- Z-Algorithm
+- Manacher’s algorithm (Longest Palindromic Substring)
+- String compression
+
+---
+
+### ✅ **19. Advanced Topics**
+- Segment Tree / Fenwick Tree (BIT)
+- Lazy Propagation
+- Binary Lifting
+- Mo’s Algorithm (Range Queries)
+- Line Sweep Algorithm
+- Range Minimum Query (RMQ)
+
+---
+
+### ✅ **20. Miscellaneous & System Design Prep**
+- Design Questions (LRU Cache, Twitter, TinyURL)
+- Union Find with extra constraints
+- Multithreading & concurrency (basics)
+- Rate Limiter / Debouncer (high-level design)
+
+---
+
+### 🔁 **Bonus: Practice Patterns**
+- Neetcode 150 / Blind 75
+- Striver’s SDE Sheet
+- LeetCode Explore Cards
+- GFG DSA Self-Paced or DSA Sheet
+
+---
+
+Would you like a **roadmap with timelines**, resources (YouTube, LeetCode lists, books), or **a tracker sheet** for these topics?
