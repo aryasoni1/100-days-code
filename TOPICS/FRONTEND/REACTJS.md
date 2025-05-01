@@ -4,9 +4,9 @@ Certainly! Here's a **structured roadmap for mastering React.js**, organized by 
 
 ## ✅ **1. React.js Fundamentals (All Roles)**  
 **Core essentials to start building React apps**:  
-<span style="background-color:yellow">- **Basics**:
+- **Basics**:
   - What is React? Why use it?
-  - Create a project with Vite or Create React App (CRA)<span>
+  - Create a project with Vite or Create React App (CRA)
 - **JSX and Components**:
   - Functional vs class components
   - Props and component composition
