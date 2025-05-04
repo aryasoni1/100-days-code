@@ -1,0 +1,120 @@
+Here’s a **comprehensive roadmap** to transition into **AI/ML (Artificial Intelligence / Machine Learning)** from a full-stack development background like yours:
+
+---
+
+## 🧭 AI/ML Roadmap for Full-Stack Developers (2024–2025)
+
+---
+
+### 📍 Phase 1: **Foundations (1–2 months)**
+
+**Goal:** Build a solid math and Python base
+
+* 🔢 **Math Refresher**
+
+  * Linear Algebra → vectors, matrices (Khan Academy / 3Blue1Brown)
+  * Calculus → derivatives, gradients (focus on backprop)
+  * Probability & Statistics → distributions, Bayes’ Theorem
+
+* 🐍 **Python for ML**
+
+  * Learn NumPy, Pandas, Matplotlib, Scikit-Learn
+  * Do hands-on data manipulation, visualization, feature engineering
+
+📘 *Resources:*
+
+* “Mathematics for Machine Learning” (Coursera)
+* “Python for Data Science Handbook” by Jake VanderPlas
+* Kaggle micro-courses
+
+---
+
+### 📍 Phase 2: **Machine Learning Core (2–3 months)**
+
+**Goal:** Understand ML theory and build classical ML models
+
+* 📊 **Supervised Learning** → Linear/Logistic Regression, Decision Trees, Random Forests
+* 📈 **Unsupervised Learning** → K-Means, PCA, Clustering
+* 🛠️ Build projects with real datasets (e.g., Titanic, House Prices)
+
+📘 *Courses:*
+
+* Andrew Ng’s ML Course (Coursera)
+* Kaggle Competitions (start simple)
+
+---
+
+### 📍 Phase 3: **Deep Learning & Neural Networks (2–3 months)**
+
+**Goal:** Learn deep learning fundamentals and start using PyTorch or TensorFlow
+
+* 🧠 Neural Networks → forward/backpropagation
+* 🏗️ Build: Image classifier (MNIST, CIFAR), Sentiment analysis, etc.
+* 🧰 Frameworks: PyTorch (preferred), TensorFlow
+* 🔎 Intro to CNNs, RNNs, LSTMs, Transfer Learning
+
+📘 *Courses:*
+
+* DeepLearning.AI Specialization by Andrew Ng
+* “Make Your Own Neural Network” by Tariq Rashid (book)
+
+---
+
+### 📍 Phase 4: **AI Specialization Track (3–6 months)**
+
+**Choose your track:**
+✅ **Computer Vision (CV)**
+
+* Object detection (YOLO, SSD), image segmentation (UNet)
+* Libraries: OpenCV, TorchVision
+* Projects: Face recognition, pose detection, OCR
+
+✅ **Natural Language Processing (NLP)**
+
+* Transformers (BERT, GPT), text classification, summarization
+* Libraries: HuggingFace Transformers
+* Projects: Chatbot, Sentiment Analyzer, QA System
+
+✅ **Generative AI**
+
+* LLM fine-tuning, prompt engineering
+* Tools: LangChain, OpenAI API, Weights & Biases
+
+---
+
+### 📍 Phase 5: **MLOps & Deployment (2–3 months, parallel)**
+
+**Goal:** Productionize models
+
+* 🐳 Dockerize models
+* 🚀 Model deployment: FastAPI, Flask, Streamlit
+* 🔁 Model versioning: MLflow, DVC
+* 📈 Monitoring: Prometheus, Grafana
+* ⛓️ Pipelines: Airflow, Kubeflow
+
+📘 *Projects:*
+
+* Deploy a full ML pipeline (ETL + model + dashboard)
+* Host on AWS/GCP
+
+---
+
+### 📍 Phase 6: **Portfolio & Interviews (Ongoing)**
+
+* 📁 Create GitHub repos with clear READMEs and demo links
+* 📜 Write blog posts on Medium or Hashnode
+* 🎓 Contribute to open source (HuggingFace, LangChain, PyTorch)
+* 💬 Practice DSA + ML Interview Qs (Leetcode + ML Qs from Amazon, Google)
+
+---
+
+### 🚀 BONUS: Capstone Projects
+
+* AI-powered e-commerce recommender system
+* Resume parser + ranker using NLP
+* Autonomous vehicle simulation (CV)
+* ChatGPT-style fine-tuned chatbot for a domain (healthcare/finance)
+
+---
+
+Would you like a **visual roadmap diagram** or a **Notion template** to track your progress?
