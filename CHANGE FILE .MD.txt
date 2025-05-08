@@ -1,0 +1,4 @@
+find . -type f -name "*.txt" ! -iname "*topic*.txt" -exec bash -c 'for file; do mv "$file" "${file%.txt}.md"; done' _ {} +
+
+
+ find . -type f -name "*.txt" 

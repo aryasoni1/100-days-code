@@ -1,0 +1,70 @@
+Sure! Here's a simple **React functional component** that displays `"Hello, React!"`, along with a full explanation for beginners.
+
+---
+
+### ✅ React Functional Component Code:
+
+```jsx
+import React from 'react';
+
+function HelloReact() {
+  return (
+    <h1>Hello, React!</h1>
+  );
+}
+
+export default HelloReact;
+```
+
+---
+
+### 🧠 Explanation:
+
+#### 1. `import React from 'react';`
+
+* This line **imports React** so you can use JSX (React’s syntax that looks like HTML).
+* In modern React (v17+), this line is **optional** if you’re using a setup that supports JSX automatically (like Create React App or Vite).
+
+#### 2. `function HelloReact() { ... }`
+
+* This defines a **functional component** named `HelloReact`.
+* A **component** is a reusable piece of UI in React.
+* A **functional component** is just a regular JavaScript function that returns JSX.
+
+#### 3. `return ( <h1>Hello, React!</h1> );`
+
+* This is what the component renders on the screen.
+* `h1` is a heading tag, and React knows how to render it in the DOM.
+
+#### 4. `export default HelloReact;`
+
+* This line **exports the component** so you can use it in another file, like in `App.js`.
+
+---
+
+### 🧪 Usage in Another File (e.g., `App.js`):
+
+```jsx
+import HelloReact from './HelloReact';
+
+function App() {
+  return (
+    <div>
+      <HelloReact />
+    </div>
+  );
+}
+```
+
+---
+
+Would you like to learn how to add props (custom messages) to make this component dynamic?
+
+
+
+
+
+
+
+
+
