@@ -5,7 +5,7 @@ Absolutely! Here's a curated set of **50 HTML coding practice questions**, categ
 ## ✅ **1. HTML Fundamentals (All Roles)**
 
 *Master structure, tags, attributes, and layout.*
-
+DONE VERY BASIC QUES
 1. Create a basic HTML page with `<!DOCTYPE html>` and essential tags.
 2. Add headings (`<h1>` to `<h6>`) to describe a blog post.
 3. Write a paragraph with a hyperlink to an external website.
