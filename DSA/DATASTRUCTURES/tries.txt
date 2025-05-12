@@ -1,0 +1,154 @@
+Here are your **Markdown (.md)** formatted notes on **Tries (Prefix Trees)**:
+
+---
+
+# 🌲 Tries (Prefix Trees)
+
+A **Trie** is a tree-like data structure used to efficiently store and retrieve strings, especially useful for prefix-based searching like autocomplete or spell-check.
+
+---
+
+## 🔤 Structure
+
+* Each node represents a **character**.
+* The path from the root to a node represents a **prefix**.
+* Each node may have:
+
+  * A `children` map (dict in Python)
+  * An `is_end_of_word` flag indicating a complete word
+
+---
+
+## 🔧 Operations
+
+### 📥 Insert
+
+```python
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_end = False
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+    
+    def insert(self, word):
+        node = self.root
+        for ch in word:
+            if ch not in node.children:
+                node.children[ch] = TrieNode()
+            node = node.children[ch]
+        node.is_end = True
+```
+
+### 🔍 Search
+
+```python
+def search(self, word):
+    node = self.root
+    for ch in word:
+        if ch not in node.children:
+            return False
+        node = node.children[ch]
+    return node.is_end
+```
+
+### ❌ Delete
+
+```python
+def delete(self, word):
+    def _delete(node, word, depth):
+        if not node:
+            return False
+        if depth == len(word):
+            if not node.is_end:
+                return False
+            node.is_end = False
+            return len(node.children) == 0
+        ch = word[depth]
+        if ch in node.children and _delete(node.children[ch], word, depth + 1):
+            del node.children[ch]
+            return not node.is_end and len(node.children) == 0
+        return False
+    _delete(self.root, word, 0)
+```
+
+---
+
+## 🃏 Wildcard Matching
+
+Supports patterns like `'a.c'` where `.` matches any character.
+
+```python
+def wildcard_search(self, word):
+    def dfs(node, i):
+        if i == len(word):
+            return node.is_end
+        if word[i] == '.':
+            return any(dfs(child, i+1) for child in node.children.values())
+        if word[i] not in node.children:
+            return False
+        return dfs(node.children[word[i]], i+1)
+    return dfs(self.root, 0)
+```
+
+---
+
+## 🔮 Autocomplete / Suggestions
+
+```python
+def starts_with(self, prefix):
+    node = self.root
+    for ch in prefix:
+        if ch not in node.children:
+            return []
+        node = node.children[ch]
+    
+    result = []
+    def dfs(current, path):
+        if current.is_end:
+            result.append("".join(path))
+        for ch in current.children:
+            dfs(current.children[ch], path + [ch])
+    
+    dfs(node, list(prefix))
+    return result
+```
+
+---
+
+## ⚡ Compressed Trie (Radix Tree) – Basics
+
+* **Optimization** of standard Trie: Merges nodes with a single child.
+* Instead of one character per node, stores **entire substrings**.
+* Reduces memory usage and improves performance in sparse tries.
+
+### Example
+
+```
+Normal Trie: [c] → [a] → [t]
+Radix Trie: [cat]
+```
+
+### Pros
+
+* Memory-efficient
+* Faster traversal on average
+
+---
+
+## 📈 Time Complexities
+
+| Operation    | Time Complexity |
+| ------------ | --------------- |
+| Insert       | O(L)            |
+| Search       | O(L)            |
+| Delete       | O(L)            |
+| Autocomplete | O(L + k)        |
+
+> L = length of word, k = number of results
+
+---
+
+Would you like a visual diagram or explanation comparing Trie vs. Radix Tree?

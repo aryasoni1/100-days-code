@@ -1,0 +1,435 @@
+Here are the `.md` notes for **Stacks & Queues**:
+
+---
+
+# 🧑‍💻 Stacks & Queues
+
+**Stacks** and **Queues** are fundamental data structures used in programming to store and manage data in different orders.
+
+* **Stack**: Follows **LIFO** (Last In, First Out) order.
+* **Queue**: Follows **FIFO** (First In, First Out) order.
+
+---
+
+## 🔺 Stack
+
+A **stack** is a collection of elements that supports two main operations:
+
+* **Push**: Add an item to the stack.
+* **Pop**: Remove the most recently added item.
+
+### 1. **Stack via Array**
+
+In an array-based stack, elements are added or removed from the end of the array.
+
+* **Push Operation**: Add to the end.
+
+* **Pop Operation**: Remove from the end.
+
+* **Example**:
+
+  ```javascript
+  class Stack {
+    constructor() {
+      this.items = [];
+    }
+
+    push(element) {
+      this.items.push(element);
+    }
+
+    pop() {
+      if (this.isEmpty()) return undefined;
+      return this.items.pop();
+    }
+
+    peek() {
+      return this.items[this.items.length - 1];
+    }
+
+    isEmpty() {
+      return this.items.length === 0;
+    }
+
+    size() {
+      return this.items.length;
+    }
+  }
+
+  let stack = new Stack();
+  stack.push(1);
+  stack.push(2);
+  console.log(stack.pop());  // 2
+  ```
+
+### 2. **Stack via Linked List**
+
+A **linked list-based stack** uses a linked list to store the elements, where each node points to the next node.
+
+* **Push Operation**: Insert at the head of the list.
+
+* **Pop Operation**: Remove from the head of the list.
+
+* **Example**:
+
+  ```javascript
+  class Node {
+    constructor(data) {
+      this.data = data;
+      this.next = null;
+    }
+  }
+
+  class Stack {
+    constructor() {
+      this.top = null;
+    }
+
+    push(data) {
+      let node = new Node(data);
+      node.next = this.top;
+      this.top = node;
+    }
+
+    pop() {
+      if (!this.top) return undefined;
+      let poppedData = this.top.data;
+      this.top = this.top.next;
+      return poppedData;
+    }
+
+    peek() {
+      return this.top ? this.top.data : undefined;
+    }
+
+    isEmpty() {
+      return !this.top;
+    }
+  }
+
+  let stack = new Stack();
+  stack.push(1);
+  stack.push(2);
+  console.log(stack.pop());  // 2
+  ```
+
+---
+
+## 🌀 Queue
+
+A **queue** is a collection that follows the **FIFO** (First In, First Out) principle. The first element added is the first to be removed.
+
+### 1. **Queue via Array**
+
+In an array-based queue:
+
+* **Enqueue**: Add an element to the end of the array.
+
+* **Dequeue**: Remove an element from the front of the array.
+
+* **Example**:
+
+  ```javascript
+  class Queue {
+    constructor() {
+      this.items = [];
+    }
+
+    enqueue(element) {
+      this.items.push(element);
+    }
+
+    dequeue() {
+      if (this.isEmpty()) return undefined;
+      return this.items.shift();  // Removes from the front
+    }
+
+    peek() {
+      return this.items[0];
+    }
+
+    isEmpty() {
+      return this.items.length === 0;
+    }
+
+    size() {
+      return this.items.length;
+    }
+  }
+
+  let queue = new Queue();
+  queue.enqueue(1);
+  queue.enqueue(2);
+  console.log(queue.dequeue());  // 1
+  ```
+
+### 2. **Queue via Linked List**
+
+A **linked list-based queue** uses a linked list where elements are added at the end and removed from the front.
+
+* **Enqueue Operation**: Insert at the tail of the list.
+
+* **Dequeue Operation**: Remove from the head of the list.
+
+* **Example**:
+
+  ```javascript
+  class Node {
+    constructor(data) {
+      this.data = data;
+      this.next = null;
+    }
+  }
+
+  class Queue {
+    constructor() {
+      this.front = null;
+      this.rear = null;
+    }
+
+    enqueue(data) {
+      let node = new Node(data);
+      if (this.rear) {
+        this.rear.next = node;
+      } else {
+        this.front = node;
+      }
+      this.rear = node;
+    }
+
+    dequeue() {
+      if (!this.front) return undefined;
+      let dequeuedData = this.front.data;
+      this.front = this.front.next;
+      if (!this.front) this.rear = null;
+      return dequeuedData;
+    }
+
+    peek() {
+      return this.front ? this.front.data : undefined;
+    }
+
+    isEmpty() {
+      return !this.front;
+    }
+  }
+
+  let queue = new Queue();
+  queue.enqueue(1);
+  queue.enqueue(2);
+  console.log(queue.dequeue());  // 1
+  ```
+
+---
+
+## 🔄 Circular Queue
+
+A **circular queue** is a variation of a queue where the last element is connected back to the first element to form a circle.
+
+* **Advantages**:
+
+  * Efficient use of space since it avoids the wasted space that occurs in a linear queue.
+* **Implementation**:
+
+  * Typically implemented using a fixed-size array.
+  * **Wrap-around** occurs when the queue reaches the end and the next element is inserted at the beginning of the array.
+
+---
+
+## 🔁 Deque (Double-Ended Queue)
+
+A **deque** allows insertion and deletion of elements from both ends, unlike a regular queue which allows operations only at one end.
+
+* **Operations**:
+
+  * **addFirst()**: Add to the front.
+  * **addLast()**: Add to the rear.
+  * **removeFirst()**: Remove from the front.
+  * **removeLast()**: Remove from the rear.
+
+* **Example**:
+
+  ```javascript
+  class Deque {
+    constructor() {
+      this.items = [];
+    }
+
+    addFirst(element) {
+      this.items.unshift(element);
+    }
+
+    addLast(element) {
+      this.items.push(element);
+    }
+
+    removeFirst() {
+      return this.items.shift();
+    }
+
+    removeLast() {
+      return this.items.pop();
+    }
+
+    peekFirst() {
+      return this.items[0];
+    }
+
+    peekLast() {
+      return this.items[this.items.length - 1];
+    }
+
+    isEmpty() {
+      return this.items.length === 0;
+    }
+  }
+
+  let deque = new Deque();
+  deque.addFirst(1);
+  deque.addLast(2);
+  console.log(deque.removeFirst());  // 1
+  ```
+
+---
+
+## 🏗 Monotonic Stacks/Queues
+
+### 1. **Monotonic Stack**
+
+A **monotonic stack** is a stack that maintains its elements in either increasing or decreasing order.
+
+* **Use case**:
+
+  * Solve problems like **next greater element** or **previous smaller element**.
+
+* **Example** (Next Greater Element):
+
+  ```javascript
+  function nextGreaterElement(arr) {
+    let stack = [];
+    let result = Array(arr.length).fill(-1);
+
+    for (let i = 0; i < arr.length; i++) {
+      while (stack.length && arr[stack[stack.length - 1]] < arr[i]) {
+        result[stack.pop()] = arr[i];
+      }
+      stack.push(i);
+    }
+    
+    return result;
+  }
+
+  console.log(nextGreaterElement([4, 5, 2, 10, 8]));  // [5, 10, 10, -1, -1]
+  ```
+
+### 2. **Monotonic Queue**
+
+A **monotonic queue** maintains elements in a monotonically increasing or decreasing order.
+
+* **Use case**:
+
+  * Useful in problems like **sliding window maximum**.
+
+* **Example** (Sliding Window Maximum):
+
+  ```javascript
+  function slidingWindowMaximum(nums, k) {
+    let deque = [];
+    let result = [];
+
+    for (let i = 0; i < nums.length; i++) {
+      while (deque.length && nums[deque[deque.length - 1]] < nums[i]) {
+        deque.pop();
+      }
+      deque.push(i);
+
+      if (deque[0] <= i - k) deque.shift();  // Remove out-of-window elements
+
+      if (i >= k - 1) result.push(nums[deque[0]]);
+    }
+
+    return result;
+  }
+
+  console.log(slidingWindowMaximum([1, 3, -1, -3, 5, 3, 6, 7], 3));  // [3, 3, 5, 5, 6, 7]
+  ```
+
+---
+
+## 📊 Min-Stack/Max-Stack
+
+A **min-stack** or **max-stack** is a stack that allows retrieving the minimum or maximum element in constant time.
+
+### 1. **Min-Stack**
+
+* **Operations**:
+
+  * **Push**: Add an element to the stack.
+  * **Pop**: Remove the most recently added element.
+  * **Get Min**: Retrieve the minimum element in constant time.
+
+* **Example**:
+
+  ```javascript
+  class MinStack {
+    constructor() {
+      this.stack = [];
+      this.minStack = [];
+    }
+
+    push(val) {
+      this.stack.push(val);
+      if (this.minStack.length === 0 || val <= this.minStack[this.minStack.length - 1]) {
+        this.minStack.push(val);
+      }
+    }
+
+    pop() {
+      let popped = this.stack.pop();
+      if (popped === this.minStack[this.minStack.length - 1]) {
+       
+  ```
+this.minStack.pop();
+}
+return popped;
+}
+
+```
+getMin() {
+  return this.minStack[this.minStack.length - 1];
+}
+```
+
+}
+
+let minStack = new MinStack();
+minStack.push(1);
+minStack.push(2);
+console.log(minStack.getMin());  // 1
+minStack.pop();
+console.log(minStack.getMin());  // 1
+
+```
+
+---
+
+## 🔄 Implementing One via the Other
+
+It’s possible to implement one data structure using another. For example:
+
+- **Implementing Queue via Stack**: Use two stacks to implement a queue (`enqueue` with one stack, `dequeue` with another).
+- **Implementing Stack via Queue**: Use two queues to implement a stack.
+
+---
+
+## 📝 Summary
+
+- **Stack**: LIFO order. Implemented using arrays or linked lists.
+- **Queue**: FIFO order. Can be implemented as a regular queue, circular queue, or deque.
+- **Monotonic Structures**: Stacks and queues can be modified to maintain a monotonic order.
+- **Specialized Stacks**: Min-stack and max-stack support constant-time retrieval of the minimum or maximum element.
+
+---
+
+Let me know if you need further details or examples!
+```

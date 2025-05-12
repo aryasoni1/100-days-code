@@ -1,0 +1,188 @@
+Here are structured notes on **Binary Trees** in **Markdown (.md)** format using Python:
+
+---
+
+# 🌳 Binary Trees in Python
+
+---
+
+## 🧱 Binary Tree Basics
+
+A **Binary Tree** is a hierarchical data structure where each node has at most **two children**: left and right.
+
+### ✅ Node Structure
+
+```python
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+```
+
+---
+
+## 🔁 Tree Traversals
+
+### ➕ Preorder Traversal (Root → Left → Right)
+
+```python
+def preorder(root):
+    if root:
+        print(root.val)
+        preorder(root.left)
+        preorder(root.right)
+```
+
+### ➖ Inorder Traversal (Left → Root → Right)
+
+```python
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.val)
+        inorder(root.right)
+```
+
+### ➗ Postorder Traversal (Left → Right → Root)
+
+```python
+def postorder(root):
+    if root:
+        postorder(root.left)
+        postorder(root.right)
+        print(root.val)
+```
+
+### 🔢 Level-Order Traversal (BFS)
+
+```python
+from collections import deque
+
+def level_order(root):
+    if not root:
+        return
+    queue = deque([root])
+    while queue:
+        node = queue.popleft()
+        print(node.val)
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
+```
+
+---
+
+## 📏 Tree Properties
+
+### ✅ Height of Tree
+
+```python
+def height(root):
+    if not root:
+        return 0
+    return 1 + max(height(root.left), height(root.right))
+```
+
+### ✅ Depth of a Node
+
+```python
+def depth(root, target, current_depth=0):
+    if not root:
+        return -1
+    if root.val == target:
+        return current_depth
+    left = depth(root.left, target, current_depth + 1)
+    if left != -1:
+        return left
+    return depth(root.right, target, current_depth + 1)
+```
+
+### ✅ Diameter of Tree (Longest Path Between Any Two Nodes)
+
+```python
+def diameter(root):
+    diameter = [0]
+
+    def dfs(node):
+        if not node:
+            return 0
+        left = dfs(node.left)
+        right = dfs(node.right)
+        diameter[0] = max(diameter[0], left + right)
+        return 1 + max(left, right)
+
+    dfs(root)
+    return diameter[0]
+```
+
+### 🔄 Mirror of a Tree
+
+```python
+def mirror(root):
+    if root:
+        root.left, root.right = root.right, root.left
+        mirror(root.left)
+        mirror(root.right)
+```
+
+---
+
+## 🔗 Serialization & Deserialization
+
+### ✅ Serialization (Convert Tree → String)
+
+```python
+def serialize(root):
+    vals = []
+
+    def dfs(node):
+        if node is None:
+            vals.append('#')
+            return
+        vals.append(str(node.val))
+        dfs(node.left)
+        dfs(node.right)
+
+    dfs(root)
+    return ' '.join(vals)
+```
+
+### ✅ Deserialization (Convert String → Tree)
+
+```python
+def deserialize(data):
+    vals = iter(data.split())
+
+    def dfs():
+        val = next(vals)
+        if val == '#':
+            return None
+        node = TreeNode(int(val))
+        node.left = dfs()
+        node.right = dfs()
+        return node
+
+    return dfs()
+```
+
+---
+
+## 📊 Summary Table
+
+| Concept     | Function      | Time Complexity |
+| ----------- | ------------- | --------------- |
+| Preorder    | Root-L-R      | O(n)            |
+| Inorder     | L-Root-R      | O(n)            |
+| Postorder   | L-R-Root      | O(n)            |
+| Level-order | BFS           | O(n)            |
+| Height      | Max depth     | O(n)            |
+| Diameter    | Longest path  | O(n)            |
+| Mirror      | Swap children | O(n)            |
+| Serialize   | Tree → String | O(n)            |
+| Deserialize | String → Tree | O(n)            |
+
+---
+
+Let me know if you'd like a visual diagram or practice problems for binary trees!

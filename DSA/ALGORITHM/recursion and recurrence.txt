@@ -1,0 +1,133 @@
+Here are your **Markdown (.md)** formatted notes on **Recursion & Recurrence**:
+
+---
+
+# 🔄 **Recursion & Recurrence**
+
+Recursion is a fundamental technique in algorithm design where a function calls itself. Analyzing recursive algorithms often involves understanding recurrence relations that describe the behavior of recursive calls.
+
+---
+
+## 🏗️ **Divide-and-Conquer Templates**
+
+### 1. **Divide-and-Conquer**:
+
+* **Definition**: A paradigm where a problem is divided into smaller subproblems, each of which is solved independently. The results of the subproblems are then combined to solve the original problem.
+* **Steps**:
+
+  * **Divide**: Split the problem into smaller subproblems.
+  * **Conquer**: Solve the subproblems (usually recursively).
+  * **Combine**: Merge the solutions to the subproblems to solve the original problem.
+
+#### Example:
+
+```python
+# Example: Merge Sort (Divide-and-Conquer)
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2  # Divide
+        left_half = arr[:mid]
+        right_half = arr[mid:]
+
+        merge_sort(left_half)  # Conquer
+        merge_sort(right_half)
+
+        i = j = k = 0
+        while i < len(left_half) and j < len(right_half):  # Combine
+            if left_half[i] < right_half[j]:
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+        while i < len(left_half):
+            arr[k] = left_half[i]
+            i += 1
+            k += 1
+        while j < len(right_half):
+            arr[k] = right_half[j]
+            j += 1
+            k += 1
+```
+
+---
+
+## 🧵 **Tail vs. Non-Tail Recursion**
+
+### 1. **Tail Recursion**:
+
+* **Definition**: A type of recursion where the recursive call is the last operation in the function. This allows for optimization (tail call optimization), as the current function's state is no longer needed after the recursive call.
+* **Efficiency**: Tail-recursive functions can be optimized by the compiler into an iterative process to save memory (no need for additional stack frames).
+
+#### Example: Tail Recursion (Factorial)
+
+```python
+# Tail-recursive Factorial
+def factorial_tail(n, acc=1):
+    if n == 0:
+        return acc
+    return factorial_tail(n-1, n*acc)
+```
+
+### 2. **Non-Tail Recursion**:
+
+* **Definition**: A type of recursion where the recursive call is followed by additional work after it returns. This requires additional stack space, as each function call has to retain its state.
+
+#### Example: Non-Tail Recursion (Factorial)
+
+```python
+# Non-tail-recursive Factorial
+def factorial_non_tail(n):
+    if n == 0:
+        return 1
+    return n * factorial_non_tail(n-1)
+```
+
+---
+
+## 🌳 **Recursion Tree Method**
+
+### 1. **Recursion Tree**:
+
+* **Definition**: A tree representation that helps visualize the recursive calls made by an algorithm. Each node represents a function call, and the branches represent the recursive calls made within that function.
+* **Purpose**: The recursion tree is useful for determining the time complexity of a recursive algorithm. By calculating the number of levels and the cost at each level, you can deduce the total time complexity.
+
+### 2. **How to Use Recursion Trees**:
+
+* Draw the recursive calls as a tree, with each level corresponding to a recursive call.
+* Compute the cost at each level (how many operations are performed at that level).
+* Sum the total cost across all levels to determine the total time complexity.
+
+#### Example: Recursion Tree for Merge Sort
+
+The recurrence for Merge Sort is:
+
+$$
+T(n) = 2T\left(\frac{n}{2}\right) + O(n)
+$$
+
+* **Level 0 (root)**: One call to solve a problem of size $n$ with $O(n)$ work.
+* **Level 1**: Two calls to solve problems of size $n/2$, each with $O(n/2)$ work.
+* **Level 2**: Four calls to solve problems of size $n/4$, each with $O(n/4)$ work.
+* The recursion tree has $\log n$ levels.
+
+#### Time Complexity Calculation:
+
+* **Work per level**: At each level, the total work done is $O(n)$.
+* **Total work**: Since there are $\log n$ levels, the total work is $O(n \log n)$.
+
+---
+
+## 📚 **Summary Table**
+
+| **Concept**            | **Description**                                                    | **Example**                        |
+| ---------------------- | ------------------------------------------------------------------ | ---------------------------------- |
+| **Divide-and-Conquer** | Problem is divided into subproblems which are solved and combined. | Merge Sort, Quick Sort             |
+| **Tail Recursion**     | The recursive call is the last operation, optimized for memory.    | Tail-recursive Factorial           |
+| **Non-Tail Recursion** | The recursive call is followed by additional work.                 | Non-tail-recursive Factorial       |
+| **Recursion Tree**     | A tree representation used to calculate time complexity.           | Merge Sort (T(n) = 2T(n/2) + O(n)) |
+
+---
+
+Let me know if you'd like more details or further explanations!

@@ -1,0 +1,179 @@
+Here are your **Markdown (.md)** formatted notes on **Time & Space Complexity**:
+
+---
+
+# ⏱️ **Time & Space Complexity**
+
+Understanding **Time** and **Space Complexity** is crucial in analyzing the efficiency of algorithms. These concepts help determine how an algorithm scales with respect to input size.
+
+---
+
+## 📏 **Big O, Ω, Θ Notation**
+
+### 1. **Big O Notation (O)**
+
+* **Definition**: Represents the **upper bound** of the time (or space) complexity of an algorithm, describing the worst-case scenario.
+* **Purpose**: Provides an upper limit on the growth of an algorithm’s running time.
+* **Example**: $O(n^2)$ means that in the worst case, the algorithm takes time proportional to the square of the input size.
+
+#### Example:
+
+```python
+# Example: O(n^2) - Bubble sort
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+```
+
+### 2. **Big Omega Notation (Ω)**
+
+* **Definition**: Represents the **lower bound** of the time complexity, describing the best-case scenario.
+* **Purpose**: Provides the minimum time an algorithm will take, regardless of input.
+* **Example**: $Ω(n)$ means the algorithm will take at least linear time in the best case.
+
+#### Example:
+
+```python
+# Example: Ω(n) - Linear search
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1
+```
+
+### 3. **Big Theta Notation (Θ)**
+
+* **Definition**: Represents both the **upper and lower bounds** of the time complexity, describing the exact asymptotic behavior of the algorithm.
+* **Purpose**: Gives an exact estimate of the running time for an algorithm.
+* **Example**: $Θ(n \log n)$ indicates that the algorithm's time complexity grows as $n \log n$ in both the best and worst cases.
+
+#### Example:
+
+```python
+# Example: Θ(n log n) - Merge sort
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        left_half = arr[:mid]
+        right_half = arr[mid:]
+
+        merge_sort(left_half)
+        merge_sort(right_half)
+
+        i = j = k = 0
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+        while i < len(left_half):
+            arr[k] = left_half[i]
+            i += 1
+            k += 1
+        while j < len(right_half):
+            arr[k] = right_half[j]
+            j += 1
+            k += 1
+```
+
+---
+
+## 📊 **Amortized Analysis**
+
+### 1. **Definition**:
+
+* **Amortized Analysis**: A method for analyzing the average time complexity of an operation over a sequence of operations, rather than looking at the worst-case time complexity of a single operation.
+* **Purpose**: Useful for algorithms where a single operation might be costly (e.g., dynamic array resizing) but the cost is spread over multiple operations.
+
+### 2. **Types of Amortized Analysis**:
+
+* **Aggregate Method**: The total cost of all operations is averaged over the number of operations.
+* **Accounting Method**: Charges different operations different amounts, and the difference is accounted for in future operations.
+* **Potential Method**: Uses a potential function to track the "potential" cost saved or incurred by operations.
+
+#### Example: Amortized Time of **Dynamic Array Resizing**
+
+```python
+# Example: Dynamic array insertions
+class DynamicArray:
+    def __init__(self):
+        self.arr = [None] * 2  # Initial size of array
+        self.size = 0
+
+    def insert(self, value):
+        if self.size == len(self.arr):  # Resizing condition
+            self.resize()
+        self.arr[self.size] = value
+        self.size += 1
+
+    def resize(self):
+        new_arr = [None] * len(self.arr) * 2  # Double the size
+        for i in range(self.size):
+            new_arr[i] = self.arr[i]
+        self.arr = new_arr
+
+# Amortized time complexity: O(1) per insert operation on average
+```
+
+---
+
+## 📚 **Recurrence Relations & Master Theorem**
+
+### 1. **Recurrence Relations**
+
+* **Definition**: A recurrence relation is an equation or inequality that describes a function in terms of its value on smaller inputs. It is commonly used to represent the time complexity of recursive algorithms.
+
+### 2. **Master Theorem**:
+
+* The **Master Theorem** provides a way to solve recurrence relations of the form:
+
+  $$
+  T(n) = aT\left(\frac{n}{b}\right) + O(n^d)
+  $$
+
+  Where:
+
+  * $a$ is the number of subproblems.
+  * $b$ is the factor by which the problem size is divided.
+  * $d$ is the cost of the work done at each level of recursion.
+
+#### **Master Theorem Cases**:
+
+1. **Case 1**: If $a > b^d$, then $T(n) = O(n^{\log_b a})$.
+2. **Case 2**: If $a = b^d$, then $T(n) = O(n^d \log n)$.
+3. **Case 3**: If $a < b^d$, then $T(n) = O(n^d)$.
+
+#### Example: Solve the recurrence $T(n) = 2T(n/2) + O(n)$
+
+* $a = 2$, $b = 2$, $d = 1$
+* Since $a = b^d$, this falls under **Case 2**.
+* Therefore, the solution is $T(n) = O(n \log n)$.
+
+#### Example: Solve the recurrence $T(n) = 4T(n/2) + O(n^2)$
+
+* $a = 4$, $b = 2$, $d = 2$
+* Since $a = b^d$, this falls under **Case 2**.
+* Therefore, the solution is $T(n) = O(n^2 \log n)$.
+
+---
+
+## ⚖️ **Summary Table**
+
+| **Notations**     | **Description**                                        | **Example**                              |
+| ----------------- | ------------------------------------------------------ | ---------------------------------------- |
+| **Big O (O)**     | Worst-case upper bound of time/space complexity.       | $O(n^2)$                                 |
+| **Big Omega (Ω)** | Best-case lower bound of time/space complexity.        | $Ω(n)$                                   |
+| **Big Theta (Θ)** | Exact asymptotic bound (both upper and lower bounds).  | $Θ(n \log n)$                            |
+| **Amortized**     | Average time complexity over a sequence of operations. | $O(1)$ for dynamic array insertion       |
+| **Recurrence**    | Describes the time complexity of recursive algorithms. | $T(n) = 2T(n/2) + O(n)$ (Master Theorem) |
+
+---
+
+Let me know if you'd like more information on any part of this topic!

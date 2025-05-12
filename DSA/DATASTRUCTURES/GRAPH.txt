@@ -1,0 +1,157 @@
+Here are your **Markdown (.md)** formatted notes on **Graph Representations**:
+
+---
+
+# 🌐 Graph Representations
+
+A **graph** is a collection of nodes (vertices) and edges (connections between nodes). Graphs can be represented in various ways depending on the specific use case, such as adjacency list, adjacency matrix, or edge list.
+
+---
+
+## 🔑 Types of Graph Representations
+
+### 1. **Adjacency List**
+
+* **Definition**: A collection of lists or arrays, where each index represents a vertex, and the list at that index stores the vertices connected to it.
+* **Storage**: Efficient in terms of space, especially for sparse graphs (few edges relative to the number of vertices).
+* **Complexity**:
+
+  * **Space Complexity**: O(V + E), where V is the number of vertices and E is the number of edges.
+  * **Edge Query**: O(V) for worst-case traversal of all neighbors of a vertex.
+
+#### Example:
+
+```python
+graph = {
+    0: [1, 2],  # Vertex 0 is connected to 1 and 2
+    1: [0, 2],  # Vertex 1 is connected to 0 and 2
+    2: [0, 1],  # Vertex 2 is connected to 0 and 1
+}
+```
+
+---
+
+### 2. **Adjacency Matrix**
+
+* **Definition**: A 2D matrix (V x V), where each cell (i, j) represents the presence (1) or absence (0) of an edge between vertices i and j.
+* **Storage**: Not efficient for sparse graphs because it uses O(V^2) space, regardless of the number of edges.
+* **Complexity**:
+
+  * **Space Complexity**: O(V^2)
+  * **Edge Query**: O(1) – Checking if an edge exists between two vertices is a constant-time operation.
+
+#### Example:
+
+```python
+# Adjacency Matrix for a graph with 3 vertices
+graph = [
+    [0, 1, 1],  # Vertex 0 is connected to 1 and 2
+    [1, 0, 1],  # Vertex 1 is connected to 0 and 2
+    [1, 1, 0],  # Vertex 2 is connected to 0 and 1
+]
+```
+
+---
+
+### 3. **Edge List**
+
+* **Definition**: A list of edges, where each edge is represented as a pair (or tuple) of vertices. It stores just the edges, not the full connectivity between all vertices.
+* **Storage**: Efficient for representing a sparse graph with a small number of edges.
+* **Complexity**:
+
+  * **Space Complexity**: O(E), where E is the number of edges.
+  * **Edge Query**: O(E) – to check if an edge exists, you need to search through all edges.
+
+#### Example:
+
+```python
+graph = [
+    (0, 1),  # Edge between vertex 0 and vertex 1
+    (0, 2),  # Edge between vertex 0 and vertex 2
+    (1, 2),  # Edge between vertex 1 and vertex 2
+]
+```
+
+---
+
+## 🔄 Graph Types
+
+Graphs can be categorized based on two main characteristics: **weight** and **direction**.
+
+### 1. **Weighted vs. Unweighted Graphs**
+
+* **Weighted Graph**: Each edge has a weight or cost associated with it, representing things like distance, time, or cost.
+
+  * **Use Case**: Useful for shortest path problems like Dijkstra's algorithm.
+
+  #### Example (Adjacency List):
+
+  ```python
+  graph = {
+      0: [(1, 2), (2, 4)],  # Vertex 0 is connected to 1 with weight 2, and 2 with weight 4
+      1: [(0, 2), (2, 1)],  # Vertex 1 is connected to 0 with weight 2, and 2 with weight 1
+      2: [(0, 4), (1, 1)]   # Vertex 2 is connected to 0 with weight 4, and 1 with weight 1
+  }
+  ```
+
+* **Unweighted Graph**: All edges are assumed to have the same weight or cost, usually treated as 1.
+
+  * **Use Case**: Used in simple traversal algorithms like Breadth-First Search (BFS).
+
+  #### Example (Adjacency List):
+
+  ```python
+  graph = {
+      0: [1, 2],  # Vertex 0 is connected to 1 and 2
+      1: [0, 2],  # Vertex 1 is connected to 0 and 2
+      2: [0, 1]   # Vertex 2 is connected to 0 and 1
+  }
+  ```
+
+---
+
+### 2. **Directed vs. Undirected Graphs**
+
+* **Directed Graph (Digraph)**: Each edge has a direction, meaning it points from one vertex to another. In other words, edges have a source and a destination.
+
+  * **Use Case**: Useful for modeling one-way streets, data flow, or dependencies.
+
+  #### Example (Adjacency Matrix):
+
+  ```python
+  # Directed graph (edges go from vertex i to vertex j)
+  graph = [
+      [0, 1, 0],  # Vertex 0 -> Vertex 1
+      [0, 0, 1],  # Vertex 1 -> Vertex 2
+      [0, 0, 0],  # Vertex 2 has no outgoing edges
+  ]
+  ```
+
+* **Undirected Graph**: The edges do not have a direction, meaning if there's an edge between vertex i and vertex j, you can traverse in both directions.
+
+  * **Use Case**: Used to model symmetric relationships, like friendships or undirected roads.
+
+  #### Example (Adjacency Matrix):
+
+  ```python
+  # Undirected graph (edges are bidirectional)
+  graph = [
+      [0, 1, 1],  # Vertex 0 is connected to Vertex 1 and Vertex 2
+      [1, 0, 1],  # Vertex 1 is connected to Vertex 0 and Vertex 2
+      [1, 1, 0],  # Vertex 2 is connected to Vertex 0 and Vertex 1
+  ]
+  ```
+
+---
+
+## 🧩 Summary Table
+
+| Representation   | Space Complexity | Edge Query | Best Use Case                              |
+| ---------------- | ---------------- | ---------- | ------------------------------------------ |
+| Adjacency List   | O(V + E)         | O(V)       | Sparse graphs, graph traversal             |
+| Adjacency Matrix | O(V^2)           | O(1)       | Dense graphs, quick edge lookup            |
+| Edge List        | O(E)             | O(E)       | Sparse graphs, simple graph representation |
+
+---
+
+Let me know if you need further details or clarification on any topic!

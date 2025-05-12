@@ -1,0 +1,319 @@
+Here are the `.md` notes for **Linked Lists**:
+
+---
+
+# 🧑‍💻 Linked Lists
+
+A **linked list** is a linear data structure where each element (node) contains a value and a reference (or link) to the next node in the sequence. Unlike arrays, linked lists are not contiguous in memory, and each element points to the next.
+
+---
+
+## 🔗 Types of Linked Lists
+
+### 1. **Singly Linked List**
+
+A **singly linked list** is a type of linked list where each node points to the next node. The last node points to `null`.
+
+* **Structure**:
+
+  * Each node has two parts: `data` and `next`.
+  * The `next` points to the next node in the sequence, or `null` if it's the last node.
+
+* **Example**:
+
+  ```javascript
+  class Node {
+    constructor(data) {
+      this.data = data;
+      this.next = null;
+    }
+  }
+
+  let head = new Node(1);
+  head.next = new Node(2);
+  head.next.next = new Node(3);
+  ```
+
+### 2. **Doubly Linked List**
+
+A **doubly linked list** is a type of linked list where each node has two links:
+
+* One to the **next** node.
+
+* One to the **previous** node.
+
+* **Structure**:
+
+  * Each node has three parts: `data`, `next`, and `prev`.
+  * The `prev` points to the previous node, and `next` points to the next node.
+
+* **Example**:
+
+  ```javascript
+  class Node {
+    constructor(data) {
+      this.data = data;
+      this.next = null;
+      this.prev = null;
+    }
+  }
+
+  let head = new Node(1);
+  let second = new Node(2);
+  head.next = second;
+  second.prev = head;
+  ```
+
+### 3. **Circular Linked List**
+
+In a **circular linked list**, the last node points back to the first node, forming a circle. It can be either singly or doubly circular.
+
+* **Structure**:
+
+  * For a singly circular linked list, the last node's `next` points to the head of the list.
+  * For a doubly circular linked list, the `next` of the last node points to the head, and the `prev` of the head points to the last node.
+
+* **Example** (Singly Circular Linked List):
+
+  ```javascript
+  class Node {
+    constructor(data) {
+      this.data = data;
+      this.next = null;
+    }
+  }
+
+  let head = new Node(1);
+  let second = new Node(2);
+  head.next = second;
+  second.next = head;  // Last node points to the head
+  ```
+
+---
+
+## 🧰 Common Linked List Operations
+
+### 1. **Insert a Node**
+
+Insertion can be done at the beginning, end, or middle of the linked list.
+
+* **Insert at the beginning**:
+
+  ```javascript
+  function insertAtBeginning(head, data) {
+    let newNode = new Node(data);
+    newNode.next = head;
+    return newNode;  // New head
+  }
+  ```
+
+* **Insert at the end**:
+
+  ```javascript
+  function insertAtEnd(head, data) {
+    let newNode = new Node(data);
+    if (!head) return newNode;
+    
+    let temp = head;
+    while (temp.next) {
+      temp = temp.next;
+    }
+    temp.next = newNode;
+    return head;
+  }
+  ```
+
+* **Insert after a given node**:
+
+  ```javascript
+  function insertAfter(node, data) {
+    let newNode = new Node(data);
+    newNode.next = node.next;
+    node.next = newNode;
+  }
+  ```
+
+### 2. **Delete a Node**
+
+Deletion can occur by value or by position in the list.
+
+* **Delete the first node**:
+
+  ```javascript
+  function deleteFirstNode(head) {
+    if (!head) return null;
+    return head.next;
+  }
+  ```
+
+* **Delete a node by value**:
+
+  ```javascript
+  function deleteNode(head, data) {
+    if (!head) return null;
+    
+    // If head needs to be removed
+    if (head.data === data) return head.next;
+    
+    let temp = head;
+    while (temp.next && temp.next.data !== data) {
+      temp = temp.next;
+    }
+    
+    if (temp.next) temp.next = temp.next.next;  // Remove the node
+    return head;
+  }
+  ```
+
+### 3. **Reverse the Linked List**
+
+Reversing a linked list changes the direction of the links between the nodes.
+
+* **Example**:
+
+  ```javascript
+  function reverseLinkedList(head) {
+    let prev = null;
+    let current = head;
+    
+    while (current) {
+      let nextNode = current.next;
+      current.next = prev;
+      prev = current;
+      current = nextNode;
+    }
+    
+    return prev;  // New head
+  }
+  ```
+
+### 4. **Detect and Remove a Cycle** (Floyd’s Tortoise and Hare Algorithm)
+
+Detecting a cycle in a linked list requires finding two nodes that meet at some point in the list.
+
+* **Cycle Detection (Floyd's Tortoise and Hare)**:
+
+  ```javascript
+  function hasCycle(head) {
+    let slow = head;
+    let fast = head;
+    
+    while (fast && fast.next) {
+      slow = slow.next;
+      fast = fast.next.next;
+      
+      if (slow === fast) return true;
+    }
+    
+    return false;
+  }
+  ```
+
+* **Removing a Cycle**:
+
+  ```javascript
+  function removeCycle(head) {
+    let slow = head;
+    let fast = head;
+    
+    while (fast && fast.next) {
+      slow = slow.next;
+      fast = fast.next.next;
+      
+      if (slow === fast) {
+        slow = head;
+        while (slow !== fast.next) {
+          slow = slow.next;
+          fast = fast.next;
+        }
+        fast.next = null;  // Remove the cycle
+        break;
+      }
+    }
+  }
+  ```
+
+---
+
+## 🧠 Advanced Linked List Operations
+
+### 1. **Merge Two Sorted Linked Lists**
+
+Merging two sorted lists results in a new sorted list.
+
+* **Example**:
+
+  ```javascript
+  function mergeLists(list1, list2) {
+    let dummy = new Node(0);
+    let current = dummy;
+    
+    while (list1 && list2) {
+      if (list1.data < list2.data) {
+        current.next = list1;
+        list1 = list1.next;
+      } else {
+        current.next = list2;
+        list2 = list2.next;
+      }
+      current = current.next;
+    }
+    
+    current.next = list1 || list2;  // Append remaining nodes
+    return dummy.next;
+  }
+  ```
+
+### 2. **Copy List with Random Pointer**
+
+In some linked lists, each node has an additional random pointer which can point to any node in the list or `null`.
+
+* **Example** (Copy List with Random Pointer):
+
+  ```javascript
+  function copyRandomList(head) {
+    if (!head) return null;
+    
+    let map = new Map();
+    let current = head;
+    
+    // First pass: copy nodes without random pointers
+    while (current) {
+      map.set(current, new Node(current.data));
+      current = current.next;
+    }
+    
+    // Second pass: set next and random pointers
+    current = head;
+    while (current) {
+      map.get(current).next = map.get(current.next) || null;
+      map.get(current).random = map.get(current.random) || null;
+      current = current.next;
+    }
+    
+    return map.get(head);  // Return the copy of the head
+  }
+  ```
+
+### 3. **Skip List Basics**
+
+A **skip list** is a probabilistic data structure that allows for fast search within an ordered sequence of elements, with multiple layers of linked lists.
+
+* **Characteristics**:
+
+  * Skip lists use multiple levels of linked lists to speed up search, insertion, and deletion operations.
+  * Every node is part of at least one list, with higher-level lists skipping over multiple nodes.
+
+---
+
+## 📝 Summary
+
+Linked lists are powerful data structures that allow for efficient insertions and deletions. Here's a quick recap:
+
+* **Types**: Singly, doubly, and circular linked lists.
+* **Operations**: Insertion, deletion, reversal, cycle detection/removal.
+* **Advanced**: Merging sorted lists, copying lists with random pointers, skip-list basics.
+
+---
+
+Let me know if you need more detailed explanations or examples!

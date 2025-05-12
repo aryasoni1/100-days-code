@@ -1,0 +1,165 @@
+Here are the `.md` format notes for **Binary Search**:
+
+---
+
+# 🔍 Binary Search
+
+Binary Search is a **divide-and-conquer** algorithm used to efficiently find an element in a **sorted array** (or satisfy a condition in a monotonic domain). It has a time complexity of **O(log n)**.
+
+---
+
+## ✅ Standard Binary Search
+
+Searches for a target value in a sorted array.
+
+```python
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = left + (right - left) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+```
+
+* **Time complexity**: `O(log n)`
+* **Condition**: Array must be sorted
+
+---
+
+## 🔻 Lower Bound / Upper Bound
+
+* **Lower Bound**: First index where `arr[i] >= target`
+* **Upper Bound**: First index where `arr[i] > target`
+
+```python
+def lower_bound(arr, target):
+    left, right = 0, len(arr)
+    while left < right:
+        mid = (left + right) // 2
+        if arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid
+    return left
+```
+
+```python
+def upper_bound(arr, target):
+    left, right = 0, len(arr)
+    while left < right:
+        mid = (left + right) // 2
+        if arr[mid] <= target:
+            left = mid + 1
+        else:
+            right = mid
+    return left
+```
+
+---
+
+## 🔄 Rotated Sorted Array
+
+Used when a sorted array has been rotated at an unknown pivot.
+
+### Search in Rotated Sorted Array
+
+```python
+def search_rotated(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        # Left half is sorted
+        if arr[left] <= arr[mid]:
+            if arr[left] <= target < arr[mid]:
+                right = mid - 1
+            else:
+                left = mid + 1
+        # Right half is sorted
+        else:
+            if arr[mid] < target <= arr[right]:
+                left = mid + 1
+            else:
+                right = mid - 1
+    return -1
+```
+
+---
+
+## ⛰️ Peak Element / Mountain Problems
+
+Used to find local maxima (or minima).
+
+### Find a Peak Element
+
+```python
+def find_peak(nums):
+    left, right = 0, len(nums) - 1
+    while left < right:
+        mid = (left + right) // 2
+        if nums[mid] < nums[mid + 1]:
+            left = mid + 1
+        else:
+            right = mid
+    return left  # Index of peak
+```
+
+* Also useful in **mountain arrays** (increasing then decreasing).
+
+---
+
+## 📐 Binary Search in Continuous Domains
+
+Used for problems involving real numbers or infinite domains, like:
+
+* Finding square roots
+* Minimizing/maximizing values under constraints
+* Solving equations like `f(x) = 0` where `f` is monotonic
+
+### Template (Floating Point Precision)
+
+```python
+def binary_search_real(f, low, high, eps=1e-6):
+    while high - low > eps:
+        mid = (low + high) / 2
+        if f(mid):
+            high = mid
+        else:
+            low = mid
+    return low
+```
+
+**Example**: Square root of `n`
+
+```python
+def sqrt(n):
+    return binary_search_real(lambda x: x * x >= n, 0, n)
+```
+
+---
+
+## 🧠 Tips
+
+* Always define clear **search space** and **loop invariants**.
+* Prefer `left + (right - left) // 2` to avoid overflow.
+* Use **monotonicity** property to apply binary search (function values must go in one direction).
+
+---
+
+## 🧪 Practice Problems
+
+* [ ] Find first and last position of a target
+* [ ] Search in rotated sorted array
+* [ ] Find peak in mountain array
+* [ ] Median of two sorted arrays
+* [ ] Minimize/maximize cost/problem in continuous range
+
+---
+
+Let me know if you'd like visual diagrams or practice problems!

@@ -1,0 +1,275 @@
+Here are the `.md` notes for **Efficient Sorts**:
+
+---
+
+# 📚 Efficient Sorts
+
+Efficient sorting algorithms perform much better than elementary sorts (like Bubble, Insertion, and Selection Sort) for larger datasets, generally achieving better time complexities like **O(n log n)**. These algorithms typically use divide-and-conquer techniques or data structures like heaps for more optimal performance.
+
+---
+
+## ⚡ Merge Sort
+
+**Merge Sort** is a **divide-and-conquer** algorithm that splits the array into smaller subarrays, sorts each subarray, and then merges them back together in sorted order.
+
+* **Algorithm**:
+
+  1. Divide the array into two halves.
+  2. Recursively sort each half.
+  3. Merge the two sorted halves.
+
+* **Time Complexity**:
+
+  * Best: **O(n log n)**
+  * Average: **O(n log n)**
+  * Worst: **O(n log n)**
+
+* **Space Complexity**: **O(n)** (due to auxiliary space for merging)
+
+* **Example**:
+
+  ```javascript
+  function mergeSort(arr) {
+    if (arr.length <= 1) return arr;
+    
+    const mid = Math.floor(arr.length / 2);
+    const left = mergeSort(arr.slice(0, mid));
+    const right = mergeSort(arr.slice(mid));
+    
+    return merge(left, right);
+  }
+
+  function merge(left, right) {
+    let result = [], i = 0, j = 0;
+    
+    while (i < left.length && j < right.length) {
+      if (left[i] < right[j]) result.push(left[i++]);
+      else result.push(right[j++]);
+    }
+
+    return result.concat(left.slice(i)).concat(right.slice(j));
+  }
+  ```
+
+---
+
+## ⚡ QuickSort
+
+**QuickSort** is another **divide-and-conquer** algorithm. It works by selecting a **pivot element** and partitioning the array such that elements less than the pivot come before it, and elements greater come after. The subarrays are then sorted recursively.
+
+* **Algorithm**:
+
+  1. Choose a pivot element (e.g., first element, last element, random element, or median).
+  2. Partition the array into two subarrays.
+  3. Recursively apply QuickSort to the subarrays.
+
+* **Time Complexity**:
+
+  * Best: **O(n log n)**
+  * Average: **O(n log n)**
+  * Worst: **O(n²)** (when the pivot is poorly chosen)
+
+* **Space Complexity**: **O(log n)** (for recursive calls)
+
+* **Example**:
+
+  ```javascript
+  function quickSort(arr) {
+    if (arr.length <= 1) return arr;
+    
+    const pivot = arr[arr.length - 1]; // Pivot element
+    const left = [], right = [];
+    
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] < pivot) left.push(arr[i]);
+      else right.push(arr[i]);
+    }
+    
+    return [...quickSort(left), pivot, ...quickSort(right)];
+  }
+  ```
+
+* **Pivot Strategies**:
+
+  1. **First Element**: Simple but may degrade performance in certain cases.
+  2. **Last Element**: Similar to first element, with potential pitfalls.
+  3. **Random Element**: Reduces worst-case scenarios, making it more efficient.
+  4. **Median of Three**: Takes the first, middle, and last elements, and picks the median as the pivot.
+
+---
+
+## ⚡ Heap Sort
+
+**Heap Sort** utilizes a **binary heap** data structure (a complete binary tree) to sort elements. It first builds a max heap (for ascending order) and then repeatedly extracts the maximum element and rebuilds the heap.
+
+* **Algorithm**:
+
+  1. Build a max-heap from the array.
+  2. Swap the root (largest element) with the last element of the array.
+  3. Reheapify the heap to maintain the max-heap property.
+  4. Repeat the process for the remaining elements.
+
+* **Time Complexity**:
+
+  * Best: **O(n log n)**
+  * Average: **O(n log n)**
+  * Worst: **O(n log n)**
+
+* **Space Complexity**: **O(1)** (in-place sorting)
+
+* **Example**:
+
+  ```javascript
+  function heapSort(arr) {
+    const n = arr.length;
+
+    // Build a max heap
+    for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+      heapify(arr, n, i);
+    }
+
+    // Extract elements one by one from the heap
+    for (let i = n - 1; i > 0; i--) {
+      [arr[0], arr[i]] = [arr[i], arr[0]]; // Swap root with last element
+      heapify(arr, i, 0); // Heapify the root
+    }
+
+    return arr;
+  }
+
+  function heapify(arr, n, i) {
+    let largest = i;
+    const left = 2 * i + 1;
+    const right = 2 * i + 2;
+
+    if (left < n && arr[left] > arr[largest]) largest = left;
+    if (right < n && arr[right] > arr[largest]) largest = right;
+    if (largest !== i) {
+      [arr[i], arr[largest]] = [arr[largest], arr[i]];
+      heapify(arr, n, largest);
+    }
+  }
+  ```
+
+---
+
+## ⚡ Counting Sort
+
+**Counting Sort** is a non-comparative integer sorting algorithm that works by counting the number of occurrences of each element and using that to place elements in their correct position.
+
+* **Algorithm**:
+
+  1. Create an auxiliary array to count occurrences of each element.
+  2. Calculate the cumulative sum to get the correct position of each element.
+  3. Place the elements in the correct position.
+
+* **Time Complexity**: **O(n + k)** (where `n` is the number of elements and `k` is the range of the input)
+
+* **Space Complexity**: **O(k)** (for the count array)
+
+* **Example**:
+
+  ```javascript
+  function countingSort(arr) {
+    const max = Math.max(...arr);
+    const count = new Array(max + 1).fill(0);
+    const result = new Array(arr.length);
+
+    // Count occurrences
+    for (const num of arr) {
+      count[num]++;
+    }
+
+    // Calculate cumulative count
+    for (let i = 1; i <= max; i++) {
+      count[i] += count[i - 1];
+    }
+
+    // Place elements in sorted order
+    for (let i = arr.length - 1; i >= 0; i--) {
+      result[--count[arr[i]]] = arr[i];
+    }
+
+    return result;
+  }
+  ```
+
+---
+
+## ⚡ Radix Sort
+
+**Radix Sort** is a non-comparative integer sorting algorithm that sorts numbers by processing individual digits. It processes each digit from the least significant digit (LSD) or the most significant digit (MSD).
+
+* **Algorithm**:
+
+  1. Find the maximum number to know the number of digits.
+  2. For each digit, sort the numbers based on the current digit using Counting Sort.
+  3. Repeat for all digits.
+
+* **Time Complexity**: **O(nk)** (where `n` is the number of elements and `k` is the number of digits)
+
+* **Space Complexity**: **O(n + k)**
+
+* **Example**:
+
+  ```javascript
+  function radixSort(arr) {
+    const max = Math.max(...arr);
+    let exp = 1;
+
+    while (Math.floor(max / exp) > 0) {
+      arr = countingSortByDigit(arr, exp);
+      exp *= 10;
+    }
+
+    return arr;
+  }
+
+  function countingSortByDigit(arr, exp) {
+    const count = new Array(10).fill(0);
+    const result = new Array(arr.length);
+
+    // Count occurrences based on current digit
+    for (let i = 0; i < arr.length; i++) {
+      count[Math.floor(arr[i] / exp) % 10]++;
+    }
+
+    // Calculate cumulative count
+    for (let i = 1; i < 10; i++) {
+      count[i] += count[i - 1];
+    }
+
+    // Place elements in sorted order based on current digit
+    for (let i = arr.length - 1; i >= 0; i--) {
+      result[--count[Math.floor(arr[i] / exp) % 10]] = arr[i];
+    }
+
+    return result;
+  }
+  ```
+
+---
+
+## 🔍 Comparison of Efficient Sorts
+
+| **Algorithm**     | **Best Case** | **Average Case** | **Worst Case** | **Space Complexity** |
+| ----------------- | ------------- | ---------------- | -------------- | -------------------- |
+| **Merge Sort**    | O(n log n)    | O(n log n)       | O(n log n)     | O(n)                 |
+| **QuickSort**     | O(n log n)    | O(n log n)       | O(n²)          | O(log n)             |
+| **Heap Sort**     | O(n log n)    | O(n log n)       | O(n log n)     | O(1)                 |
+| **Counting Sort** | O(n + k)      | O(n + k)         | O(n + k)       | O(k)                 |
+| \*\*Rad           |               |                  |                |                      |
+ix Sort\*\*       | O(nk)         | O(nk)             | O(nk)          | O(n + k)             |
+
+---
+
+## ✨ Key Points
+
+* **Merge Sort**: Ideal for large datasets and stable sorting.
+* **QuickSort**: Fast and efficient on average, but can degrade with poor pivot selection.
+* **Heap Sort**: An in-place algorithm, useful for priority queues.
+* **Counting and Radix Sort**: Non-comparative algorithms that work well for specific data types (e.g., integers).
+
+---
+
+Let me know if you need further clarification or examples!

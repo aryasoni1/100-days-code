@@ -1,0 +1,137 @@
+Here's your **Markdown (.md)** formatted notes on **Hash Tables**:
+
+---
+
+# 🧩 Hash Tables
+
+A **hash table** (or hash map) is a data structure that maps keys to values using a **hash function** to compute an index into an array of buckets.
+
+---
+
+## 🔑 Key Concepts
+
+* **Hash Function**: Converts a key into an index.
+* **Load Factor**: `load factor = number of entries / number of buckets`. Affects performance.
+* **Collision**: When multiple keys hash to the same index.
+
+---
+
+## 🛡️ Collision Resolution Techniques
+
+### 1. **Separate Chaining**
+
+* Each bucket holds a linked list of entries.
+* On collision, new key-value pairs are appended to the list.
+
+```python
+class HashTableChaining:
+    def __init__(self, size=10):
+        self.size = size
+        self.table = [[] for _ in range(size)]
+
+    def _hash(self, key):
+        return hash(key) % self.size
+
+    def insert(self, key, value):
+        idx = self._hash(key)
+        for i, (k, v) in enumerate(self.table[idx]):
+            if k == key:
+                self.table[idx][i] = (key, value)
+                return
+        self.table[idx].append((key, value))
+
+    def get(self, key):
+        idx = self._hash(key)
+        for k, v in self.table[idx]:
+            if k == key:
+                return v
+        return None
+```
+
+### 2. **Open Addressing**
+
+* All data stored in the hash table itself.
+* On collision, probe for the next open slot.
+
+#### a. **Linear Probing**
+
+* Move sequentially (step = 1) to find an empty slot.
+
+#### b. **Quadratic Probing**
+
+* Probes slots using a quadratic function: `i^2` steps.
+
+#### c. **Double Hashing**
+
+* Use a second hash function to compute step size.
+
+```python
+class HashTableOpenAddressing:
+    def __init__(self, size=10):
+        self.size = size
+        self.table = [None] * size
+
+    def _hash(self, key):
+        return hash(key) % self.size
+
+    def insert(self, key, value):
+        idx = self._hash(key)
+        original_idx = idx
+        i = 1
+        while self.table[idx] is not None and self.table[idx][0] != key:
+            idx = (original_idx + i) % self.size  # Linear probing
+            i += 1
+        self.table[idx] = (key, value)
+
+    def get(self, key):
+        idx = self._hash(key)
+        original_idx = idx
+        i = 1
+        while self.table[idx] is not None:
+            if self.table[idx][0] == key:
+                return self.table[idx][1]
+            idx = (original_idx + i) % self.size
+            i += 1
+        return None
+```
+
+---
+
+## 🎯 Designing Good Hash Functions
+
+A good hash function should:
+
+* Distribute keys **uniformly**.
+* Minimize **collisions**.
+* Be **fast** to compute.
+
+### Common Techniques
+
+* **Modulo-based hashing**: `hash(key) % table_size`
+* **Polynomial rolling hash**: for strings
+* **Multiplicative hash**: uses fractions of numbers (e.g., `key * A % 1 * table_size`)
+
+### Example: Polynomial Rolling Hash
+
+```python
+def string_hash(s, base=31, mod=10**9 + 9):
+    hash_val = 0
+    for c in s:
+        hash_val = (hash_val * base + ord(c)) % mod
+    return hash_val
+```
+
+---
+
+## ✅ Summary
+
+| Feature                  | Separate Chaining  | Open Addressing               |
+| ------------------------ | ------------------ | ----------------------------- |
+| Memory usage             | Extra for pointers | In-table only                 |
+| Performance at high load | Better             | Slower                        |
+| Cache-friendliness       | Poor               | Better                        |
+| Deletion complexity      | Easy               | Hard (may require tombstones) |
+
+---
+
+Would you like Python examples for collision resolution using quadratic probing or double hashing?

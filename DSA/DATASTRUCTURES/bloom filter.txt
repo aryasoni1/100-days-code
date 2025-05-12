@@ -1,0 +1,138 @@
+Here are your **Markdown (.md)** formatted notes on **Bloom Filters**:
+
+---
+
+# 🌸 Bloom Filters
+
+A **Bloom Filter** is a probabilistic data structure that is used to test whether an element is a member of a set. It allows for **fast membership queries** with a possibility of **false positives** but **no false negatives**.
+
+---
+
+## 🔑 Key Concepts
+
+* **Bit Array**: A fixed-size array of bits (0 or 1).
+* **Hash Functions**: Multiple hash functions are used to map elements to indices in the bit array.
+* **False Positives**: A Bloom filter may erroneously indicate that an element is present, even if it is not.
+* **False Negatives**: Never occurs in a Bloom filter (i.e., if an element is absent, the filter will correctly report it as absent).
+
+---
+
+## 🌿 How It Works
+
+1. **Initialization**: Start with a bit array of size `m` (all bits set to 0).
+2. **Hash Functions**: Use `k` independent hash functions to hash an element and map it to `k` positions in the bit array.
+3. **Adding Elements**: For each element to be added, the `k` hash functions are applied, and the corresponding bits in the array are set to 1.
+4. **Querying**: To check if an element exists:
+
+   * Apply the `k` hash functions to the element.
+   * If all corresponding bits are 1, the element is **probably** in the set.
+   * If any bit is 0, the element is definitely **not** in the set.
+
+---
+
+## 🛠️ False Positives vs. False Negatives
+
+* **False Positives**: Occur when the Bloom filter mistakenly reports an element as present, even if it's not.
+
+  * **Reason**: Due to hash collisions (multiple elements hashing to the same bit positions).
+  * **Probability**: As the Bloom filter fills up, the probability of false positives increases.
+
+* **False Negatives**: Never occur.
+
+  * **Reason**: An absent element will always produce at least one bit being 0, indicating its absence.
+
+---
+
+## 🔧 Operations
+
+1. **Insert Operation**:
+
+   * Apply `k` hash functions to the element.
+   * Set the resulting `k` positions in the bit array to 1.
+
+2. **Membership Query**:
+
+   * Apply `k` hash functions to the element.
+   * Check the corresponding positions in the bit array.
+   * If all bits are 1, the element is likely present.
+   * If any bit is 0, the element is definitely not present.
+
+---
+
+## 📉 Trade-offs
+
+* **Space Efficiency**: Bloom filters use very little memory compared to other data structures like hash sets.
+* **Time Efficiency**: Membership queries are fast, but insertions and deletions are less efficient.
+* **False Positives**: The trade-off between memory and the probability of false positives is key. As the size of the bit array increases and more hash functions are used, the false positive rate decreases, but the memory usage increases.
+
+---
+
+## 🧩 Use-Cases
+
+* **Set Membership**: Checking if an element is part of a set without storing the full set.
+
+  * Example: Checking if a word exists in a dictionary or a URL in a blacklist.
+
+* **Distributed Systems**: Used in databases (like **Apache HBase** or **Redis**) to quickly check whether a data block exists.
+
+* **Web Caching**: Checking if a URL has been cached before fetching it from the server.
+
+* **Network Systems**: Used for detecting duplicate packets or determining if a certain message has been seen before.
+
+---
+
+## ⚖️ Trade-offs & Limitations
+
+* **Memory vs. Accuracy**: More memory decreases the likelihood of false positives.
+* **No Deletion**: Once an element is added to the Bloom filter, it cannot be removed. However, **counting Bloom filters** allow for deletions.
+* **Scalability**: Bloom filters can be scaled to handle larger datasets by adjusting the bit array size and number of hash functions.
+
+---
+
+## 📦 Example (Python)
+
+```python
+class BloomFilter:
+    def __init__(self, size, num_hashes):
+        self.size = size
+        self.num_hashes = num_hashes
+        self.bit_array = [0] * size
+
+    def _hash(self, item, i):
+        return (hash(item) + i * hash(item)) % self.size
+
+    def add(self, item):
+        for i in range(self.num_hashes):
+            idx = self._hash(item, i)
+            self.bit_array[idx] = 1
+
+    def contains(self, item):
+        for i in range(self.num_hashes):
+            idx = self._hash(item, i)
+            if self.bit_array[idx] == 0:
+                return False
+        return True
+
+# Example usage
+bloom = BloomFilter(500, 3)
+bloom.add("apple")
+print(bloom.contains("apple"))  # Likely True
+print(bloom.contains("banana"))  # Likely False
+```
+
+---
+
+## 📊 Summary Table
+
+| Feature          | Bloom Filter                    |
+| ---------------- | ------------------------------- |
+| False Positives  | Yes                             |
+| False Negatives  | No                              |
+| Space Efficiency | High                            |
+| Time Complexity  | O(k) for both insert and query  |
+| Deletions        | Not directly supported          |
+| Use-cases        | Web caching, DB filtering, etc. |
+
+---
+
+Let me know if you need any additional details!

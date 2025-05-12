@@ -1,0 +1,185 @@
+Here are structured notes on **Binary Search Trees (BSTs)** in **Markdown (.md)** format with Python examples:
+
+---
+
+# 🌲 Binary Search Trees (BST) in Python
+
+---
+
+## 🧱 What is a BST?
+
+A **Binary Search Tree** is a binary tree where:
+
+* Left subtree contains only nodes **less than** the node’s key.
+* Right subtree contains only nodes **greater than** the node’s key.
+* Left and right subtrees are also BSTs.
+
+---
+
+## 🧩 Node Definition
+
+```python
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+```
+
+---
+
+## ➕ Insert into BST
+
+```python
+def insert(root, key):
+    if not root:
+        return TreeNode(key)
+    if key < root.val:
+        root.left = insert(root.left, key)
+    else:
+        root.right = insert(root.right, key)
+    return root
+```
+
+---
+
+## 🔍 Search in BST
+
+```python
+def search(root, key):
+    if not root or root.val == key:
+        return root
+    if key < root.val:
+        return search(root.left, key)
+    return search(root.right, key)
+```
+
+---
+
+## ❌ Delete a Node from BST
+
+```python
+def delete(root, key):
+    if not root:
+        return root
+    if key < root.val:
+        root.left = delete(root.left, key)
+    elif key > root.val:
+        root.right = delete(root.right, key)
+    else:
+        # Node with one child or no child
+        if not root.left:
+            return root.right
+        elif not root.right:
+            return root.left
+        # Node with two children: get inorder successor
+        temp = minValueNode(root.right)
+        root.val = temp.val
+        root.right = delete(root.right, temp.val)
+    return root
+
+def minValueNode(node):
+    while node.left:
+        node = node.left
+    return node
+```
+
+---
+
+## 🧭 Inorder Successor & Predecessor
+
+### ✅ Inorder Successor (smallest > node)
+
+```python
+def inorder_successor(root, node):
+    succ = None
+    while root:
+        if node.val < root.val:
+            succ = root
+            root = root.left
+        else:
+            root = root.right
+    return succ
+```
+
+### ✅ Inorder Predecessor (largest < node)
+
+```python
+def inorder_predecessor(root, node):
+    pred = None
+    while root:
+        if node.val > root.val:
+            pred = root
+            root = root.right
+        else:
+            root = root.left
+    return pred
+```
+
+---
+
+## ✅ Validate a BST
+
+```python
+def is_valid_bst(root, low=float('-inf'), high=float('inf')):
+    if not root:
+        return True
+    if not (low < root.val < high):
+        return False
+    return (is_valid_bst(root.left, low, root.val) and
+            is_valid_bst(root.right, root.val, high))
+```
+
+---
+
+## 🥇 Kth Smallest Element
+
+```python
+def kth_smallest(root, k):
+    stack = []
+    while True:
+        while root:
+            stack.append(root)
+            root = root.left
+        root = stack.pop()
+        k -= 1
+        if k == 0:
+            return root.val
+        root = root.right
+```
+
+---
+
+## 🥈 Kth Largest Element
+
+```python
+def kth_largest(root, k):
+    stack = []
+    while True:
+        while root:
+            stack.append(root)
+            root = root.right
+        root = stack.pop()
+        k -= 1
+        if k == 0:
+            return root.val
+        root = root.left
+```
+
+---
+
+## 📊 Summary Table
+
+| Operation            | Time Complexity |
+| -------------------- | --------------- |
+| Insert / Delete      | O(h)            |
+| Search               | O(h)            |
+| Validate BST         | O(n)            |
+| Inorder Successor    | O(h)            |
+| Kth Smallest/Largest | O(h + k)        |
+
+> *Where **h** is the height of the tree. For a balanced BST, h ≈ log(n).*
+
+---
+
+Would you like diagrams or practice problems for BSTs too?

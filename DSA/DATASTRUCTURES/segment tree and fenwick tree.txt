@@ -1,0 +1,133 @@
+Here's your **Markdown (.md)** formatted notes on **Segment Trees & Fenwick Trees (Binary Indexed Trees - BIT)**:
+
+---
+
+# 🌲 Segment Trees & Fenwick Trees (BIT)
+
+Data structures used for **efficient range queries and updates** in arrays, often used in competitive programming and systems requiring dynamic range computations.
+
+---
+
+## 📐 Segment Tree
+
+A binary tree used for:
+
+* Range sum/min/max queries
+* Point or range updates
+* Static-sized array (size `n` → tree size \~ `4n`)
+
+### ✅ Features
+
+* Query: O(log n)
+* Update: O(log n)
+* Memory: O(n)
+
+### 🧱 Segment Tree Construction
+
+```python
+class SegmentTree:
+    def __init__(self, arr):
+        self.n = len(arr)
+        self.tree = [0] * (4 * self.n)
+        self.build(arr, 0, 0, self.n - 1)
+
+    def build(self, arr, node, l, r):
+        if l == r:
+            self.tree[node] = arr[l]
+        else:
+            mid = (l + r) // 2
+            self.build(arr, 2 * node + 1, l, mid)
+            self.build(arr, 2 * node + 2, mid + 1, r)
+            self.tree[node] = self.tree[2 * node + 1] + self.tree[2 * node + 2]
+```
+
+### 📊 Range Query and Point Update
+
+```python
+    def update(self, idx, value, node=0, l=0, r=None):
+        if r is None:
+            r = self.n - 1
+        if l == r:
+            self.tree[node] = value
+        else:
+            mid = (l + r) // 2
+            if idx <= mid:
+                self.update(idx, value, 2 * node + 1, l, mid)
+            else:
+                self.update(idx, value, 2 * node + 2, mid + 1, r)
+            self.tree[node] = self.tree[2 * node + 1] + self.tree[2 * node + 2]
+
+    def query(self, ql, qr, node=0, l=0, r=None):
+        if r is None:
+            r = self.n - 1
+        if qr < l or ql > r:
+            return 0
+        if ql <= l and r <= qr:
+            return self.tree[node]
+        mid = (l + r) // 2
+        return self.query(ql, qr, 2 * node + 1, l, mid) + self.query(ql, qr, 2 * node + 2, mid + 1, r)
+```
+
+---
+
+## 💤 Lazy Propagation
+
+Used in segment trees to **defer updates** and apply them **on-demand** (for range updates).
+
+* Speeds up frequent range updates.
+* Uses an auxiliary lazy\[] array.
+
+---
+
+## 🧮 Fenwick Tree (Binary Indexed Tree - BIT)
+
+Efficient structure for:
+
+* Prefix sums
+* Point updates
+
+### ✅ Features
+
+* Query: O(log n)
+* Update: O(log n)
+* Memory: O(n)
+
+### 📘 Implementation
+
+```python
+class FenwickTree:
+    def __init__(self, size):
+        self.n = size
+        self.tree = [0] * (self.n + 1)
+
+    def update(self, index, delta):
+        while index <= self.n:
+            self.tree[index] += delta
+            index += index & -index
+
+    def query(self, index):
+        result = 0
+        while index > 0:
+            result += self.tree[index]
+            index -= index & -index
+        return result
+
+    def range_query(self, left, right):
+        return self.query(right) - self.query(left - 1)
+```
+
+---
+
+## 🔄 Point vs. Range Updates
+
+| Type         | Segment Tree  | Fenwick Tree (BIT)                |
+| ------------ | ------------- | --------------------------------- |
+| Point Update | ✅ O(log n)    | ✅ O(log n)                        |
+| Range Update | ✅ (with lazy) | ⚠️ Not built-in (needs extra BIT) |
+| Range Query  | ✅ O(log n)    | ✅ O(log n)                        |
+
+> BIT is simpler and faster for point updates and prefix sums; Segment Tree is more flexible for complex queries and range updates.
+
+---
+
+Would you like a visual diagram of how a segment tree or BIT structure looks?

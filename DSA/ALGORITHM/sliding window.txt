@@ -1,0 +1,122 @@
+Here are your **Markdown (.md)** formatted notes on **Sliding Window**:
+
+---
+
+# 🪟 **Sliding Window**
+
+The **Sliding Window** technique is a popular approach to solving array or list problems where we maintain a subset of elements and slide it across the array to optimize time complexity. This technique is widely used to solve problems like finding subarrays, dynamic range problems, and other sequence-based tasks.
+
+---
+
+## 🪟 **Fixed-Size Window vs. Variable-Size Window**
+
+### 1. **Fixed-Size Window**:
+
+* **Definition**: A sliding window of fixed size that moves across the array or list without changing its size.
+* **Common Use Cases**:
+
+  * Finding the maximum or minimum sum of a subarray of a fixed length.
+  * Finding subarrays with a particular sum or property.
+
+### 2. **Variable-Size Window**:
+
+* **Definition**: A sliding window where the window size can dynamically adjust based on the problem constraints, like increasing or decreasing as conditions change.
+* **Common Use Cases**:
+
+  * Finding the smallest subarray with a sum greater than or equal to a target.
+  * Longest substring with distinct characters.
+
+---
+
+## 🔄 **Min/Max Window**
+
+### 1. **Min/Max Sliding Window**:
+
+* **Definition**: A technique used to find the minimum or maximum value in the current window as it slides through the array or list.
+* **Common Use Cases**:
+
+  * Finding the maximum or minimum element in a sliding window of fixed size.
+  * Maintaining a sliding window to find the maximum or minimum sum.
+
+### 2. **Example: Maximum in Sliding Window (Fixed Size)**:
+
+Given an array of integers, find the maximum in every sliding window of size `k`.
+
+```python
+from collections import deque
+
+def max_sliding_window(nums, k):
+    result = []
+    deq = deque()  # stores indices of elements in the current window
+
+    for i, num in enumerate(nums):
+        # Remove elements outside the current window
+        while deq and deq[0] < i - k + 1:
+            deq.popleft()
+
+        # Remove smaller elements from the deque
+        while deq and nums[deq[-1]] < num:
+            deq.pop()
+
+        deq.append(i)
+
+        # Append the current max value (which is at the front of the deque)
+        if i >= k - 1:
+            result.append(nums[deq[0]])
+
+    return result
+```
+
+* **Explanation**: This code uses a deque (double-ended queue) to store the indices of array elements in the current window. The window slides, and the deque is updated by removing elements that are out of the current window or smaller than the new element.
+
+---
+
+## 🔄 **Dynamic Window Adjustments**
+
+### 1. **Dynamic Window**:
+
+* **Definition**: The window size can adjust based on conditions, such as a sum or property constraint. This allows more flexibility in finding the solution.
+* **Common Use Cases**:
+
+  * Finding the smallest subarray with a sum greater than or equal to a target value.
+  * Longest substring with no repeating characters.
+
+### 2. **Example: Smallest Subarray with Sum Greater than Target**:
+
+Given an array of positive integers, find the length of the smallest contiguous subarray whose sum is greater than or equal to a given target.
+
+```python
+def min_subarray_length(target, nums):
+    n = len(nums)
+    min_length = float('inf')
+    current_sum = 0
+    left = 0
+
+    for right in range(n):
+        current_sum += nums[right]
+
+        # Shrink the window as long as the current sum is greater than or equal to the target
+        while current_sum >= target:
+            min_length = min(min_length, right - left + 1)
+            current_sum -= nums[left]
+            left += 1
+
+    return min_length if min_length != float('inf') else 0
+```
+
+* **Explanation**: This code uses a dynamic window where the `right` pointer expands the window and the `left` pointer contracts it when the sum is greater than or equal to the target.
+
+---
+
+## 📚 **Summary Table**
+
+| **Technique**                 | **Description**                                              | **Example**                           |
+| ----------------------------- | ------------------------------------------------------------ | ------------------------------------- |
+| **Fixed-Size Window**         | A window of fixed size slides through the array.             | Maximum in sliding window of size `k` |
+| **Variable-Size Window**      | The window size adjusts dynamically based on conditions.     | Smallest subarray with sum ≥ target   |
+| **Min/Max Sliding Window**    | Finding minimum or maximum values within the current window. | Maximum sliding window, fixed size    |
+| **Dynamic Window Adjustment** | Window size changes dynamically to meet a certain condition. | Smallest subarray with sum ≥ target   |
+
+---
+
+Let me know if you'd like additional details or examples!

@@ -1,0 +1,127 @@
+Here's a well-structured **Markdown (.md)** formatted note on **Balanced Trees** with focus on **AVL Trees** and **Red-Black Trees**:
+
+---
+
+# 🌳 Balanced Trees
+
+Balanced trees are binary search trees (BSTs) that maintain a low height to ensure efficient operations (insertion, deletion, and lookup).
+
+---
+
+## 🔄 AVL Trees
+
+AVL Tree is a **self-balancing BST** where for any node:
+
+```
+|height(left subtree) - height(right subtree)| ≤ 1
+```
+
+### ✅ Properties
+
+* Balance factor = `height(left) - height(right)`
+* Allowed balance factor: `-1`, `0`, `1`
+
+### 🔁 Rotations
+
+To maintain balance after insertions/deletions, AVL trees perform rotations:
+
+#### 🔹 Right Rotation (LL Case)
+
+```
+    z                        y
+   / \                      / \
+  y   T4      →           x   z
+ / \                          / \
+x   T3                      T3  T4
+```
+
+```python
+def right_rotate(z):
+    y = z.left
+    T3 = y.right
+    y.right = z
+    z.left = T3
+    return y
+```
+
+#### 🔹 Left Rotation (RR Case)
+
+```
+  z                             y
+ / \                           / \
+T1  y         →              z   x
+    / \                     / \
+   T2  x                   T1  T2
+```
+
+```python
+def left_rotate(z):
+    y = z.right
+    T2 = y.left
+    y.left = z
+    z.right = T2
+    return y
+```
+
+#### 🔸 Left-Right (LR) and Right-Left (RL) Cases
+
+* LR = Left Rotate, then Right Rotate
+* RL = Right Rotate, then Left Rotate
+
+### 🧮 Time Complexity
+
+| Operation | Time     |
+| --------- | -------- |
+| Insert    | O(log n) |
+| Delete    | O(log n) |
+| Search    | O(log n) |
+
+---
+
+## 🟥⚫ Red-Black Trees
+
+A Red-Black Tree is a **self-balancing BST** with extra color properties.
+
+### ✅ Properties
+
+1. Each node is either **Red** or **Black**.
+2. The **root is always Black**.
+3. **No two red nodes** can be adjacent (no red-red parent-child).
+4. Every path from a node to its descendant null nodes contains the **same number of black nodes**.
+5. All leaves (NILs) are considered **black**.
+
+### 🔄 Balancing with Rotations & Recoloring
+
+Balancing is done using:
+
+* **Left Rotation**
+* **Right Rotation**
+* **Color Flip (Recoloring)**
+
+### 🎯 Insertion & Deletion Strategy
+
+* Insert as in a normal BST, then **recolor and rotate** to restore red-black properties.
+* Deletion may involve **double-black** scenarios and requires **rebalancing** using sibling cases and rotations.
+
+### 🧮 Time Complexity
+
+| Operation | Time     |
+| --------- | -------- |
+| Insert    | O(log n) |
+| Delete    | O(log n) |
+| Search    | O(log n) |
+
+---
+
+## 📊 Comparison Table
+
+| Feature             | AVL Tree               | Red-Black Tree   |
+| ------------------- | ---------------------- | ---------------- |
+| Balance Strictness  | More strictly balanced | Loosely balanced |
+| Operations Time     | O(log n)               | O(log n)         |
+| Rotations Frequency | More frequent          | Less frequent    |
+| Use Case            | Read-heavy apps        | Write-heavy apps |
+
+---
+
+Would you like visual diagrams or code implementations for AVL and Red-Black trees as well?

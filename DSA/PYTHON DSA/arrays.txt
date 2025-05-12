@@ -1,0 +1,108 @@
+Here's a well-structured **Markdown (.md)** note on **Arrays in Python**, covering fixed vs. dynamic arrays, multidimensional arrays, common operations, and in-place vs. out-of-place transformations:
+
+---
+
+# 🧮 Arrays in Python
+
+## 🔹 Overview
+
+* Python does not have built-in fixed-size arrays like C/C++.
+* The built-in `list` type is a dynamic array.
+* For performance and fixed types, use the `array` module or NumPy arrays.
+
+---
+
+## 📌 Fixed vs. Dynamic Arrays
+
+### ✅ Dynamic Arrays (Python Lists)
+
+* Automatically resize as elements are added or removed.
+* Backed by a resizable array under the hood.
+
+```python
+arr = [1, 2, 3]
+arr.append(4)  # Dynamic resizing
+```
+
+### ✅ Fixed Arrays (Using `array` Module or NumPy)
+
+* Require a fixed data type.
+* Better performance for numerical computations.
+
+```python
+from array import array
+fixed_arr = array('i', [1, 2, 3])  # Integer-only array
+```
+
+---
+
+## 🔢 Multidimensional Arrays
+
+* Use **nested lists** or **NumPy** for efficient multidimensional arrays.
+
+```python
+# 2D array using nested lists
+matrix = [
+    [1, 2],
+    [3, 4]
+]
+
+# Using NumPy
+import numpy as np
+matrix_np = np.array([[1, 2], [3, 4]])
+```
+
+---
+
+## 🔁 Common Operations
+
+### 1. **Traversal**
+
+```python
+for item in arr:
+    print(item)
+```
+
+### 2. **Insertion**
+
+```python
+arr.insert(1, 99)  # Insert 99 at index 1
+```
+
+### 3. **Deletion**
+
+```python
+arr.remove(99)     # Remove first occurrence of 99
+del arr[0]         # Delete by index
+```
+
+---
+
+## ♻️ In-place vs. Out-of-place Transforms
+
+### 🔄 In-place (Modifies original array)
+
+```python
+arr.sort()  # Sorts the array in place
+```
+
+### 🔁 Out-of-place (Creates a new array)
+
+```python
+new_arr = sorted(arr)  # Original array remains unchanged
+```
+
+---
+
+## 📚 Summary Table
+
+| Feature               | Dynamic List  | Fixed Array (`array`) | NumPy Array |
+| --------------------- | ------------- | --------------------- | ----------- |
+| Resizeable            | ✅ Yes         | ❌ No                  | ✅ Yes       |
+| Type-specific         | ❌ No          | ✅ Yes                 | ✅ Yes       |
+| Multidimensional      | ❌ Nested only | ❌ Not supported       | ✅ Supported |
+| Performance (Numeric) | 🚫 Low        | ⚠️ Medium             | ✅ High      |
+
+---
+
+Let me know if you'd like a downloadable `.md` file or want similar notes for other data structures like stacks or linked lists!

@@ -1,0 +1,255 @@
+Here are the `.md` notes for **Binary Search Trees (BSTs)**:
+
+---
+
+# 🌳 Binary Search Trees (BSTs)
+
+A **Binary Search Tree** (BST) is a special type of binary tree in which the left child node’s value is less than its parent node’s value, and the right child node’s value is greater than its parent node’s value. This property helps to efficiently search for values in the tree.
+
+---
+
+## 🌱 Binary Search Tree Operations
+
+### 1. **Insert**
+
+To insert a node in a BST, we start at the root. If the value to be inserted is smaller than the current node’s value, we move to the left subtree; otherwise, we move to the right subtree. We repeat this process recursively until we find an empty spot.
+
+* **Algorithm**:
+
+  * If the tree is empty, create the root node.
+  * Otherwise, compare the value with the current node and traverse left or right accordingly.
+
+* **Example**:
+
+  ```javascript
+  function insert(root, value) {
+    if (root === null) return new TreeNode(value);
+    if (value < root.value) {
+      root.left = insert(root.left, value);
+    } else {
+      root.right = insert(root.right, value);
+    }
+    return root;
+  }
+  ```
+
+### 2. **Delete**
+
+To delete a node in a BST, there are three cases to consider:
+
+1. The node is a **leaf** (no children) – simply remove the node.
+2. The node has **one child** – replace the node with its child.
+3. The node has **two children** – replace the node with the inorder successor (the smallest node in the right subtree) or the inorder predecessor (the largest node in the left subtree).
+
+* **Example**:
+
+  ```javascript
+  function deleteNode(root, value) {
+    if (root === null) return root;
+
+    if (value < root.value) {
+      root.left = deleteNode(root.left, value);
+    } else if (value > root.value) {
+      root.right = deleteNode(root.right, value);
+    } else {
+      // Node to be deleted
+      if (root.left === null) {
+        return root.right;
+      } else if (root.right === null) {
+        return root.left;
+      }
+
+      // Node with two children: Get the inorder successor (smallest in the right subtree)
+      root.value = minValue(root.right);
+      root.right = deleteNode(root.right, root.value);
+    }
+    return root;
+  }
+
+  function minValue(node) {
+    let current = node;
+    while (current.left !== null) {
+      current = current.left;
+    }
+    return current.value;
+  }
+  ```
+
+### 3. **Search**
+
+To search for a value, start from the root. If the value is smaller than the current node’s value, move left. If the value is greater, move right. This process continues recursively until the value is found or the search reaches a leaf node.
+
+* **Example**:
+
+  ```javascript
+  function search(root, value) {
+    if (root === null || root.value === value) return root;
+
+    if (value < root.value) {
+      return search(root.left, value);
+    } else {
+      return search(root.right, value);
+    }
+  }
+  ```
+
+---
+
+## 🔄 Inorder Successor / Predecessor
+
+### 1. **Inorder Successor**
+
+The **inorder successor** of a node is the node with the smallest key greater than the node’s key. It is typically the leftmost node in the node’s right subtree.
+
+* **Example**:
+
+  ```javascript
+  function inorderSuccessor(root, node) {
+    if (node.right) {
+      return findMin(node.right);
+    }
+
+    let successor = null;
+    while (root) {
+      if (node.value < root.value) {
+        successor = root;
+        root = root.left;
+      } else if (node.value > root.value) {
+        root = root.right;
+      } else {
+        break;
+      }
+    }
+    return successor;
+  }
+
+  function findMin(node) {
+    while (node.left) {
+      node = node.left;
+    }
+    return node;
+  }
+  ```
+
+### 2. **Inorder Predecessor**
+
+The **inorder predecessor** is the node with the largest key smaller than the node’s key. It is typically the rightmost node in the node’s left subtree.
+
+* **Example**:
+
+  ```javascript
+  function inorderPredecessor(root, node) {
+    if (node.left) {
+      return findMax(node.left);
+    }
+
+    let predecessor = null;
+    while (root) {
+      if (node.value < root.value) {
+        root = root.left;
+      } else if (node.value > root.value) {
+        predecessor = root;
+        root = root.right;
+      } else {
+        break;
+      }
+    }
+    return predecessor;
+  }
+
+  function findMax(node) {
+    while (node.right) {
+      node = node.right;
+    }
+    return node;
+  }
+  ```
+
+---
+
+## 🛠 Validating a Binary Search Tree
+
+A BST is valid if for every node, all the nodes in its left subtree are smaller and all the nodes in its right subtree are greater. To validate a BST, we can use a recursive approach where we maintain a range of valid values for each node.
+
+* **Example**:
+
+  ```javascript
+  function isValidBST(root, min = -Infinity, max = Infinity) {
+    if (root === null) return true;
+
+    if (root.value <= min || root.value >= max) {
+      return false;
+    }
+
+    return isValidBST(root.left, min, root.value) && isValidBST(root.right, root.value, max);
+  }
+  ```
+
+---
+
+## 📊 kth Smallest / Largest Element in a BST
+
+To find the kth smallest/largest element, we can perform an inorder traversal (which will visit the nodes in sorted order) and count the elements as we traverse.
+
+### 1. **kth Smallest Element**
+
+* **Example**:
+
+  ```javascript
+  function kthSmallest(root, k) {
+    let count = 0;
+    let result = null;
+
+    function inorder(node) {
+      if (node === null) return;
+      inorder(node.left);
+      count++;
+      if (count === k) {
+        result = node.value;
+        return;
+      }
+      inorder(node.right);
+    }
+
+    inorder(root);
+    return result;
+  }
+  ```
+
+### 2. **kth Largest Element**
+
+To find the kth largest element, we can perform a reverse inorder traversal (which visits nodes in descending order).
+
+* **Example**:
+
+  ```javascript
+  function kthLargest(root, k) {
+    let count = 0;
+    let result = null;
+
+    function reverseInorder(node) {
+      if (node === null) return;
+      reverseInorder(node.right);
+      count++;
+      if (count === k) {
+        result = node.value;
+        return;
+      }
+      reverseInorder(node.left);
+    }
+
+    reverseInorder(root);
+    return result;
+  }
+  ```
+
+---
+
+## 📝 Summary
+
+* **Insert, Delete, and Search**: Operations to modify and retrieve values in a BST.
+* **Inorder Successor/Predecessor**: Finding the next or previous node in sorted order.
+* **Validate BST**: Ensure the tree maintains the properties of a binary search tree.
+* **kth Smallest/Largest**: Find specific elements based on their position in the sorted order.
+
+Let me know if you need further details or examples!

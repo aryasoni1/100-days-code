@@ -1,0 +1,226 @@
+Here are structured notes on **Stacks & Queues** in **Markdown (.md)** format using Python:
+
+---
+
+# 🧱 Stacks & Queues in Python
+
+---
+
+## 📦 Stack
+
+A **Stack** follows **LIFO** (Last In, First Out) principle.
+
+### ✅ Stack using List (Array)
+
+```python
+stack = []
+stack.append(10)     # Push
+stack.append(20)
+stack.pop()          # Pop (removes 20)
+stack[-1]            # Peek (returns 10)
+```
+
+### ✅ Stack using Linked List
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class StackLL:
+    def __init__(self):
+        self.head = None
+
+    def push(self, data):
+        node = Node(data)
+        node.next = self.head
+        self.head = node
+
+    def pop(self):
+        if self.head is None:
+            return None
+        data = self.head.data
+        self.head = self.head.next
+        return data
+
+    def peek(self):
+        return self.head.data if self.head else None
+```
+
+---
+
+## 🚏 Queue
+
+A **Queue** follows **FIFO** (First In, First Out) principle.
+
+### ✅ Queue using List
+
+```python
+from collections import deque
+queue = deque()
+queue.append(10)    # Enqueue
+queue.append(20)
+queue.popleft()     # Dequeue (removes 10)
+```
+
+### ✅ Circular Queue
+
+```python
+class CircularQueue:
+    def __init__(self, size):
+        self.q = [None] * size
+        self.size = size
+        self.front = self.rear = -1
+
+    def enqueue(self, data):
+        if (self.rear + 1) % self.size == self.front:
+            return "Queue Full"
+        elif self.front == -1:
+            self.front = self.rear = 0
+        else:
+            self.rear = (self.rear + 1) % self.size
+        self.q[self.rear] = data
+
+    def dequeue(self):
+        if self.front == -1:
+            return "Queue Empty"
+        data = self.q[self.front]
+        if self.front == self.rear:
+            self.front = self.rear = -1
+        else:
+            self.front = (self.front + 1) % self.size
+        return data
+```
+
+---
+
+## 🔁 Deque (Double Ended Queue)
+
+```python
+from collections import deque
+dq = deque()
+dq.append(10)      # Add rear
+dq.appendleft(20)  # Add front
+dq.pop()           # Remove rear
+dq.popleft()       # Remove front
+```
+
+---
+
+## 📈 Monotonic Structures
+
+### ✅ Monotonic Stack (Increasing)
+
+```python
+def monotonic_stack(arr):
+    stack = []
+    for num in arr:
+        while stack and stack[-1] > num:
+            stack.pop()
+        stack.append(num)
+    return stack
+```
+
+### ✅ Monotonic Queue (for sliding window min/max)
+
+```python
+from collections import deque
+def max_in_sliding_window(nums, k):
+    q = deque()
+    res = []
+    for i, num in enumerate(nums):
+        while q and nums[q[-1]] < num:
+            q.pop()
+        q.append(i)
+        if q[0] == i - k:
+            q.popleft()
+        if i >= k - 1:
+            res.append(nums[q[0]])
+    return res
+```
+
+---
+
+## 🧮 Min Stack
+
+Supports retrieving min in O(1) time.
+
+```python
+class MinStack:
+    def __init__(self):
+        self.stack = []
+        self.min_stack = []
+
+    def push(self, val):
+        self.stack.append(val)
+        if not self.min_stack or val <= self.min_stack[-1]:
+            self.min_stack.append(val)
+
+    def pop(self):
+        if self.stack.pop() == self.min_stack[-1]:
+            self.min_stack.pop()
+
+    def get_min(self):
+        return self.min_stack[-1]
+```
+
+---
+
+## 🔄 Implementing One via Another
+
+### ✅ Queue using Two Stacks
+
+```python
+class QueueFromStacks:
+    def __init__(self):
+        self.in_stack = []
+        self.out_stack = []
+
+    def enqueue(self, x):
+        self.in_stack.append(x)
+
+    def dequeue(self):
+        if not self.out_stack:
+            while self.in_stack:
+                self.out_stack.append(self.in_stack.pop())
+        return self.out_stack.pop()
+```
+
+### ✅ Stack using Two Queues
+
+```python
+from collections import deque
+class StackFromQueues:
+    def __init__(self):
+        self.q1 = deque()
+        self.q2 = deque()
+
+    def push(self, x):
+        self.q2.append(x)
+        while self.q1:
+            self.q2.append(self.q1.popleft())
+        self.q1, self.q2 = self.q2, self.q1
+
+    def pop(self):
+        return self.q1.popleft()
+```
+
+---
+
+## 📚 Summary Table
+
+| Data Structure        | Type          | Key Feature          | Time Complexity     |
+| --------------------- | ------------- | -------------------- | ------------------- |
+| Stack (List/LL)       | LIFO          | Top = Last pushed    | Push/O(1), Pop/O(1) |
+| Queue (List/Deque)    | FIFO          | Front dequeued first | Enq/O(1), Deq/O(1)  |
+| Circular Queue        | Circular      | Wrap-around index    | O(1)                |
+| Deque                 | Bidirectional | Front & rear access  | O(1)                |
+| Monotonic Stack/Queue | Ordered       | Monotonic property   | O(n)                |
+| Min/Max Stack         | Enhanced      | O(1) min/max access  | O(1)                |
+| Queue via Stack       | Hybrid        | Stack mimics queue   | Amortized O(1)      |
+| Stack via Queue       | Hybrid        | Queue mimics stack   | Push: O(n)          |
+
+---
+
+Would you like visuals or problems for practice with these concepts?

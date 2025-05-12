@@ -1,0 +1,133 @@
+Here are your **Markdown (.md)** formatted notes on **Divide & Conquer**:
+
+---
+
+# 🧩 **Divide & Conquer**
+
+The **Divide and Conquer** algorithm is a powerful paradigm in problem-solving where a problem is broken down into smaller subproblems, solved independently, and then combined to get the solution. It typically follows three steps:
+
+1. **Divide**: Split the problem into smaller subproblems.
+2. **Conquer**: Solve each subproblem recursively.
+3. **Combine**: Combine the results of subproblems to get the final solution.
+
+---
+
+## ⚡ **Classic Examples of Divide and Conquer**
+
+### 1. **Merge Sort**
+
+* **Description**: Merge Sort is a classic divide and conquer algorithm used for sorting an array. It recursively divides the array into two halves, sorts them, and then merges the sorted halves.
+* **Time Complexity**: O(n log n)
+* **Space Complexity**: O(n)
+
+```python
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    while left and right:
+        if left[0] < right[0]:
+            result.append(left.pop(0))
+        else:
+            result.append(right.pop(0))
+    result.extend(left)
+    result.extend(right)
+    return result
+```
+
+* **Explanation**: The array is split recursively into two halves, and the `merge()` function merges the sorted halves.
+
+### 2. **Quickselect**
+
+* **Description**: Quickselect is a divide and conquer algorithm used to find the `k`-th smallest element in an unordered list. It works similarly to QuickSort but instead of fully sorting the list, it focuses on partitioning and finding the element.
+* **Time Complexity**: O(n) on average
+* **Space Complexity**: O(1)
+
+```python
+import random
+
+def quickselect(arr, k):
+    if len(arr) == 1:
+        return arr[0]
+    
+    pivot = random.choice(arr)
+    lows = [el for el in arr if el < pivot]
+    highs = [el for el in arr if el > pivot]
+    pivots = [el for el in arr if el == pivot]
+    
+    if k < len(lows):
+        return quickselect(lows, k)
+    elif k < len(lows) + len(pivots):
+        return pivots[0]
+    else:
+        return quickselect(highs, k - len(lows) - len(pivots))
+```
+
+* **Explanation**: Quickselect picks a random pivot and partitions the array into smaller and larger elements relative to the pivot. It then recursively looks for the `k`-th smallest element.
+
+---
+
+## 🧭 **Search on Answer (Binary Search on Space)**
+
+### 1. **Binary Search on Space**:
+
+* **Description**: This is a strategy where you perform binary search, but instead of searching through values or sorted lists, you search on the possible range of answers (space). It is often used when you can model the problem as a question that can be answered with a boolean decision, such as "Is there a solution within a given range?"
+* **Common Use Cases**:
+
+  * Finding the minimum or maximum value for a problem (e.g., minimal time, cost, or distance).
+  * Searching for an optimal solution (e.g., minimal number of moves or max capacity).
+
+### 2. **Example: Binary Search for Minimum Maximum Distance (Aggressive Cows)**
+
+In this problem, you need to place cows in stalls such that the minimum distance between any two cows is maximized. The goal is to find the largest minimum distance.
+
+```python
+def can_place_cows(stalls, distance, cows):
+    count = 1
+    last_position = stalls[0]
+
+    for i in range(1, len(stalls)):
+        if stalls[i] - last_position >= distance:
+            count += 1
+            last_position = stalls[i]
+        if count == cows:
+            return True
+    return False
+
+def aggressive_cows(stalls, cows):
+    stalls.sort()
+    low = 0
+    high = stalls[-1] - stalls[0]
+    result = -1
+
+    while low <= high:
+        mid = (low + high) // 2
+        if can_place_cows(stalls, mid, cows):
+            result = mid
+            low = mid + 1
+        else:
+            high = mid - 1
+    return result
+```
+
+* **Explanation**: This problem uses binary search on the possible distances between cows. The `can_place_cows()` function checks whether it is possible to place all cows with a given minimum distance, and binary search is used to optimize the solution.
+
+---
+
+## 📚 **Summary Table**
+
+| **Concept**                | **Description**                                                  | **Example**                                            |
+| -------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------ |
+| **Merge Sort**             | Divide the array into halves, recursively sort, then merge.      | Sorting array using merge sort.                        |
+| **Quickselect**            | Find the `k`-th smallest element by partitioning around a pivot. | Finding `k`-th smallest element in an array.           |
+| **Binary Search on Space** | Perform binary search on the possible range of answers.          | Finding the largest minimum distance for placing cows. |
+
+---
+
+Let me know if you'd like more details or examples!

@@ -1,0 +1,182 @@
+Here are comprehensive **Markdown (.md)** notes on **Linked Lists in Python**, including singly, doubly, and circular linked lists, common operations, and advanced topics:
+
+---
+
+# 🔗 Linked Lists in Python
+
+## 🔸 Types of Linked Lists
+
+### 1. **Singly Linked List**
+
+* Each node points to the next node.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+```
+
+### 2. **Doubly Linked List**
+
+* Each node points to both next and previous nodes.
+
+```python
+class DNode:
+    def __init__(self, data):
+        self.data = data
+        self.prev = None
+        self.next = None
+```
+
+### 3. **Circular Linked List**
+
+* Last node points back to the head (can be singly or doubly).
+
+```python
+class CNode:
+    def __init__(self, data):
+        self.data = data
+        self.next = self  # Points to self initially
+```
+
+---
+
+## 🧰 Operations
+
+### 1. **Insert (at head)**
+
+```python
+def insert_head(head, data):
+    new_node = Node(data)
+    new_node.next = head
+    return new_node
+```
+
+### 2. **Delete (by value)**
+
+```python
+def delete_node(head, key):
+    if head is None:
+        return None
+    if head.data == key:
+        return head.next
+    prev = head
+    while prev.next and prev.next.data != key:
+        prev = prev.next
+    if prev.next:
+        prev.next = prev.next.next
+    return head
+```
+
+### 3. **Reverse (Iterative)**
+
+```python
+def reverse_list(head):
+    prev = None
+    current = head
+    while current:
+        nxt = current.next
+        current.next = prev
+        prev = current
+        current = nxt
+    return prev
+```
+
+### 4. **Detect and Remove Cycle (Floyd’s Algorithm)**
+
+```python
+def detect_and_remove_cycle(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            break
+    else:
+        return False  # No cycle
+    slow = head
+    while slow.next != fast.next:
+        slow = slow.next
+        fast = fast.next
+    fast.next = None  # Remove cycle
+    return True
+```
+
+---
+
+## ⚙️ Advanced Topics
+
+### ✅ Merge Two Sorted Linked Lists
+
+```python
+def merge_sorted(l1, l2):
+    dummy = Node(0)
+    tail = dummy
+    while l1 and l2:
+        if l1.data < l2.data:
+            tail.next, l1 = l1, l1.next
+        else:
+            tail.next, l2 = l2, l2.next
+        tail = tail.next
+    tail.next = l1 or l2
+    return dummy.next
+```
+
+### ✅ Copy List with Random Pointer
+
+```python
+class RNode:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+        self.random = None
+
+def copy_random_list(head):
+    if not head: return None
+    # Step 1: Insert cloned nodes
+    curr = head
+    while curr:
+        new_node = RNode(curr.val)
+        new_node.next = curr.next
+        curr.next = new_node
+        curr = new_node.next
+    # Step 2: Set random pointers
+    curr = head
+    while curr:
+        if curr.random:
+            curr.next.random = curr.random.next
+        curr = curr.next.next
+    # Step 3: Separate lists
+    old = head
+    new = head.next
+    copy = new
+    while old:
+        old.next = old.next.next
+        new.next = new.next.next if new.next else None
+        old = old.next
+        new = new.next
+    return copy
+```
+
+### ✅ Skip List Basics (Conceptual)
+
+* A skip list is a layered linked list allowing fast search in O(log n) time.
+* Nodes are connected in multiple levels.
+* Each level skips more nodes than the one below it.
+* Python implementation requires randomized level generation and pointer management.
+
+---
+
+## 📚 Summary Table
+
+| Feature            | Singly | Doubly | Circular |
+| ------------------ | ------ | ------ | -------- |
+| Backward traversal | ❌ No   | ✅ Yes  | ❌/✅      |
+| Reverse operation  | ✅ Yes  | ✅ Yes  | ✅ Yes    |
+| Detect cycles      | ✅ Yes  | ✅ Yes  | ✅ Yes    |
+| Merge sorted lists | ✅ Yes  | ✅ Yes  | ✅ Yes    |
+
+---
+
+Let me know if you'd like a downloadable version or visual diagram for linked list structures!

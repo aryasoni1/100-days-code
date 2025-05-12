@@ -1,0 +1,134 @@
+Here are your **Markdown (.md)** formatted notes on **Disjoint Set Union (Union-Find)**:
+
+---
+
+# 🔗 Disjoint Set Union (Union-Find)
+
+**Disjoint Set Union (DSU)**, also known as **Union-Find**, is a data structure that efficiently supports union and find operations. It is commonly used for solving problems that involve partitioning sets, such as finding connected components in a graph or determining the number of distinct sets.
+
+---
+
+## 🔑 Operations
+
+### 1. **Find**
+
+* **Purpose**: Finds the representative (or root) of the set that contains a particular element.
+* **Path Compression**: This technique flattens the structure of the tree whenever a `find` operation is called, making future operations faster.
+
+#### Find with Path Compression:
+
+```python
+def find(parent, x):
+    if parent[x] != x:
+        parent[x] = find(parent, parent[x])  # Path compression
+    return parent[x]
+```
+
+### 2. **Union**
+
+* **Purpose**: Merges two sets into one set.
+* **Union by Rank/Size**: This technique ensures that the tree remains balanced by attaching the smaller tree (in terms of rank or size) under the root of the larger tree, which helps in optimizing the operations.
+
+#### Union by Rank:
+
+```python
+def union(parent, rank, x, y):
+    rootX = find(parent, x)
+    rootY = find(parent, y)
+    
+    if rootX != rootY:
+        # Union by rank
+        if rank[rootX] > rank[rootY]:
+            parent[rootY] = rootX
+        elif rank[rootX] < rank[rootY]:
+            parent[rootX] = rootY
+        else:
+            parent[rootY] = rootX
+            rank[rootX] += 1
+```
+
+#### Union by Size:
+
+```python
+def union(parent, size, x, y):
+    rootX = find(parent, x)
+    rootY = find(parent, y)
+    
+    if rootX != rootY:
+        # Union by size
+        if size[rootX] > size[rootY]:
+            parent[rootY] = rootX
+            size[rootX] += size[rootY]
+        else:
+            parent[rootX] = rootY
+            size[rootY] += size[rootX]
+```
+
+---
+
+## 🧩 Applications
+
+### 1. **Connected Components**
+
+* **Problem**: Given an undirected graph, determine the connected components of the graph.
+* **Union-Find Solution**: Using union and find operations, we can efficiently group vertices that are connected by edges into separate components.
+
+#### Example:
+
+```python
+# Initialize each node as its own parent (disjoint set)
+parent = [i for i in range(n)]  # n is the number of nodes
+rank = [0] * n  # Rank array to keep the tree shallow
+
+# Union operations
+union(parent, rank, 0, 1)
+union(parent, rank, 1, 2)
+
+# Find operations
+find(parent, 0)  # Output: root of the set containing node 0
+find(parent, 1)  # Output: root of the set containing node 1
+```
+
+### 2. **Kruskal’s Minimum Spanning Tree (MST)**
+
+* **Problem**: Find the minimum spanning tree of a graph.
+* **Union-Find Solution**: In Kruskal's algorithm, edges are sorted by weight and added to the MST one by one. If adding an edge forms a cycle, it is skipped. The union-find data structure is used to efficiently check whether two vertices are in the same connected component (i.e., avoid cycles).
+
+#### Kruskal’s Algorithm:
+
+```python
+def kruskal(graph, n):
+    parent = [i for i in range(n)]  # Initialize disjoint sets
+    rank = [0] * n
+    edges = sorted(graph, key=lambda x: x[2])  # Sort edges by weight
+
+    mst = []
+    for u, v, weight in edges:
+        if find(parent, u) != find(parent, v):
+            union(parent, rank, u, v)
+            mst.append((u, v, weight))  # Add edge to MST
+
+    return mst
+```
+
+---
+
+## 🔄 Time Complexity
+
+* **Find**: O(α(n)), where α is the inverse Ackermann function (very slow-growing).
+* **Union**: O(α(n)).
+* **Total Complexity**: For a series of m operations on n elements, the total complexity is O(m \* α(n)).
+
+---
+
+## 🧩 Summary Table
+
+| Operation        | Time Complexity | Description                                       |
+| ---------------- | --------------- | ------------------------------------------------- |
+| Find             | O(α(n))         | Find the root of an element with path compression |
+| Union            | O(α(n))         | Merge two sets using union by rank/size           |
+| Total Operations | O(m \* α(n))    | For m operations on n elements                    |
+
+---
+
+Let me know if you'd like further details or have additional questions!

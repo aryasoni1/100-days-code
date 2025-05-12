@@ -1,0 +1,117 @@
+Here are your **Markdown (.md)** formatted notes on **Heaps**:
+
+---
+
+# ⛏️ Heaps
+
+A **Heap** is a special tree-based data structure that satisfies the heap property:
+
+* **Min-Heap**: Parent ≤ Children (smallest at the root)
+* **Max-Heap**: Parent ≥ Children (largest at the root)
+
+Heaps are typically implemented using arrays for space and time efficiency.
+
+---
+
+## 🔢 Array Representation
+
+* For node at index `i`:
+
+  * Left child: `2i + 1`
+  * Right child: `2i + 2`
+  * Parent: `(i - 1) // 2`
+
+---
+
+## 📦 Types of Heaps
+
+### 🔽 Min-Heap
+
+```python
+import heapq
+
+min_heap = []
+heapq.heappush(min_heap, 10)
+heapq.heappush(min_heap, 5)
+heapq.heappush(min_heap, 7)
+
+print(heapq.heappop(min_heap))  # 5
+```
+
+### 🔼 Max-Heap (via negative values)
+
+```python
+max_heap = []
+heapq.heappush(max_heap, -10)
+heapq.heappush(max_heap, -5)
+heapq.heappush(max_heap, -7)
+
+print(-heapq.heappop(max_heap))  # 10
+```
+
+---
+
+## ⚙️ Core Operations
+
+| Operation | Description                | Time Complexity |
+| --------- | -------------------------- | --------------- |
+| `push`    | Add element to heap        | O(log n)        |
+| `pop`     | Remove root element        | O(log n)        |
+| `heapify` | Convert array to heap      | O(n)            |
+| `peek`    | View root without removing | O(1)            |
+
+### Heapify Example
+
+```python
+arr = [9, 5, 7, 1]
+heapq.heapify(arr)  # Converts list to min-heap
+```
+
+---
+
+## 🎯 Applications
+
+### 🥇 Priority Queue
+
+* Elements with higher priority are served first.
+* Built-in `heapq` can be used for efficient priority queues.
+
+### 📊 Heap Sort
+
+```python
+def heap_sort(nums):
+    heapq.heapify(nums)
+    return [heapq.heappop(nums) for _ in range(len(nums))]
+```
+
+* Time: O(n log n)
+* Space: O(1) (in-place possible)
+
+### 🔍 Kth Smallest/Largest Element
+
+```python
+def kth_smallest(nums, k):
+    heapq.heapify(nums)
+    for _ in range(k - 1):
+        heapq.heappop(nums)
+    return heapq.heappop(nums)
+
+def kth_largest(nums, k):
+    max_heap = [-x for x in nums]
+    heapq.heapify(max_heap)
+    for _ in range(k - 1):
+        heapq.heappop(max_heap)
+    return -heapq.heappop(max_heap)
+```
+
+---
+
+## 🧠 Advanced Tips
+
+* Use `heapq.nlargest()` and `heapq.nsmallest()` for quick selection.
+* For custom objects, use tuples: `(priority, data)`.
+* Combine with dictionaries for efficient lookups + ordering.
+
+---
+
+Would you like a diagram showing min-heap and max-heap structure visually?
