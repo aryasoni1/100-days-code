@@ -17,6 +17,8 @@ import Basic from "./second 10ques/basic";
 import Advanced from "./second 10ques/advanced";
 import ProblemAnswer from "./second 10ques/problemAnswer";
 import TodoApp from "./second 10ques/4th ques/todoReducer";
+import ThemePaged from "./second 10ques/5th ques/ThemePaged";
+import { ThemeProvider } from "./second 10ques/5th ques/ThemeContext";
 function App() {
   return (
     <AuthProvider>
@@ -50,6 +52,9 @@ function App() {
         <Parent />
         <DelayedUpdate />
         <TodoApp />
+        <ThemeProvider>
+          <ThemePaged />
+        </ThemeProvider>
       </Router>
     </AuthProvider>
   );

@@ -1,12 +1,21 @@
 const express = require("express");
 const app = express();
 const PORT = 3030;
-
+const path = require("path");
+//Serve static HTML and CSS using express.static().
+app.use(express.static(path.join(__dirname, "public")));
 //Add and test middleware that logs every incoming request.
 app.use((req, res, next) => {
   const now = new Date().toISOString();
   console.log(`[${now}]${req.method} ${req.url}`);
   next();
+});
+
+//Create a custom middleware that appends a timestamp to each request.
+app.use((req, res, next) => {
+  req.timestamp = new Date().toISOString();
+  console.log(`${req.timestamp} ${req.method} ${req.url}`);
+  next(); // Pass control to next middleware or route handler
 });
 
 //Use express.json() and express.urlencoded() for body parsing.
@@ -52,8 +61,31 @@ app.get("/search", (req, res) => {
   }
 });
 
-//
+//Send different HTTP status codes (200, 400, 404, 500) in various routes.
 
+// ✅ 200 OK - Success
+app.get("/success", (req, res) => {
+  res.status(200).send("Everything is OK!");
+});
+
+// ❌ 400 Bad Request - Client sent invalid data
+app.get("/bad-request", (req, res) => {
+  res.status(400).send("Bad Request: Invalid input!");
+});
+
+// ❌ 404 Not Found - Resource doesn't exist
+app.get("/not-found", (req, res) => {
+  res.status(404).send("404: Resource not found!");
+});
+
+// ❌ 500 Internal Server Error - Server-side error
+app.get("/server-error", (req, res) => {
+  res.status(500).send("500: Internal Server Error!");
+});
+//Return 404 for all unhandled routes using a catch-all route.
+app.use((req, res) => {
+  res.status(404).send("404 not found");
+});
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
 });

@@ -1,0 +1,71 @@
+p {
+  line-height: 1.5;
+  font-size: 18px;
+  color: blue;
+}
+h1 {
+  color: red;
+}
+h2 {
+  color: green;
+}
+.highlight {
+  background-color: yellow;
+}
+#box {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  padding: 20px;
+  margin: 10px;
+  border: 10px solid black;
+}
+button:hover {
+  background-color: green;
+  color: white;
+  cursor: pointer;
+}
+li:nth-child(odd) {
+  color: white;
+  background-color: red;
+}
+.container {
+  width: 100%;
+}
+.column {
+  width: 48%;
+  padding: 1%;
+  box-sizing: border-box;
+}
+.left {
+  float: left;
+  background-color: #f0f0f0;
+}
+.right {
+  float: right;
+  background-color: #e0e0e0;
+}
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.card {
+  position: relative;
+  background-color: white;
+  width: 300px;
+  height: 150px;
+  border: 2px solid black;
+  padding: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
