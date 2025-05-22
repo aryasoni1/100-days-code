@@ -19,6 +19,10 @@ import ProblemAnswer from "./second 10ques/problemAnswer";
 import TodoApp from "./second 10ques/4th ques/todoReducer";
 import ThemePaged from "./second 10ques/5th ques/ThemePaged";
 import { ThemeProvider } from "./second 10ques/5th ques/ThemeContext";
+import ControlledForm from "./second 10ques/6th ques/ControlledForm";
+import RHFForm from "./second 10ques/7th ques/REACTHOOKForm";
+import TailwindButton from "./second 10ques/8th ques/TailwindButton";
+import TailwindCard from "./second 10ques/8th ques/TailwindCard";
 function App() {
   return (
     <AuthProvider>
@@ -56,6 +60,10 @@ function App() {
           <ThemePaged />
         </ThemeProvider>
       </Router>
+      <ControlledForm />
+      <RHFForm />
+      <TailwindButton />
+      <TailwindCard />
     </AuthProvider>
   );
 }

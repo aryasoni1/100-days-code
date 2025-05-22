@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive navbar</title>
+    <link href="style2.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!--Build a responsive navbar that collapses at 768px using media queries.
+-->
+    <nav class="navbar">
+      <div class="logo">Mysite</div>
+      <button class="menu-toggle" id="menu-toggle">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#">Home </a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Services</a></li>
+      </ul>
+    </nav>
+    <!--Center a div both vertically and horizontally using Flexbox.
+-->
+    <div class="container">
+      <div class="centered-box">Centered Box</div>
+    </div>
+    <!--Create a 3-column grid layout with equal width using CSS Grid.
+-->
+    <div class="grid-container">
+      <div class="grid-item">1</div>
+      <div class="grid-item">2</div>
+      <div class="grid-item">3</div>
+    </div>
+    <!--Create a button with a smooth hover transition effect.
+-->
+    <button class="smooth-button">Hover me</button>
+
+    <!--Animate a div sliding in from the left using @keyframes.-->
+
+    <div class="slide-in-box">Hello, I'm sliding in!</div>
+    <!--Build a card component with a shadow, border radius, and hover scale.
+-->
+    <!--Use a custom font from Google Fonts and apply it to a heading.
+-->
+    <!--Create a sticky header using position: sticky.
+-->
+    <!--Use vw and vh units to make a full-screen hero section.
+-->
+    <!--Build a responsive image gallery that wraps on smaller screens.
+-->
+
+    <script>
+      // Toggle nav menu on small screens
+      document.getElementById("menu-toggle").addEventListener("click", () => {
+        document.getElementById("navLinks").classList.toggle("active");
+      });
+    </script>
+  </body>
+</html>
