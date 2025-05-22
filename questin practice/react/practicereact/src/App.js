@@ -21,8 +21,10 @@ import ThemePaged from "./second 10ques/5th ques/ThemePaged";
 import { ThemeProvider } from "./second 10ques/5th ques/ThemeContext";
 import ControlledForm from "./second 10ques/6th ques/ControlledForm";
 import RHFForm from "./second 10ques/7th ques/REACTHOOKForm";
-import TailwindButton from "./second 10ques/8th ques/TailwindButton";
-import TailwindCard from "./second 10ques/8th ques/TailwindCard";
+import TailwindButton from "./second 10ques/8th ques doubt/TailwindButton";
+import TailwindCard from "./second 10ques/8th ques doubt/TailwindCard";
+import Card from "./second 10ques/9th ques/Card";
+import CustomButton from "./second 10ques/10th ques/CustomButton";
 function App() {
   return (
     <AuthProvider>
@@ -64,6 +66,32 @@ function App() {
       <RHFForm />
       <TailwindButton />
       <TailwindCard />
+      <Card />
+      <div style={{ padding: "2rem" }}>
+        <CustomButton
+          color="#007bff"
+          onClick={() => alert("Primary Button clicked!")}
+        >
+          primary
+        </CustomButton>
+        <br />
+        <br />
+        <CustomButton
+          color="#28a745"
+          onClick={() => alert("Success Button clicked!")}
+        >
+          {" "}
+          Success
+        </CustomButton>
+        <br />
+        <br />
+        <CustomButton
+          color="#dc3545"
+          onClick={() => alert("Danger Button clicked!")}
+        >
+          Danger
+        </CustomButton>
+      </div>
     </AuthProvider>
   );
 }
