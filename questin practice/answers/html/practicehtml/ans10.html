@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Meta description for SEO -->
+    <meta
+      name="description"
+      content="A modern, accessible web page built with HTML and CSS."
+    />
+
+    <!-- Responsive design viewport setup -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="My Awesome Site" />
+    <meta
+      property="og:description"
+      content="Explore amazing content, tutorials, and more!"
+    />
+    <meta property="og:image" content="https://example.com/thumbnail.jpg" />
+    <meta property="og:url" content="https://example.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="My Awesome Site" />
+
+    <!-- Optional: Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="My Awesome Site" />
+    <meta
+      name="twitter:description"
+      content="Explore amazing content, tutorials, and more!"
+    />
+    <meta name="twitter:image" content="https://example.com/thumbnail.jpg" />
+    <title>ans10</title>
+    <link rel="stylesheet" href="ans10.css" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#317EFB" />
+  </head>
+  <body>
+    <!--Embed a YouTube video on your web page.-->
+    <h1>My Favorite Video</h1>
+
+    <iframe
+      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+      title="YouTube video player"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    >
+    </iframe>
+    <!--Add an interactive <details> and <summary> section for FAQs.
+-->
+    <h1>Frequently Asked Questions</h1>
+
+    <details>
+      <summary>What is this site about?</summary>
+      <p>
+        This site helps users learn web development through simple examples and
+        challenges.
+      </p>
+    </details>
+
+    <details>
+      <summary>Do I need to know coding already?</summary>
+      <p>
+        No, the site starts with beginner-friendly content and grows more
+        advanced over time.
+      </p>
+    </details>
+
+    <details>
+      <summary>Is it free to use?</summary>
+      <p>
+        Yes, all content is available for free with optional premium features
+        coming soon.
+      </p>
+    </details>
+    <!--Use <dialog> to create a popup modal with a close button.
+-->
+    <h1>Welcome</h1>
+    <button id="showModal">Open Modal</button>
+
+    <dialog id="myDialog">
+      <h3>Modal Title</h3>
+      <p>This is a dialog modal with a close button.</p>
+      <button class="close-btn" id="closeModal">Close</button>
+    </dialog>
+
+    <!--Add a <progress> bar that shows 50% completion.
+-->
+    <label for="progress">Loading Progress:</label>
+    <progress id="progress" value="50" max="100"></progress>
+
+    <!--Embed a Google Map using an iframe.
+-->
+    <h2>Our Location</h2>
+    <div class="map-container">
+      <iframe
+        class="map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086559247251!2d-122.41941508468138!3d37.774929279759264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c2c9841a1%3A0x6b697411fd6822d7!2sSan+Francisco%2C+CA!5e0!3m2!1sen!2sus!4v1587572534505!5m2!1sen!2sus"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      >
+      </iframe>
+    </div>
+    <!--Add proper aria-label and roles to a navigation bar.
+-->
+    <!-- Accessible Nav Bar -->
+    <nav role="navigation" aria-label="Main navigation">
+      <ul role="menubar">
+        <li role="none"><a href="#home" role="menuitem">Home</a></li>
+        <li role="none"><a href="#about" role="menuitem">About</a></li>
+        <li role="none"><a href="#services" role="menuitem">Services</a></li>
+        <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
+      </ul>
+    </nav>
+    <!--Create an accessible form with label for each input.
+-->
+    <form aria-label="Contact form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+    <!--Add meta tags for description and viewport in the head.
+-->
+    <!--Add Open Graph tags for social sharing of your site.
+-->
+    <!--Add a favicon and manifest file for a PWA shell.-->
+    <script src="ans10.js"></script>
+  </body>
+</html>
