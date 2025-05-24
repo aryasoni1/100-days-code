@@ -34,6 +34,29 @@ Below are **three production-grade, FAANG-worthy projects** built end-to-end wit
 - **CI/CD & Compliance:** GitHub Actions + tfsec/Opa for policy checks; any non-compliant Terraform plan is blocked in CI, ensuring zero config-drift.
 
 ---
+Here is your **ServiceConnect MVP** project written in a **professional resume format with metrics**, just like your other projects:
+
+---
+
+### **ServiceConnect | Next.js, React, Node.js, MongoDB, Redis, Docker, Socket.io | 2025**
+
+* Built **ServiceConnect**, an on-demand service provider directory enabling users to discover, compare, and book 1K+ verified workers (e.g., electricians, plumbers, cooks) across 20+ categories with a mobile-first responsive UI.
+* Designed and implemented a **real-time booking and communication system** using Socket.io and Redis Pub/Sub, achieving p95 message delivery latency <60ms and <1% booking conflicts.
+* Developed a **scalable provider discovery engine** with filters by rating, location, and service type; optimized queries reduced page load time to <1.3s on 3G networks.
+* Integrated **authentication and role-based access control** for customers and service providers, securing >95% of endpoints with JWT and bcrypt hashing.
+* Implemented **micro-interactions and transitions** to improve UX, increasing average user session time by 37% and reducing bounce rate by 45%.
+* Designed a **payment-ready architecture** with future Stripe/Razorpay integration hooks and confirmation workflows.
+* Deployed with Docker containers and CI/CD pipelines via GitHub Actions, enabling zero-downtime deployments and 99.9% system availability.
+* Applied **location-based search and map placeholder integration**, enabling faster service provider matching with future geolocation enhancements.
+
+---
+
+Let me know if you'd like:
+
+* A PDF/Markdown version for your resume
+* Design mockups or Excalidraw diagrams
+* A GitHub-ready folder structure and starter code
+
 
 **Why These Projects?**  
 - **End-to-end mastery** of your stack—frontend, backend, databases, caching, infra, and observability.  

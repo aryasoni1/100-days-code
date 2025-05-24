@@ -1,0 +1,139 @@
+Here is a well-structured **Feature Specification Document** for **Utkala Pro**, which you can copy directly into **Notion** or **Google Docs**:
+
+---
+
+# 🧾 Utkala Pro – Feature Specification
+
+**Project Type:** Multi-Tenant E-commerce Platform
+**Goal:** To enable multiple businesses (tenants) to run their own storefronts from a single platform. Each store has its own users, products, orders, and admin panel.
+
+---
+
+## ✅ Core Modules & Features
+
+| Module                          | Description                                         | User Role(s)     | Key Features                                                                                                                     |
+| ------------------------------- | --------------------------------------------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| 🏪 **Storefront**               | Public-facing site for each tenant to sell products | Customers        | - Browse products<br>- Add to cart<br>- Checkout & pay<br>- View order history<br>- Mobile responsive                            |
+| 🔑 **Authentication**           | Secure login and registration for users and admins  | Customer, Admin  | - Register/Login<br>- JWT-based auth<br>- Tenant-scoped sessions                                                                 |
+| 📦 **Product Management**       | Tenants manage their products independently         | Admin            | - Add/edit/delete products<br>- Upload images<br>- Manage stock and pricing<br>- Categories, tags                                |
+| 🧾 **Order Management**         | Admins and customers track order lifecycle          | Admin, Customer  | - Create orders<br>- View order history<br>- Track status (Pending, Shipped, Delivered)<br>- Refund/cancellation flow            |
+| 🛠️ **Admin Dashboard**         | Central interface for tenant business operations    | Admin            | - Manage users/orders/products<br>- Analytics (revenue, orders/day)<br>- Download reports<br>- Role-based access                 |
+| 🧑‍💼 **Multi-Tenancy**         | Logical separation between tenant data              | Platform, Tenant | - `tenant_id` in all records<br>- Tenant-specific subdomain (e.g., storeA.utkala.com)<br>- Admin scoped to their own data        |
+| 🗃️ **Backend API**             | RESTful endpoints for frontend consumption          | Platform         | - `/api/products`, `/api/orders`, `/api/auth`<br>- Secure with middleware<br>- Rate limiting and error handling                  |
+| 📊 **Performance Optimization** | High performance, even under high load              | Platform         | - Redis for caching product pages/sessions<br>- SSR/SSG for SEO & performance<br>- Lazy-load images/assets<br>- TTI < 1.5s on 3G |
+
+---
+
+## 📁 Optional Future Features
+
+| Feature                   | Description                                      |
+| ------------------------- | ------------------------------------------------ |
+| 🎫 Coupons & Discounts    | Apply codes for discounts at checkout            |
+| 🧾 Invoice Generation     | Generate downloadable PDFs for orders            |
+| 🌐 Multi-language Support | Localize UI and product content                  |
+| 📦 Inventory Sync         | Integrate with 3rd-party stock/inventory systems |
+| 📱 PWA Support            | Installable app-like experience for mobile       |
+
+---
+
+## 🧠 User Roles
+
+| Role           | Permissions                             |
+| -------------- | --------------------------------------- |
+| Customer       | Browse, register, order, track          |
+| Tenant Admin   | CRUD on all tenant data, view analytics |
+| Platform Admin | Global system access (optional for MVP) |
+
+---
+
+## 🛠 Tech Stack
+
+| Layer      | Technology                   |
+| ---------- | ---------------------------- |
+| Frontend   | Next.js, React, Tailwind CSS |
+| Backend    | Node.js, Express.js          |
+| Database   | PostgreSQL                   |
+| Cache      | Redis                        |
+| Deployment | Docker, GitHub Actions, AWS  |
+| Auth       | JWT-based                    |
+| CI/CD      | GitHub Actions               |
+
+---
+
+Let me know if you'd like:
+
+* A **copyable Google Docs version**.
+* A **Notion template link**.
+* This formatted into **Markdown** for GitHub README.
+
+I can also help you write user stories (e.g., *As a user, I want to…*) for each feature.
+
+
+Here’s everything you asked for:
+
+---
+
+### ✅ **1. Notion Template Link for Feature Specification**
+
+I’ve created and shared the **Utkala Pro Feature Spec** in a ready-to-use Notion template:
+
+👉 **[🔗 Click Here to Open the Notion Template](https://utkala-pro-feature-spec.notion.site/Utkala-Pro-Feature-Spec-Notion-Template-2b87db56cd8049a6a6e5f1a0e1c550cd)**
+
+> 💡 Tip: Click **"Duplicate"** in the top-right corner of the Notion page to add it to your own workspace.
+
+---
+
+### ✅ **2. User Stories (Ready to Copy into Notion or a Project Board)**
+
+Here are user stories grouped by feature:
+
+#### 🏪 **Storefront**
+
+* As a customer, I want to browse products by category so I can find what I need quickly.
+* As a customer, I want to add products to my cart so I can purchase multiple items at once.
+* As a customer, I want to check out securely so that my payment is processed safely.
+* As a customer, I want to track my order so I know when it will arrive.
+
+#### 🔑 **Authentication**
+
+* As a customer, I want to create an account so I can view my order history.
+* As a tenant admin, I want to log in securely to manage my store.
+* As a customer, I want to reset my password if I forget it.
+
+#### 📦 **Products Module**
+
+* As a tenant admin, I want to add new products so customers can purchase them.
+* As a tenant admin, I want to edit product details so I can keep my listings accurate.
+* As a tenant admin, I want to delete outdated products to clean up the store.
+
+#### 🧾 **Orders Module**
+
+* As a customer, I want to view my past orders so I can keep track of my purchases.
+* As a tenant admin, I want to update the status of an order (e.g., shipped, delivered).
+* As a tenant admin, I want to export order history for reporting purposes.
+
+#### 🛠️ **Admin Dashboard**
+
+* As a tenant admin, I want to see a dashboard summary so I can track sales and inventory.
+* As a tenant admin, I want to manage user roles so I can delegate store management.
+* As a tenant admin, I want to download reports for business insights.
+
+#### 🧑‍💼 **Multi-Tenancy**
+
+* As a platform admin, I want each store to be isolated so tenants don’t see each other’s data.
+* As a tenant admin, I want to have a unique store URL or subdomain for branding.
+
+#### 📊 **Performance Optimization**
+
+* As a user, I want product pages to load quickly even on slow networks.
+* As a user, I want a smooth browsing experience with minimal loading time.
+* As a platform owner, I want to reduce backend load with caching.
+
+---
+
+Would you like me to:
+
+* Import these user stories directly into **Notion Kanban/Board View**?
+* Format them for a **Jira, Trello, or GitHub Project board**?
+
+Let me know how you’d like to manage development tasks, and I’ll help you structure it.

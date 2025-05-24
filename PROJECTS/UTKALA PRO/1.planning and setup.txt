@@ -1,0 +1,171 @@
+Here’s a **step-by-step guide** on how to execute **Phase 1: Planning & Setup** for your Utkala Pro project. This phase is essential to lay a strong technical and organizational foundation.
+
+---
+
+## ✅ **🗂️ Phase 1: Planning & Setup (Week 1)**
+
+---
+
+### 🔹 1. **Define Core Features**
+
+**Tool:** Notion / Google Docs
+**Objective:** Document what your product will do and how each user will interact with it.
+
+#### 💡 Action Steps:
+
+* Open Notion or Google Docs.
+* Create a table or checklist for core modules:
+
+  * 🏪 **Storefront**: View products, add to cart, checkout, track orders.
+  * 🔑 **Auth System**: User login, tenant admin login, session management.
+  * 📦 **Products Module**: Add/edit/delete/view products by tenant.
+  * 🧾 **Orders Module**: Order creation, status update, history view.
+  * 🛠️ **Admin Panel**: Dashboard, CRUD for users/products/orders.
+  * 🧑‍💼 **Multi-Tenancy**: Each store is isolated by `tenant_id`.
+  * 🗃️ **Backend APIs**: REST endpoints for frontend use.
+  * 📊 **Performance Optimization**: Redis, SSR, lazy loading.
+
+**Deliverable:** A well-structured feature list document (or a feature spec in Notion).
+
+---
+
+### 🔹 2. **Design Architecture**
+
+**Tool:** Draw\.io or Excalidraw
+**Objective:** Create a visual diagram of how your system will work.
+
+#### 💡 Action Steps:
+
+* Open [Excalidraw](https://excalidraw.com) or [draw.io](https://draw.io).
+* Design two diagrams:
+
+  1. **High-level Architecture**
+
+     * User → Frontend (Next.js) → Backend (Express API) → DB (Postgres)
+     * Redis for caching
+     * AWS for deployment
+  2. **Multi-Tenant Schema**
+
+     * Tables with `tenant_id`: Users, Products, Orders
+     * Example:
+
+       ```sql
+       CREATE TABLE products (
+         id SERIAL PRIMARY KEY,
+         tenant_id UUID,
+         name TEXT,
+         price INT,
+         ...
+       );
+       ```
+
+**Deliverable:** Save architecture diagrams to your project folder or upload to GitHub.
+
+---
+
+### 🔹 3. **Setup Repo Structure and GitHub**
+
+**Tool:** GitHub, GitHub Projects (Kanban board)
+**Objective:** Structure your codebase for scalability and start version control.
+
+#### 💡 Action Steps:
+
+* Create a new GitHub repo: `utkala-pro`.
+* Initialize folder structure:
+
+```
+utkala-pro/
+├── backend/
+│   ├── src/
+│   ├── Dockerfile
+│   └── package.json
+├── frontend/
+│   ├── pages/
+│   ├── components/
+│   ├── Dockerfile
+│   └── package.json
+├── docker-compose.yml
+├── README.md
+└── .github/
+    └── workflows/
+```
+
+* Go to **GitHub → Projects** → Create a new board → Columns: `Backlog`, `In Progress`, `Done`.
+
+**Deliverable:** Public or private repo with README + GitHub Project board.
+
+---
+
+### 🔹 4. **Local Dev Setup**
+
+**Tool:** Docker Compose
+**Objective:** Create isolated environments for backend, frontend, DB, and Redis.
+
+#### 💡 Action Steps:
+
+1. Install Docker Desktop
+2. Create a `docker-compose.yml` file:
+
+```yaml
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_HOST=db
+      - REDIS_HOST=redis
+    depends_on:
+      - db
+      - redis
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+
+  db:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: utkaladb
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+```
+
+3. In each service (`backend`, `frontend`), add a basic `Dockerfile`.
+4. Run:
+
+```bash
+docker-compose up --build
+```
+
+**Deliverable:** Functional dev environment running with:
+
+* Backend on `localhost:5000`
+* Frontend on `localhost:3000`
+* PostgreSQL and Redis services
+
+---
+
+### ✅ Final Deliverables for Phase 1
+
+| Item                    | Description                                |
+| ----------------------- | ------------------------------------------ |
+| 📝 Feature Spec         | In Notion/Google Docs                      |
+| 📊 System Diagrams      | In Draw\.io/Excalidraw                     |
+| 📁 GitHub Repo          | Initialized with folders                   |
+| 🏗 GitHub Project Board | Backlog + Tasks                            |
+| 🐳 Docker Setup         | Compose file + Dockerfiles working locally |
+
+---
+
+Would you like me to generate the **initial Dockerfiles**, `.env` templates, or GitHub Project board JSON for import?

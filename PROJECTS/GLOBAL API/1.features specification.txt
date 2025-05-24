@@ -1,0 +1,67 @@
+Here’s a well-structured **Core Feature Specification** you can copy into **Notion**, **Google Docs**, or import into **GitHub Projects**, **Trello**, or **Jira** as user stories/board items.
+
+---
+
+## 📝 Real-Time Collaborative Workspace – Core Features Document
+
+### 📌 Overview
+
+The project is a **real-time collaborative editor**, similar to Google Docs, built with Next.js, React, Redux, Socket.io, Node.js, MongoDB, Redis, Docker, and deployed via GitHub Actions and ArgoCD to AWS EKS.
+
+---
+
+### ✅ Core Modules & Features
+
+| Feature                       | Description                                                                                | Status      | Priority |
+| ----------------------------- | ------------------------------------------------------------------------------------------ | ----------- | -------- |
+| 🖊 Live Collaborative Editor  | Users can edit the same document in real time. Uses OT (Operational Transformation).       | Not Started | High     |
+| 🎯 Real-time Cursor Tracking  | Each user's cursor position and selection is visible to other users in real time.          | Not Started | High     |
+| 🔐 User Authentication        | Auth system with JWT (or OAuth/Social login). Required to create/edit/view documents.      | Not Started | High     |
+| 🕓 Document Version History   | Store and visualize changes made over time. Users can revert to earlier versions.          | Not Started | Medium   |
+| 🔗 Shareable Links with Roles | Generate document share links with roles: Viewer or Editor. Role-based access control.     | Not Started | High     |
+| 💬 Real-Time Comments/Chat    | In-doc commenting or sidebar chat. Useful for team discussions while editing.              | Not Started | Medium   |
+| 📶 Offline Sync               | Users can make edits offline, which sync when they reconnect. Uses localStorage/IndexedDB. | Not Started | Medium   |
+
+---
+
+### 🎯 User Stories (For Trello / GitHub Projects / Jira)
+
+#### Epic: Live Editing
+
+* 🧑‍💻 *As a user, I want to type in a document and see my changes appear instantly.*
+* 👥 *As a user, I want to see other users' changes appear in real time without refresh.*
+* 🎨 *As a user, I want to see the cursors and selections of my collaborators.*
+
+#### Epic: Auth & Access
+
+* 🔑 *As a user, I want to sign in with email/password or Google.*
+* 🔐 *As an owner, I want to share a doc as read-only or editable.*
+* 👁️ *As a viewer, I should not be able to make changes.*
+
+#### Epic: Document Management
+
+* 🕓 *As a user, I want to view the edit history and revert to older versions.*
+* 🔗 *As a user, I want to generate a shareable URL with edit/view permissions.*
+
+#### Epic: Offline Mode
+
+* ✈️ *As a user, I want to edit documents offline and sync changes when reconnected.*
+
+---
+
+### 🗂️ How to Use This
+
+* **📌 Notion:** Paste into a table or board view.
+* **📌 Trello:** Use each feature as a card under “Backlog”.
+* **📌 GitHub Projects:** Paste as markdown issues or cards in Kanban.
+* **📌 Jira:** Import as Epics/Stories with labels and priorities.
+
+---
+
+Would you like me to:
+
+* Format this as a `.csv` or `.md` file for direct import to a board?
+* Prepare the Notion shareable board format?
+* Set up the board structure in Trello/GitHub Projects?
+
+Let me know how you'd like to manage your task flow.
