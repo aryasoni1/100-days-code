@@ -1,0 +1,66 @@
+Here's the `.md` formatted note for **13. Artifacts & Caching** in GitHub Actions:
+
+---
+
+# 📦 **13. Artifacts & Caching in GitHub Actions**
+
+Use **artifacts** to preserve files between jobs or after workflow runs, and **caching** to speed up builds by avoiding re-installing dependencies.
+
+---
+
+## 🧳 **Upload Artifacts**
+
+Artifacts store build outputs or test results for later access.
+
+### 🔧 Example: Uploading Test Reports
+
+```yaml
+- name: Upload test report
+  uses: actions/upload-artifact@v4
+  with:
+    name: test-report
+    path: reports/
+```
+
+> ✅ Artifacts are useful for logs, coverage reports, or compiled files.
+
+---
+
+## 🚀 **Caching Dependencies**
+
+Speed up builds by caching files like `node_modules`, `.m2`, or `.venv`.
+
+### 🔧 Example: Caching `node_modules`
+
+```yaml
+- name: Cache Node.js modules
+  uses: actions/cache@v3
+  with:
+    path: ~/.npm
+    key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+    restore-keys: |
+      ${{ runner.os }}-node-
+```
+
+> 💡 You can use `hashFiles` to automatically detect changes in dependencies.
+
+---
+
+## 📌 Other Common Paths to Cache
+
+| Language | Path to Cache               |
+| -------- | --------------------------- |
+| Node.js  | `~/.npm` or `node_modules/` |
+| Java     | `~/.m2/repository`          |
+| Python   | `~/.cache/pip` or `.venv/`  |
+
+---
+
+## 🛠️ Tips
+
+* Always choose a **unique and stable `key:`** to avoid cache misses.
+* Combine `actions/cache` with `setup-*` actions (like `setup-node`) for best results.
+
+---
+
+Let me know if you want templates for Python, Java, or Docker caching setups!

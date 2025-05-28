@@ -1,0 +1,63 @@
+Absolutely! Here's a concise guide to the **TypeScript Core Fundamentals** you mentioned:
+
+---
+
+## ✅ **1. Type System Basics**
+
+### 🔢 **Primitive Types**
+
+TypeScript builds on JavaScript by adding static types.
+
+```ts
+let id: number = 101;
+let name: string = "Alice";
+let isActive: boolean = true;
+```
+
+### ❓ **Special Types**
+
+| Type      | Description                                 | Example                                            |
+| --------- | ------------------------------------------- | -------------------------------------------------- |
+| `any`     | Opt-out of type checking                    | `let data: any = "text";`                          |
+| `unknown` | Safer alternative to `any`, must be checked | `let input: unknown = 42;`                         |
+| `void`    | No return value (used for functions)        | `function log(): void {}`                          |
+| `never`   | Function that never returns or throws       | `function fail(): never { throw new Error("x"); }` |
+
+---
+
+### 📚 **Arrays**
+
+```ts
+let scores: number[] = [85, 92, 78];
+let names: Array<string> = ["Alice", "Bob"];
+```
+
+---
+
+### 🔗 **Tuples**
+
+Tuples define a fixed-length array with specified types.
+
+```ts
+let user: [number, string] = [1, "Alice"];
+```
+
+---
+
+### 🧭 **Enums**
+
+Enums are useful for readable sets of constants.
+
+```ts
+enum Role {
+  Admin,
+  User,
+  Guest
+}
+
+let userRole: Role = Role.Admin;
+```
+
+---
+
+Would you like to move on to **functions, interfaces, and type aliases**, or see a TypeScript cheat sheet next?

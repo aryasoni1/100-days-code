@@ -1,0 +1,110 @@
+Here's a quick and practical guide to **Dockerfile basics** — the core instructions for building Docker images:
+
+---
+
+## 📄 **Dockerfile: Essential Instructions**
+
+Each Dockerfile is a blueprint for creating a Docker image. It contains steps written in plain text.
+
+---
+
+### 🏗️ **1. `FROM`** – Base Image
+
+Specifies the starting point for your image.
+
+```dockerfile
+FROM node:18
+```
+
+* Starts with an official Node.js 18 image.
+
+---
+
+### ⚙️ **2. `RUN`** – Execute Commands at Build Time
+
+Used to install dependencies, update packages, etc.
+
+```dockerfile
+RUN apt-get update && apt-get install -y curl
+```
+
+* Each `RUN` creates a new layer in the image.
+
+---
+
+### 📥 **3. `COPY`** – Add Files to Image
+
+Copies files from your local machine into the image.
+
+```dockerfile
+COPY . /app
+```
+
+---
+
+### 📦 **4. `WORKDIR`** – Set Working Directory
+
+Optional, but commonly used to avoid repeating paths.
+
+```dockerfile
+WORKDIR /app
+```
+
+---
+
+### ▶️ **5. `CMD`** – Default Command
+
+Specifies the default **runtime** command when the container starts.
+
+```dockerfile
+CMD ["node", "index.js"]
+```
+
+* Only one `CMD` allowed (last one overrides previous).
+
+---
+
+### ⛓️ **6. `ENTRYPOINT`** – Configures Container as Executable
+
+Defines a fixed command that always runs.
+
+```dockerfile
+ENTRYPOINT ["npm", "run"]
+CMD ["start"]
+```
+
+* Runs as `npm run start`.
+
+> Use `ENTRYPOINT` + `CMD` when you want default args but allow override.
+
+---
+
+### 🌐 **7. `EXPOSE`** – Document Port
+
+Informs which port the app runs on.
+
+```dockerfile
+EXPOSE 3000
+```
+
+> This does *not* publish the port—use `docker run -p` for that.
+
+---
+
+### ✅ Example: Simple Node App Dockerfile
+
+```dockerfile
+FROM node:18
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+Let me know if you'd like examples for Python, React, Flask, or FastAPI projects too!

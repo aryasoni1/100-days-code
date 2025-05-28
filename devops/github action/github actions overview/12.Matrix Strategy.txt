@@ -1,0 +1,64 @@
+Here’s the `.md` formatted note for **12. Matrix Strategy (Parallel Builds)** in GitHub Actions:
+
+---
+
+# 🧪 **12. Matrix Strategy (Parallel Builds)**
+
+Matrix strategy allows you to **run jobs in parallel** across different configurations — like multiple Node.js, Java, or Python versions.
+
+---
+
+## 🚀 **Why Use Matrix Builds?**
+
+* ✅ Test your code against **multiple versions** of a language/runtime.
+* ✅ Ensure **cross-environment compatibility**.
+* ✅ Speed up builds by running jobs **concurrently**.
+
+---
+
+## 🔧 **Example: Node.js Matrix**
+
+```yaml
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14, 16, 18]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm install
+      - run: npm test
+```
+
+---
+
+## 💡 **Other Matrix Use Cases**
+
+```yaml
+strategy:
+  matrix:
+    os: [ubuntu-latest, windows-latest]
+    python-version: [3.8, 3.9, 3.10]
+```
+
+This creates **3×2 = 6 jobs** running in parallel.
+
+---
+
+## ⚠️ Tips
+
+* Use `fail-fast: false` if you don’t want the entire matrix to stop on one failure.
+* Combine matrix with conditional logic (`if:`) for more control.
+
+---
+
+Let me know if you want a matrix example for **Java**, **Python**, or **Docker images**!

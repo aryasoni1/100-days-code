@@ -1,0 +1,68 @@
+Here's a beginner-friendly `.md` formatted note for **Environment Setup** in GitHub Actions:
+
+---
+
+# ⚙️ **8. Environment Setup in GitHub Actions**
+
+Setting up your environment properly ensures your workflows run consistently across different platforms and configurations.
+
+---
+
+## 🖥️ **Define the Operating System**
+
+Specify which OS your workflow runs on using `runs-on:`.
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest  # or windows-latest / macos-latest
+```
+
+> 💡 `ubuntu-latest` is the most commonly used and supports most languages/tools.
+
+---
+
+## 🔐 **Use Environment Variables**
+
+### ✅ Define variables using `env:`
+
+```yaml
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
+      API_KEY: ${{ secrets.API_KEY }}
+    steps:
+      - name: Echo Env Var
+        run: echo "Environment: $NODE_ENV"
+```
+
+---
+
+## 🔐 **Use GitHub Secrets (Recommended for sensitive data)**
+
+* Store secrets in your GitHub repository settings under **Settings > Secrets and variables > Actions**.
+
+### 🔒 Access secrets in workflow
+
+```yaml
+env:
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+```
+
+> 🔐 Use secrets for passwords, API keys, tokens, etc.
+
+---
+
+## 📌 Summary
+
+| Feature              | Example                  | Notes                            |
+| -------------------- | ------------------------ | -------------------------------- |
+| OS Definition        | `runs-on: ubuntu-latest` | Choose the platform for your job |
+| Environment Variable | `env: NODE_ENV=prod`     | For general config values        |
+| GitHub Secrets       | `secrets.API_KEY`        | Store secure keys/tokens         |
+
+---
+
+Let me know if you want a **full sample GitHub Actions workflow** using OS, environment variables, and secrets!

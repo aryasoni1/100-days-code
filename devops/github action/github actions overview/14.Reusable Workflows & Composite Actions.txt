@@ -1,0 +1,102 @@
+Here's your structured guide for:
+
+---
+
+# 🔁 **14. Reusable Workflows & Composite Actions**
+
+Make your GitHub Actions cleaner and DRY (Don't Repeat Yourself) by **reusing workflows** and creating **custom composite actions**.
+
+---
+
+## 🔄 **Reusable Workflows**
+
+Reusable workflows let you define a common CI/CD process and call it from other workflows.
+
+### 🧱 Step 1: Define a reusable workflow (`.github/workflows/reusable.yml`)
+
+```yaml
+name: Reusable Workflow
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+
+jobs:
+  print-env:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Environment: ${{ inputs.environment }}"
+```
+
+---
+
+### 🔗 Step 2: Call it from another workflow
+
+```yaml
+name: Caller Workflow
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  use-reusable:
+    uses: ./.github/workflows/reusable.yml
+    with:
+      environment: production
+```
+
+> ✅ Useful for shared processes like deploy, test, or build logic across multiple repos or branches.
+
+---
+
+## ⚙️ **Composite Actions**
+
+Create **custom actions** composed of multiple shell steps. Ideal for encapsulating logic in reusable units.
+
+### 📁 Directory structure:
+
+```
+.github/
+└── actions/
+    └── my-action/
+        ├── action.yml
+        └── script.sh
+```
+
+### 🔧 `action.yml` example:
+
+```yaml
+name: 'My Custom Action'
+description: 'Runs a custom script'
+runs:
+  using: 'composite'
+  steps:
+    - run: bash ${GITHUB_ACTION_PATH}/script.sh
+      shell: bash
+```
+
+### 🧪 Use it in your workflow:
+
+```yaml
+steps:
+  - uses: ./.github/actions/my-action
+```
+
+> 💡 Great for creating step libraries like setting up environments or running common commands.
+
+---
+
+### ✅ Summary
+
+| Feature             | Benefit                               |
+| ------------------- | ------------------------------------- |
+| `workflow_call`     | Share workflows across projects       |
+| `composite` actions | Custom, reusable logic in shell steps |
+
+---
+
+Let me know if you want a starter repo layout with reusable workflows and composite actions!

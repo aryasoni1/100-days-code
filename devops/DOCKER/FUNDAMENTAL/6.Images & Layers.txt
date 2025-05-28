@@ -1,0 +1,65 @@
+### 🧱 **Docker Images & Layers**
+
+Docker images are built in **layers**, where each command in a `Dockerfile` (like `RUN`, `COPY`, `ENV`) creates a **new layer**. These layers are **cached**, reused, and shared between containers to optimize speed and storage.
+
+---
+
+### 🔄 **Image Caching**
+
+* Docker caches each layer during build.
+* If a layer hasn’t changed, Docker reuses the cache to **speed up builds**.
+
+#### Example:
+
+```Dockerfile
+FROM node:18
+
+COPY package.json .         # Layer 1
+RUN npm install             # Layer 2 (cached if package.json unchanged)
+COPY . .                    # Layer 3
+RUN npm run build           # Layer 4
+```
+
+Changing `package.json` will invalidate the cache for `npm install` and all layers below.
+
+---
+
+### 🏗️ **Multi-Stage Builds**
+
+Use **multi-stage builds** to:
+
+* Separate build environment from runtime.
+* Keep the final image small and production-ready.
+
+#### Example:
+
+```Dockerfile
+# Stage 1: Build
+FROM node:18 AS builder
+WORKDIR /app
+COPY . .
+RUN npm install
+RUN npm run build
+
+# Stage 2: Runtime
+FROM node:18-slim
+WORKDIR /app
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package.json .
+RUN npm install --production
+CMD ["node", "dist/index.js"]
+```
+
+🔹 Benefits:
+
+* Only includes what's needed for production.
+* Avoids shipping dev dependencies, source files, etc.
+
+---
+
+### ⚡ Pro Tips:
+
+* Order `Dockerfile` instructions from least to most frequently changing for better cache use.
+* Use `.dockerignore` to reduce unnecessary context and further optimize.
+
+Let me know if you want a full Dockerfile example for your specific tech stack (Node.js, Python, etc.).

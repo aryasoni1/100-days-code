@@ -1,0 +1,80 @@
+Here’s a concise guide to essential **Docker commands** every developer or DevOps engineer should know:
+
+---
+
+## 🧰 **Basic Docker Commands**
+
+### 🔨 **1. Build an Image**
+
+```bash
+docker build -t <image-name> .
+```
+
+* `-t`: Tags the image (e.g., `my-app:latest`)
+* `.`: Context (typically current directory with a `Dockerfile`)
+
+---
+
+### 🚀 **2. Run a Container**
+
+```bash
+docker run -d -p 3000:3000 --name my-container my-app
+```
+
+* `-d`: Run in detached mode (in background)
+* `-p`: Map host port to container port
+* `--name`: Give your container a custom name
+
+---
+
+### 📋 **3. List Containers**
+
+```bash
+docker ps             # Running containers
+docker ps -a          # All containers (including stopped)
+```
+
+---
+
+### 🔍 **4. View Logs**
+
+```bash
+docker logs my-container
+```
+
+* Useful for debugging output from container apps
+
+---
+
+### 💻 **5. Execute Commands Inside a Container**
+
+```bash
+docker exec -it my-container bash
+```
+
+* `-it`: Interactive terminal
+* Great for troubleshooting inside the running container
+
+---
+
+### 🗑️ **6. Stop and Remove Containers**
+
+```bash
+docker stop my-container
+docker rm my-container
+```
+
+---
+
+### 🧼 **7. Remove Images**
+
+```bash
+docker rmi my-app
+```
+
+* Removes image from local system
+* You may need to `stop` and `rm` containers using the image first
+
+---
+
+Let me know if you want a cheatsheet with these commands or examples using Docker Compose!
