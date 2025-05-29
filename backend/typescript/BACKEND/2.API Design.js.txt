@@ -1,0 +1,133 @@
+Here's a comprehensive overview of **API Design with TypeScript**, covering REST, GraphQL, type sharing, and ORM integration:
+
+---
+
+## 🔗 **1. Type-Safe REST and GraphQL APIs**
+
+### ✅ **REST API (Express + TypeScript + Zod)**
+
+Ensure type safety across your routes and request/response bodies.
+
+```ts
+// routes/user.ts
+import { z } from 'zod';
+
+const userSchema = z.object({
+  name: z.string(),
+  age: z.number().min(18),
+});
+
+type User = z.infer<typeof userSchema>; // Share this type
+```
+
+### 🚀 **GraphQL (Apollo + TypeScript)**
+
+Use code-first or schema-first approaches with type safety.
+
+* **Code-first:** `type-graphql` or `nexus`
+* **Schema-first:** Write `.graphql` and auto-generate types with `graphql-codegen`
+
+```ts
+@ObjectType()
+class User {
+  @Field()
+  name: string;
+
+  @Field()
+  age: number;
+}
+```
+
+---
+
+## 🔁 **2. Share Types Between Frontend and Backend**
+
+Use a `shared` folder or a monorepo to maintain shared TypeScript types.
+
+### Structure Example (monorepo or pnpm workspace):
+
+```
+/shared
+  └── types.ts
+/backend
+/frontend
+```
+
+```ts
+// shared/types.ts
+export interface Product {
+  id: string;
+  name: string;
+  price: number;
+}
+```
+
+Then import it in both backend and frontend:
+
+```ts
+// frontend
+import type { Product } from '../../shared/types';
+```
+
+---
+
+## 🗄 **3. Use TypeScript with ORM**
+
+### 🔸 **Prisma** (highly type-safe)
+
+```bash
+npx prisma init
+```
+
+```ts
+// Prisma auto-generates types for models
+const products = await prisma.product.findMany(); // Typed result!
+```
+
+You can generate and share Prisma types with the frontend using:
+
+```ts
+export type Product = Prisma.ProductGetPayload<{}>;
+```
+
+---
+
+### 🔹 **TypeORM / Sequelize**
+
+#### TypeORM
+
+```ts
+@Entity()
+export class User {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
+  name: string;
+}
+```
+
+#### Sequelize with TypeScript
+
+```ts
+const User = sequelize.define<Model<UserAttributes>>('User', {
+  name: DataTypes.STRING,
+});
+```
+
+For best type safety, Prisma is most recommended.
+
+---
+
+## 🧩 Summary
+
+| Feature             | Tooling Recommendation         |
+| ------------------- | ------------------------------ |
+| Type-safe REST      | Zod, Express, TypeScript       |
+| Type-safe GraphQL   | Apollo, GraphQL Codegen, Nexus |
+| Shared Types        | `shared/` folder or monorepo   |
+| ORM with TypeScript | ✅ Prisma > TypeORM > Sequelize |
+
+---
+
+Let me know if you'd like a **starter repo layout** or **sample REST/GraphQL project** with shared types!
