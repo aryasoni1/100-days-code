@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
+import { JWT_SECRET } from "../index";
 import jwt from "jsonwebtoken";
 import User from "../models/User";
 
-const JWT_SECRET = process.env.JWT_SECRET || "secret";
-
+//console.log("JWT_SECRET controller:", process.env.JWT_SECRET);
 export const register = async (req: Request, res: Response) => {
   const { name, email, password, role } = req.body;
   try {
@@ -23,7 +23,7 @@ export const register = async (req: Request, res: Response) => {
       JWT_SECRET,
       { expiresIn: "7d" }
     );
-
+    console.log("JWT_SECRECT from controller", JWT_SECRET);
     res.status(201).json({ token });
   } catch (err) {
     res.status(500).json({ message: "registration failed", error: err });
@@ -43,6 +43,7 @@ export const login = async (req: Request, res: Response) => {
       res.status(400).json({ message: "invalid credentials" });
       return;
     }
+    console.log("JWT_SECRECT from controller", JWT_SECRET);
     const token = jwt.sign({ userId: user._id, role: user.role }, JWT_SECRET, {
       expiresIn: "7d",
     });

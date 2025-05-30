@@ -1,0 +1,36 @@
+1. Using Postman (Recommended for manual testing)
+🔹 Register a User
+Method: POST
+
+URL: http://localhost:5050/api/auth/register
+
+Headers: Content-Type: application/json
+
+Body (raw JSON):
+
+json
+Copy
+Edit
+{
+  "name": "Test User",
+  "email": "testuser@example.com",
+  "password": "password123",
+  "role": "customer"
+}
+🔹 Login User
+Method: POST
+
+URL: http://localhost:5050/api/auth/login
+
+Headers: Content-Type: application/json
+
+Body (raw JSON):
+
+json
+Copy
+Edit
+{
+  "email": "testuser@example.com",
+  "password": "password123"
+}
+✅ You should receive a token in the response if login is successful.

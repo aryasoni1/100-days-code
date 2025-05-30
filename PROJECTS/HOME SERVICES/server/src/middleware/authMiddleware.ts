@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-
+import { JWT_SECRET } from "../index";
+//console.log("JWT_SECRET middleware:", JWT_SECRET);
 export const authMiddleware = (
   req: Request,
   res: Response,
@@ -16,7 +17,6 @@ export const authMiddleware = (
   console.log("Token extracted:", token);
 
   const JWT_SECRET = process.env.JWT_SECRET || "secret";
-  console.log("JWT_SECRET:", JWT_SECRET);
 
   if (!token) {
     res.status(400).json({ message: "token not found" });

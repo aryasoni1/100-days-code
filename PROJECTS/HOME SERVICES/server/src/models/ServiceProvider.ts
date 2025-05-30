@@ -5,6 +5,8 @@ export interface IServiceProvider extends Document {
   category: string;
   description: string;
   rating: number;
+  location: string;
+  contact: string;
   availability: boolean;
 }
 
@@ -14,6 +16,8 @@ const ServiceProviderSchema = new Schema(
     category: { type: String, required: true },
     description: { type: String },
     rating: { type: Number, default: 0 },
+    location: { type: String },
+    contact: { type: String },
     availability: { type: Boolean, default: true },
   },
   { timestamps: true }

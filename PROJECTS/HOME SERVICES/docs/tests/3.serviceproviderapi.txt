@@ -1,0 +1,117 @@
+Here’s how to **test the ServiceProvider API** using **Thunder Client** in **VS Code**, assuming your endpoints are protected with `authMiddleware` (JWT) and possibly role-based access (`checkRole` or `checkOwnershipOrRole`).
+
+---
+
+## ✅ Precondition
+
+You must have:
+
+* Logged in as a valid user (ServiceProvider or Admin).
+* A valid JWT token for the logged-in user.
+* Token used in all requests via `Authorization: Bearer <token>` header.
+
+---
+
+## 🔧 Common Setup for All Requests
+
+**Header (always include):**
+
+```
+Authorization: Bearer <your_valid_token>
+Content-Type: application/json
+```
+
+You can save `token` as a variable in Thunder Client environment and use:
+
+```
+Authorization: Bearer {{token}}
+```
+
+---
+
+## 🧪 TEST CASES FOR SERVICE PROVIDER API
+
+### 1. ✅ Create a Service Provider
+
+**Method:** `POST`
+**URL:** `http://localhost:5050/api/providers`
+**Body (JSON):**
+
+```json
+{
+  "category": "Plumber",
+  "description": "Expert in home water systems",
+  "rating": 4.5,
+  "location": "Bhubaneswar",
+  "contact": "9876543210",
+  "availability": true
+}
+```
+
+> ✔ Must be logged in as a **ServiceProvider** or **Admin**.
+
+---
+
+### 2. ✅ Get All Service Providers
+
+**Method:** `GET`
+**URL:** `http://localhost:5050/api/providers`
+
+> ✔ Accessible to all logged-in users.
+
+---
+
+### 3. ✅ Get Provider by ID
+
+**Method:** `GET`
+**URL:** `http://localhost:5050/api/providers/:id`
+Replace `:id` with the actual provider ID (from DB or previous response).
+
+---
+
+### 4. ✏️ Update Provider
+
+**Method:** `PUT`
+**URL:** `http://localhost:5050/api/providers/:id`
+**Body (JSON):**
+
+```json
+{
+  "description": "Updated plumbing expert services",
+  "availability": false
+}
+```
+
+> ✔ Only **owner** or **Admin** can update.
+
+---
+
+### 5. ❌ Delete Provider
+
+**Method:** `DELETE`
+**URL:** `http://localhost:5050/api/providers/:id`
+
+> ✔ Only **owner** or **Admin** can delete.
+
+---
+
+## ❗ Expected Error Cases (Negative Tests)
+
+### 🔒 No Token
+
+* Remove `Authorization` header.
+* Expected: `400 Bad Request` with `Authorization header missing`.
+
+### ❌ Invalid Token
+
+* Use malformed token.
+* Expected: `403 Forbidden` with `unauthorized`.
+
+### 🔒 Unauthorized Role
+
+* Try to `POST /providers` as a user with `role: "Customer"` (if RBAC is enforced).
+* Expected: `403 Forbidden` with `Access denied`.
+
+---
+
+Would you like me to generate **Thunder Client Collections** (JSON) or show how to test **checkOwnershipOrRole** middleware next?

@@ -1,0 +1,98 @@
+Here’s how to **test your `authMiddleware` using Thunder Client** in **VS Code**, assuming your Express server is running and secured routes are protected using `authMiddleware`.
+
+---
+
+## 🔐 **authMiddleware Summary**
+
+Your `authMiddleware` does the following:
+
+1. Reads `Authorization: Bearer <token>` header.
+2. Verifies the JWT.
+3. Attaches the decoded user info to `req.user`.
+4. Rejects the request if the token is invalid or missing.
+
+---
+
+## ✅ **Steps to Test `authMiddleware` in Thunder Client**
+
+### 🧪 Step 1: Register and Login to Get Token
+
+Create a **POST request** to `/api/auth/register` or `/api/auth/login` and save the returned token.
+
+#### ✅ Login Test (get token)
+
+**Method:** `POST`
+**URL:** `http://localhost:5050/api/auth/login`
+**Body (JSON):**
+
+```json
+{
+  "email": "testuser@example.com",
+  "password": "password123"
+}
+```
+
+**✅ Save the token** from the response like:
+
+```json
+{
+  "token": "eyJhbGciOi..."
+}
+```
+
+---
+
+### 🧪 Step 2: Test a Protected Route Using the Token
+
+Assuming you have a protected route like:
+
+```ts
+app.get("/api/protected", authMiddleware, (req, res) => {
+  res.json({ message: "You are authorized!", user: (req as any).user });
+});
+```
+
+#### 🔐 Thunder Client Test for Protected Route
+
+**Method:** `GET`
+**URL:** `http://localhost:5050/api/protected`
+**Headers:**
+
+```
+Authorization: Bearer <paste-token-here>
+```
+
+Replace `<paste-token-here>` with the token from Step 1.
+
+---
+
+### ❌ Test Cases to Simulate Failures
+
+#### 🚫 Missing Token
+
+* Don't include the `Authorization` header.
+* Expected: `400 Bad Request`, `{ message: "Authorization header missing" }`
+
+#### 🚫 Invalid Token
+
+* Use: `Authorization: Bearer invalid_token`
+* Expected: `403 Forbidden`, `{ message: "unauthorized" }`
+
+---
+
+## 🔁 Reusability Tip in Thunder Client
+
+1. Save the token in a Thunder Client environment variable:
+
+   * Create environment: `Dev`
+   * Add: `token = <your_jwt_token_here>`
+
+2. In your request headers:
+
+   ```
+   Authorization: Bearer {{token}}
+   ```
+
+---
+
+Let me know if you want to test role-based access control or check ownership next.

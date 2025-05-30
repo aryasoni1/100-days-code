@@ -1,16 +1,22 @@
+import dotenv from "dotenv";
+dotenv.config({ path: ".env.server" });
+if (!process.env.JWT_SECRET) {
+  throw new Error("JWT_SECRET is missing in .env");
+}
+
+export const JWT_SECRET = process.env.JWT_SECRET;
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes";
-
-dotenv.config({ path: ".env.server" });
+import serviceProviderRoutes from "./routes/serviceProviderRoutes";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
+//console.log("JWT_SECRET at startup:", process.env.JWT_SECRET);
 
 const MONGO_URI = process.env.MONGO_URI || "";
 
@@ -25,6 +31,7 @@ mongoose
   });
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/providers", serviceProviderRoutes);
 app.get("/", (req, res) => {
   res.send("ServiceConnect API is running");
 });

@@ -1,0 +1,116 @@
+Here’s how you can **test both `checkRole` and `checkOwnershipOrRole` middlewares** using **Thunder Client** in your Node.js API:
+
+---
+
+## 🔐 Precondition
+
+1. You already have:
+
+   * Working authentication with valid **JWT token**.
+   * Roles like: `"Admin"`, `"ServiceProvider"`, `"Customer"`.
+   * Ownership logic tied to resource (e.g. `ServiceProvider.user === req.user.userId`).
+2. Middleware is applied on specific routes like:
+
+   ```ts
+   router.post('/providers', authMiddleware, checkRole(['Admin', 'ServiceProvider']), createProvider);
+   router.put('/providers/:id', authMiddleware, checkOwnershipOrRole('ServiceProvider'), updateProvider);
+   ```
+
+---
+
+## ✅ TESTING `checkRole` middleware
+
+### 🔒 Unauthorized Role
+
+**Test Case:** POST `/api/providers` as `"Customer"`.
+
+* **Headers:**
+
+  ```
+  Authorization: Bearer <JWT_of_customer>
+  Content-Type: application/json
+  ```
+
+* **Body:**
+
+  ```json
+  {
+    "category": "Electrician",
+    "description": "Certified",
+    "location": "Bangalore"
+  }
+  ```
+
+* **Expected Response:**
+  `403 Forbidden`
+
+  ```json
+  { "message": "Access denied: insufficient role" }
+  ```
+
+---
+
+### ✅ Authorized Role
+
+**Test Case:** POST `/api/providers` as `"ServiceProvider"` or `"Admin"`.
+
+* Use token of a user with the correct role.
+* Should receive: `201 Created` with provider data.
+
+---
+
+## ✅ TESTING `checkOwnershipOrRole` middleware
+
+### 🔒 Not Owner, Not Admin
+
+**Test Case:** PUT `/api/providers/:id` by another ServiceProvider (not the one who created the entry).
+
+* Use token of a different ServiceProvider than the one who created the resource.
+* **Expected:** `403 Forbidden`
+
+  ```json
+  { "message": "Access denied: not owner or admin" }
+  ```
+
+---
+
+### ✅ Owner Access
+
+**Test Case:** PUT `/api/providers/:id` by the same user who created the resource.
+
+* Use token of the user who owns the resource.
+* **Expected:** `200 OK` with updated data.
+
+---
+
+### ✅ Admin Override
+
+**Test Case:** PUT `/api/providers/:id` by Admin (not the owner).
+
+* Use Admin token.
+* Should be allowed regardless of ownership.
+* **Expected:** `200 OK`
+
+---
+
+## ⚡ Thunder Client Tips
+
+* Use **Environments** to store and switch tokens easily:
+
+  ```json
+  {
+    "adminToken": "Bearer eyJ...",
+    "providerToken": "Bearer eyJ...",
+    "customerToken": "Bearer eyJ..."
+  }
+  ```
+
+  And use it in `Authorization`:
+
+  ```
+  Authorization: {{adminToken}}  or {{providerToken}} etc.
+  ```
+
+---
+
+Would you like me to give a JSON collection export for Thunder Client with all these cases?
