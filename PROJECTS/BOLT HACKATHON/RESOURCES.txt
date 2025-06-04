@@ -1,0 +1,39 @@
+| Tool / Service       | Offer                               | How to Claim                                  | What It’s Used For                                                             |
+| -------------------- | ----------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------ |
+| **Neon Postgres**    | \$100 Neon Credit                   | Email `dev-offer@neon.tech` after signup      | Cloud-native PostgreSQL database with autoscaling and serverless architecture. |
+| **Neurelo**          | 1M API Units Free (6 months)        | Email `support@neurelo.com` after signup      | Backend-as-a-Service for creating scalable APIs from databases.                |
+| **Interview\.study** | 1 Month Free Premium                | Use code `8WHVZ8BX` at checkout               | Platform to practice coding and system design interview questions.             |
+| **CodeRabbit**       | 1 Month Free                        | Use code `OS1RGX` at checkout                 | AI code assistant integrated into GitHub for pull request reviews.             |
+| **Warp**             | 2 Months Free Pro Plan (\$50 value) | Use code `CLXXHAG0` at checkout               | A modern, GPU-accelerated terminal for developers.                             |
+| **Suprsend**         | 3 Months Free Growth Plan           | Email `nklkumar0321@gmail.com`                | Notification infrastructure (email, SMS, push) for SaaS platforms.             |
+| **DevCycle**         | 1 Year Free Starter Plan            | Email `devplusplus@devcycle.com` after signup | Feature flag and experimentation platform for software teams.                  |
+| **highlight.io**     | 6 Months Free Pay-as-you-go         | Use code `9BT6PHP6` at checkout               | Full-stack monitoring: logs, errors, and session replays for apps.             |
+| **Tower**            | Extended 3-Month Trial              | Use code `TOWR-DVTO-NUCE-HUXA-BAGU`           | Git GUI client for Mac & Windows—ideal for managing Git visually.              |
+| Tool/Perk           | Free?            | Notes                            |
+| ------------------- | ---------------- | -------------------------------- |
+| Bolt Pro Credit     | ✅                | \$30 credit                      |
+| RevenueCat          | ✅ (up to \$2.5k) | After threshold, pricing applies |
+| Entri (Domain)      | ✅ (1 year)       |                                  |
+| Nodely              | ✅ (2 months)     | Unlimited API + IPFS             |
+| Pica                | ✅ (2 months)     | AI UI assistant                  |
+| Sentry              | ✅ (6 months)     | Monitoring                       |
+| Expo                | ✅ (1 month)      | React Native deployment          |
+| Lingo               | ✅                | \$50 credits for localization    |
+| Dappier             | ✅ + discount     | \$25 credits                     |
+| 21st.dev            | ❌ (50% off)      | Magic AI tools                   |
+| Tavus               | ✅                | \$150 credits                    |
+| River               | ✅                | Event hosting + monetization     |
+| DEV++ Membership    | ✅ (1 year)       | Community + exclusive deals      |
+| YouTube for Hackers | ✅                | Educational content              |
+| Uptime Kuma         | ✅                | Self-hosted monitoring           |
+| Cal.com             | ✅                | Open source scheduler            |
+| LogSnag             | ✅                | \$50 credits                     |
+| Xata                | ✅                | Free tier DB                     |
+| Clerk.dev           | ✅                | Auth as a service                |
+| Showwcase           | ✅                | Developer network                |
+| Devpost             | ✅                | Hackathon platform               |
+| Railway             | ✅                | Cloud backend                    |
+| Koyeb               | ✅                | Edge infra                       |
+| Repl AI             | ✅                | Chatbot builder                  |
+| Vercel AI SDK       | ✅                | Open source AI UI builder        |
+| Bolt Boilerplates   | ✅                | Get started instantly            |

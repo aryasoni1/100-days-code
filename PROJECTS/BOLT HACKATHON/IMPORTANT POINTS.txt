@@ -1,0 +1,192 @@
+Sure! Here are **all the important points you need to know about the Bolt.new Hackathon** in a clear, concise way:
+
+---
+
+## ⚡ Bolt.new Hackathon — Key Points
+
+### 1. **Dates & Deadlines**
+
+* **Building start date:** May 30, 2025, at 12:15 AM PT (Don’t start before this!)
+* **Submission deadline:** June 30, 2025, at 2:00 PM PT
+
+### 2. **Prizes**
+
+* **Grand Prize (1st place):** \$100,000 — for the most exceptional project across all judging criteria
+* **2nd–5th place:** \$75,000–\$22,000 each
+* **6th–10th place:** \$20,000–\$10,000 each
+* **Regional prizes:** \$10,000 each for AMER, APAC, and EMEA regions
+* **Bonus prizes:** For categories like Most Viral Project, Most Beautiful UI, Inspirational Story, Future Unicorn, etc.
+* **Challenge-specific prizes:** \$25,000 per challenge, e.g. Blockchain Challenge, Deploy Challenge, Make More Money Challenge, etc.
+
+### 3. **Judging Criteria**
+
+* Potential Impact
+* Quality of Idea
+* Technological Implementation
+* Design & User Experience
+
+### 4. **Challenges You Can Submit To**
+
+* **Make More Money Challenge:** Use RevenueCat SDK for subscriptions
+* **Custom Domain Challenge:** Use Entri + IONOS to publish app on custom domain
+* **Blockchain Challenge:** Build on Algorand blockchain
+* **Conversational AI Video Challenge:** Use Tavus AI video agents
+* **Voice AI Challenge:** Use ElevenLabs voice AI
+* **Deploy Challenge:** Deploy with Netlify
+* **Silly Sh!t Challenge:** Create fun, silly projects using Reddit Developer Platform x Bolt
+
+### 5. **Bonus Prize Categories**
+
+* Standout Event Hosts (best community meetups)
+* Inspirational Story (powerful origin story behind project)
+* One-Shot Competition (built from one prompt)
+* Top Build-in-Public Journey (documented build process publicly)
+* Uniquely Useful Tool (simple yet highly useful)
+* Creative Use of AI
+* Most Beautiful UI
+* Most Viral Project
+* Future Unicorn (billion-dollar potential)
+* Sharpest Problem Fit
+* We Didn’t Know We Needed This (surprise winner)
+* Most Likely to Get Funded
+
+### 6. **Rules & Regulations**
+
+* Only start building after May 30, 2025 (12:15 AM PT)
+* Submit all elements before June 30, 2025 (2:00 PM PT)
+* Each submission must be original and must follow the official rules
+* You can submit multiple projects but each must be unique and under separate accounts/emails
+* Each project can only win one Global OR Regional prize, plus up to one Challenge and one Bonus prize
+
+### 7. **Community & Support**
+
+* Join meetups worldwide to find teammates and network
+* Participate in the Bolt Discord Server for collaboration and updates
+* Builders get a special **Builder Pack** with AWS credits, tokens, and other tools after May 30
+
+### 8. **Resources**
+
+* Learn Bolt.new platform before May 30 (tutorials, guides available)
+* Use official documentation and challenge resources to guide your build
+* Watch previous hackathon winner projects for inspiration
+
+---
+
+## Summary:
+
+* **Build between May 30 and June 30**
+* **Submit unique, polished, impactful projects**
+* **Pick challenges that fit your skills/ideas**
+* **Document and share your journey for bonus prizes**
+* **Engage with the community to increase your chances**
+* **Win prizes up to \$100k + bonuses + regional awards**
+
+---
+
+If you want, I can help you brainstorm ideas tailored for these challenges or help you plan your project roadmap!
+Absolutely! Here’s a **detailed rundown of the official rules and important points you MUST follow** to have your project **selected and win prizes** at the Bolt.new Hackathon.
+
+---
+
+# Bolt.new Hackathon — Rules & Important Points for Selection
+
+---
+
+## 1. **Eligibility & Participation**
+
+* You must register and participate with a valid email.
+* You can submit multiple projects but each must be a unique entry.
+* Each project should be submitted under **one email account**.
+* Follow the **official rules** strictly to avoid disqualification.
+* Team size and structure details will be shared; usually, teams can be solo or groups.
+* Do **not start building before May 30, 2025, 12:15 AM PT**. Early builds may be disqualified.
+
+---
+
+## 2. **Submission Requirements**
+
+* Submit your full project **before June 30, 2025, 2:00 PM PT**.
+* Each submission should include:
+
+  * The working Bolt.new app URL or codebase as requested.
+  * A project description explaining the idea, impact, and features.
+  * Screenshots, demo videos, or any relevant presentation materials.
+  * Challenge category selection (if applicable).
+  * Bonus prize categories you want to apply for.
+* Projects must be **fully functional and demo-ready** by the submission deadline.
+
+---
+
+## 3. **Originality & Ownership**
+
+* Your project must be **original and created during the hackathon timeline**.
+* No plagiarism or copying of existing projects/apps.
+* Use of open source libraries or tools is allowed but you must build the core idea yourself.
+* Projects must not violate intellectual property or community guidelines.
+* If using third-party APIs or SDKs, follow their usage policies.
+
+---
+
+## 4. **Judging Criteria**
+
+Your project will be judged on:
+
+| Criteria                         | Description                                                  |
+| -------------------------------- | ------------------------------------------------------------ |
+| **Potential Impact**             | How much difference your project can make.                   |
+| **Quality of Idea**              | Creativity and uniqueness of the concept.                    |
+| **Technological Implementation** | Code quality, use of Bolt.new and integrations, scalability. |
+| **Design & User Experience**     | UI/UX design, ease of use, polish, and presentation.         |
+
+---
+
+## 5. **Challenge Categories & Bonus Prizes**
+
+* Select the **challenge(s)** your project fits into (Make More Money, Blockchain, Deploy, etc.).
+* Apply for **bonus prizes** (Inspirational Story, Most Beautiful UI, etc.) with proper justification.
+* A project can win **only one global/regional prize** but can win one **challenge** and one **bonus prize** as well.
+
+---
+
+## 6. **Allowed Technologies & Tools**
+
+* Your project must use **Bolt.new** platform as the core.
+* For specific challenges, integrate required SDKs or tools (e.g., RevenueCat for subscriptions).
+* Deployment should ideally use suggested platforms (e.g., Netlify for Deploy Challenge).
+* Creative use of AI, blockchain, voice tech, or custom domains encouraged in relevant challenges.
+
+---
+
+## 7. **Community & Collaboration**
+
+* Engage with the Bolt Discord and attend meetups.
+* Collaborate openly but submit your own original work.
+* Document your build process for bonus prizes like “Top Build-in-Public Journey.”
+
+---
+
+## 8. **What Can Disqualify Your Submission?**
+
+* Starting before May 30 or submitting after June 30 deadline.
+* Submitting plagiarized or copied work.
+* Not using Bolt.new as the core platform.
+* Submitting incomplete, non-functional, or placeholder projects.
+* Violating any terms or community guidelines.
+* Projects that promote hate, violence, or illegal activities.
+
+---
+
+## 9. **Additional Tips to Get Selected**
+
+* Build a **clear, impactful idea** that solves a real problem or creates fun.
+* Ensure your app is **stable, bug-free, and well-designed**.
+* Use the hackathon’s **official SDKs, APIs, and tools** creatively.
+* Provide **strong documentation, demo videos, and presentation** for your submission.
+* Pick relevant challenges and clearly state how your app fits those.
+* Tell a compelling **origin/inspirational story** if applying for bonus prizes.
+* Share your build progress publicly on social media or Discord for “Build-in-Public” bonus.
+* Submit early enough before deadline to fix any last-minute issues.
+
+---
+
+If you want, I can help draft a checklist for your submission or help you review your project before submitting to maximize your chance of winning. Just ask!
